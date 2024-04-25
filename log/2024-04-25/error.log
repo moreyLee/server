@@ -1,0 +1,10 @@
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 05:30:28.166	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 05:30:48.959	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 05:49:39.162	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/api/v1/system/sys_user.go:56	登陆失败! 用户名不存在或者密码错误!	{"error": "record not found"}
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 05:50:52.681	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 06:25:03.877	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 06:25:03.961	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 06:57:49.794	[31merror[0m	/Users/morey/Downloads/projects/server/core/server.go:49	net.Listen error: listen tcp :8888: bind: address already in use
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 06:58:38.097	[31merror[0m	/Users/morey/Downloads/projects/server/core/server.go:49	net.Listen error: listen tcp :8888: bind: address already in use
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 06:58:49.069	[31merror[0m	/Users/morey/Downloads/projects/gin-vue-admin/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
+[github.com/flipped-aurora/gin-vue-admin/server]2024/04/25 - 07:01:04.984	[31merror[0m	/Users/morey/Downloads/projects/server/core/server.go:49	accept tcp [::]:8888: use of closed network connection
