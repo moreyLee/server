@@ -78,7 +78,7 @@ mysql:
     db-name: cg_devops
     username: root
     password: Devops%8
-    path: 127.0.0.1
+    path: 192.168.217.134
     engine: ""
     log-mode: error
     max-idle-conns: 10
