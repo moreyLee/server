@@ -1,35 +1,3 @@
-aliyun-oss:
-    endpoint: ""
-    access-key-id: ""
-    access-key-secret: ""
-    bucket-name: ""
-    bucket-url: ""
-    base-path: ""
-autocode:
-    server-model: /model/%s
-    server-router: /router/%s
-    server: /server
-    server-api: /api/v1/%s
-    server-plug: /plugin/%s
-    server-initialize: /initialize
-    root: /Users/morey/Downloads/projects/gin-vue-admin
-    web-table: /view
-    web: /web/src
-    server-service: /service/%s
-    server-request: /model/%s/request/
-    web-api: /api
-    web-form: /view
-    transfer-restart: true
-aws-s3:
-    bucket: ""
-    region: ""
-    endpoint: ""
-    secret-id: ""
-    secret-key: ""
-    base-url: ""
-    path-prefix: ""
-    s3-force-path-style: false
-    disable-ssl: false
 captcha:
     key-long: 6
     img-width: 240
@@ -83,7 +51,7 @@ hua-wei-obs:
     access-key: ""
     secret-key: ""
 jwt:
-    signing-key: 7847b4f5-6423-4178-ba00-730ab50cf40f
+    signing-key: 6fde2c9e-54d6-45e1-9ed9-3cb684f8da9e
     expires-time: 7d
     buffer-time: 1d
     issuer: qmPlus
@@ -103,25 +71,11 @@ mongo:
     connect-timeout-ms: 0
     is-zap: false
     hosts: []
-mssql:
-    prefix: ""
-    port: ""
-    config: ""
-    db-name: ""
-    username: ""
-    password: ""
-    path: ""
-    engine: ""
-    log-mode: ""
-    max-idle-conns: 0
-    max-open-conns: 0
-    singular: false
-    log-zap: false
 mysql:
     prefix: ""
     port: "3306"
     config: charset=utf8mb4&parseTime=True&loc=Local
-    db-name: gva
+    db-name: cg_devops
     username: root
     password: Devops%8
     path: 127.0.0.1
@@ -131,42 +85,6 @@ mysql:
     max-open-conns: 100
     singular: false
     log-zap: false
-oracle:
-    prefix: ""
-    port: ""
-    config: ""
-    db-name: ""
-    username: ""
-    password: ""
-    path: ""
-    engine: ""
-    log-mode: ""
-    max-idle-conns: 0
-    max-open-conns: 0
-    singular: false
-    log-zap: false
-pgsql:
-    prefix: ""
-    port: ""
-    config: ""
-    db-name: ""
-    username: ""
-    password: ""
-    path: ""
-    engine: ""
-    log-mode: ""
-    max-idle-conns: 0
-    max-open-conns: 0
-    singular: false
-    log-zap: false
-qiniu:
-    zone: ""
-    bucket: ""
-    img-path: ""
-    access-key: ""
-    secret-key: ""
-    use-https: false
-    use-cdn-domains: false
 redis:
     addr: 127.0.0.1:6379
     password: ""
@@ -176,20 +94,6 @@ redis:
         - 172.21.0.3:7000
         - 172.21.0.4:7001
         - 172.21.0.2:7002
-sqlite:
-    prefix: ""
-    port: ""
-    config: ""
-    db-name: ""
-    username: ""
-    password: ""
-    path: ""
-    engine: ""
-    log-mode: ""
-    max-idle-conns: 0
-    max-open-conns: 0
-    singular: false
-    log-zap: false
 system:
     db-type: mysql
     oss-type: local
@@ -200,13 +104,6 @@ system:
     use-multipoint: false
     use-redis: false
     use-mongo: false
-tencent-cos:
-    bucket: ""
-    region: ""
-    secret-id: ""
-    secret-key: ""
-    base-url: ""
-    path-prefix: ""
 zap:
     level: info
     prefix: '[github.com/flipped-aurora/gin-vue-admin/server]'
