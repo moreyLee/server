@@ -12,7 +12,7 @@ func (b *BaseApi) TestT(c *gin.Context) {
 	fmt.Println("执行命令")
 }
 func (b *BaseApi) Domain(c *gin.Context) {
-
+	//domain := "ss36.vip"
 	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
 	//zone_id := "f09f2f527f41da9b5f2c100c4ff61fe9"
 	CfApiLogin := "djpt36@163.com"
