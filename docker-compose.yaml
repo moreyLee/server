@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  game-api:
+    image: centos:7
+    working_dir: /opt
+    container_name: game-api    #自定义
+    command: "./devops-api -f config.yaml"
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/opt
+    environment:
+      - TZ=Asia/Shanghai
+# Kompose 转换 docker-compose 文件为k8s 资源 部署文件   默认版本为3
