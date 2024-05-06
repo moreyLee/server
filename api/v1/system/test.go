@@ -22,7 +22,7 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	//curl -X POST -H "X-Auth-Key:0237bd44ec3b541e622d6aa1b187aac9193f0" -H "X-Auth-Email:djpt36@163.com" -H "Content-Type: application/json" "https://api.cloudflare.com/client/v4/zones" --data '{"name":"ss36.vip","jump_start":"true"}'
 	//cmd := exec.Command("pwd")
 	//cmd := exec.Command("curl", "-X", "POST", "-H", "X-Auth-Key:"+globalKey, "-H", "X-Auth-Email:"+CfApiLogin, "-H", "Content-Type: application/json", "https://api.cloudflare.com/client/v4/zones", " --data '{\"name\":\"ss36.vip\",\"jump_start\":\"true\"}'")
-	cmd := exec.Command(commandStr)
+	cmd := exec.Command("/bin/bash", "-c", commandStr)
 	// 执行命令 并返回输出 获取执行结果
 	output, err := cmd.Output()
 	if err != nil {
