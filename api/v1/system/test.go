@@ -23,15 +23,20 @@ func (b *BaseApi) TestT(c *gin.Context) {
 //}
 
 func (b *BaseApi) Domain(c *gin.Context) {
+	//account_id :=ce7ca80686b3787313165855f53c401e
+	CfApiLogin := "djpt36@163.com"
+	//domain := "ss36.vip"
+	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
+	//zone_id := "f09f2f527f41da9b5f2c100c4ff61fe9"
 	//var list domainGetData
 	//shortUrl := c.PostForm("short_url")
 	//inviteUrl := c.PostForm("invite_url")
 	url := "https://api.cloudflare.com/client/v4/zones"
 
-	ContentType := c.DefaultPostForm("Content-Type", "application/json")
-	CfApiLogin := c.DefaultPostForm("X-Auth-Email", "djpt36@163.com")
-	globalKey := c.DefaultPostForm("X-Auth-Key", "0237bd44ec3b541e622d6aa1b187aac9193f0")
-	fmt.Println("请求头:", ContentType, CfApiLogin, globalKey)
+	//ContentType := c.DefaultPostForm("Content-Type", "application/json")
+	//CfApiLogin := c.DefaultPostForm("X-Auth-Email", "djpt36@163.com")
+	//globalKey := c.DefaultPostForm("X-Auth-Key", "0237bd44ec3b541e622d6aa1b187aac9193f0")
+	//fmt.Println("请求头:", ContentType, CfApiLogin, globalKey)
 	// 创建post 请求
 	postData := []byte(`{"name": "ss36.vip", "jump_start": "true"}`)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(postData))
@@ -65,11 +70,7 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	}
 	// 打印post 响应的内容
 	fmt.Println(result)
-	//account_id :=ce7ca80686b3787313165855f53c401e
-	//CfApiLogin := "djpt36@163.com"
-	//domain := "ss36.vip"
-	//globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
-	//zone_id := "f09f2f527f41da9b5f2c100c4ff61fe9"
+	//response.OkWithMessage(result)
 	//commandStr := "curl -X POST -H \"X-Auth-Key:\"" + globalKey + "-H \"X-Auth-Email:\"" + CfApiLogin + "\" -H \"Content-Type: application/json\" \"https://api.cloudflare.com/client/v4/zones\" --data '{\"name\":\"" + shortUrl + "\",\"jump_start\":\"true\"}'"
 	// 创建域名
 
