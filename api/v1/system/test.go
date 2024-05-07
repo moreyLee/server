@@ -12,7 +12,7 @@ func (b *BaseApi) TestT(c *gin.Context) {
 	fmt.Println("执行命令")
 }
 func (b *BaseApi) Domain(c *gin.Context) {
-	shortUrl := c.PostForm("short_url")
+	shortUrl := c.PostForm("shortUrl")
 	//invite_url := c.PostForm("invite_url")
 	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
