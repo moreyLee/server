@@ -17,9 +17,9 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
 	//domain := "ss36.vip"
-	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
+	//globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
 	//zone_id := "f09f2f527f41da9b5f2c100c4ff61fe9"
-	commandStr := "curl -X POST -H \"X-Auth-Key:\"" + globalKey + "\" -H \"X-Auth-Email:\"" + CfApiLogin + "\" -H \"Content-Type: application/json\" \"https://api.cloudflare.com/client/v4/zones\" --data '{\"name\":\"" + shortUrl + "\",\"jump_start\":\"true\"}'"
+	commandStr := "curl -X POST -H \"X-Auth-Key:\"0237bd44ec3b541e622d6aa1b187aac9193f0\" -H \"X-Auth-Email:\"" + CfApiLogin + "\" -H \"Content-Type: application/json\" \"https://api.cloudflare.com/client/v4/zones\" --data '{\"name\":\"" + shortUrl + "\",\"jump_start\":\"true\"}'"
 	// 创建域名
 	//curl -X POST -H "X-Auth-Key:0237bd44ec3b541e622d6aa1b187aac9193f0" -H "X-Auth-Email:djpt36@163.com" -H "Content-Type: application/json" "https://api.cloudflare.com/client/v4/zones" --data '{"name":"ss36.vip","jump_start":"true"}'
 	//cmd := exec.Command("pwd")
