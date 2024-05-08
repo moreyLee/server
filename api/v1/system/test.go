@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/system/dto"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
@@ -15,14 +16,11 @@ func (b *BaseApi) TestT(c *gin.Context) {
 	fmt.Println("执行命令")
 }
 
-//type domainGetData struct {
-//	Url         string `json:"url" form:"url"`
-//	ContentType string `json:"Content-Type"`
-//	CfApiLogin  string `json:"X-Auth-Email"`
-//	CfApiKey    string `json:"X-Auth-Key"`
-//}
-
 func (b *BaseApi) Domain(c *gin.Context) {
+	var data dto.DomainDto
+	err := c.ShouldBind(&data)
+	fmt.Println("前端过来的短域名", data.ShortUrl)
+
 	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
 	//domain := "ss36.vip"
@@ -32,14 +30,18 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	//shortUrl := c.PostForm("short_url")
 	//inviteUrl := c.PostForm("invite_url")
 	url := "https://api.cloudflare.com/client/v4/zones"
-
-	//ContentType := c.DefaultPostForm("Content-Type", "application/json")
-	//CfApiLogin := c.DefaultPostForm("X-Auth-Email", "djpt36@163.com")
-	//globalKey := c.DefaultPostForm("X-Auth-Key", "0237bd44ec3b541e622d6aa1b187aac9193f0")
-	//fmt.Println("请求头:", ContentType, CfApiLogin, globalKey)
+	// 实例化一个结构体 将struct 转化为json
+	//request := dto.DomainDto{ShortUrl: data.ShortUrl}
+	// 绑定结构体解析为json格式数据
+	//err :=
+	if err != nil {
+		response.Fail(c)
+		return
+	}
 	// 创建post 请求
-	postData := []byte(`{"name": "ss36.vip", "jump_start": "true"}`)
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(postData))
+	jsonData := fmt.Sprintf("{\"name\":\"%s\",\"jump_start\":\"true\"}", data.ShortUrl)
+	//postData := []byte(`{"name": ,"jump_start": "true"}`)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(jsonData)))
 	if err != nil {
 		fmt.Println("创建post请求失败:", err)
 		return
@@ -70,6 +72,7 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	}
 	// 打印post 响应的内容
 	fmt.Println(result)
+	//response.OkWithMessage(result)
 	//response.OkWithMessage(result)
 	//commandStr := "curl -X POST -H \"X-Auth-Key:\"" + globalKey + "-H \"X-Auth-Email:\"" + CfApiLogin + "\" -H \"Content-Type: application/json\" \"https://api.cloudflare.com/client/v4/zones\" --data '{\"name\":\"" + shortUrl + "\",\"jump_start\":\"true\"}'"
 	// 创建域名
