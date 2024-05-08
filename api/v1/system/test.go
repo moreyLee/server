@@ -30,18 +30,21 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	//shortUrl := c.PostForm("short_url")
 	//inviteUrl := c.PostForm("invite_url")
 	url := "https://api.cloudflare.com/client/v4/zones"
-	// 实例化一个结构体 将struct 转化为json
-	//request := dto.DomainDto{ShortUrl: data.ShortUrl}
-	// 绑定结构体解析为json格式数据
-	//err :=
+	// 构建请求体
+	body := dto.DomainDto{
+		Name:      data.ShortUrl,
+		JsonStart: "true",
+	}
+	// 序列化请求体 json 格式
+	jsonBody, err := json.Marshal(body)
 	if err != nil {
 		response.Fail(c)
 		return
 	}
 	// 创建post 请求
-	jsonData := fmt.Sprintf("{\"name\":\"%s\",\"jump_start\":\"true\"}", data.ShortUrl)
+	//jsonData := fmt.Sprintf("{\"name\":\"%s\",\"jump_start\":\"true\"}", data.ShortUrl)
 	//postData := []byte(`{"name": ,"jump_start": "true"}`)
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(jsonData)))
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonBody))
 	if err != nil {
 		fmt.Println("创建post请求失败:", err)
 		return
@@ -74,23 +77,5 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	fmt.Println(result)
 	//response.OkWithMessage(result)
 	//response.OkWithMessage(result)
-	//commandStr := "curl -X POST -H \"X-Auth-Key:\"" + globalKey + "-H \"X-Auth-Email:\"" + CfApiLogin + "\" -H \"Content-Type: application/json\" \"https://api.cloudflare.com/client/v4/zones\" --data '{\"name\":\"" + shortUrl + "\",\"jump_start\":\"true\"}'"
-	// 创建域名
 
-	//curl -X POST -H "X-Auth-Key:0237bd44ec3b541e622d6aa1b187aac9193f0" -H "X-Auth-Email:djpt36@163.com" -H "Content-Type: application/json" "https://api.cloudflare.com/client/v4/zones" --data '{"name":"ss36.vip","jump_start":"true"}'
-	//cmd := exec.Command("pwd")
-	//cmd := exec.Command("curl", "-X", "POST", "-H", "X-Auth-Key:"+globalKey, "-H", "X-Auth-Email:"+CfApiLogin, "-H", "Content-Type: application/json", "https://api.cloudflare.com/client/v4/zones", " --data '{\"name\":\"ss36.vip\",\"jump_start\":\"true\"}'")
-	//cmd := exec.Command("/bin/bash", "-c", commandStr)
-	//fmt.Println("邀请代理链接:", inviteUrl)
-	//// 执行命令 并返回输出 获取执行结果
-	//output, err := cmd.Output()
-	//if err != nil {
-	//	response.FailWithMessage(err.Error(), c)
-	//	fmt.Println("命令报错信息:", err.Error())
-	//	return
-	//}
-	//// 将命令输出转换为字符串并返回
-	//response.OkWithMessage(string(output), c)
-	//fmt.Println("命令正确执行结果:", string(output))
-	//return
 }
