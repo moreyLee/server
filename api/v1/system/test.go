@@ -25,11 +25,6 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	var data jsonData
 	err := c.ShouldBind(&data)
 	fmt.Println("前端过来的短域名")
-	c.JSON(200, gin.H{
-		"code":       200,
-		"name":       data.Name,
-		"jump_start": data.Start,
-	})
 
 	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
@@ -91,6 +86,12 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	}
 	// 打印post 响应的内容
 	fmt.Println(result)
+	c.JSON(200, gin.H{
+		"code":       200,
+		"name":       data.Name,
+		"jump_start": data.Start,
+		"result":     result,
+	})
 	//response.OkWithMessage()
 	//response.OkWithMessage(result)
 	//response.OkWithMessage(result)
