@@ -52,9 +52,15 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	//	return
 	//}
 	// 创建post 请求
+	requestBody := new(bytes.Buffer)
+	err = json.NewEncoder(requestBody).Encode(data)
+	if err != nil {
+		fmt.Println("json映射结构体失败")
+		return
+	}
 	//jsonData := fmt.Sprintf("{\"name\":\"%s\",\"jump_start\":\"true\"}", data.ShortUrl)
-	postData := []byte(`{"name": ss36.vip,"jump_start": "true"}`)
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(postData))
+	//postData := []byte(`{"name": ss36.vip,"jump_start": "true"}`)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestBody.Bytes()))
 	if err != nil {
 		fmt.Println("创建post请求失败:", err)
 		return
