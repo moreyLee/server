@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/dto"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
@@ -16,10 +15,21 @@ func (b *BaseApi) TestT(c *gin.Context) {
 	fmt.Println("执行命令")
 }
 
+type jsonData struct {
+	Name  string `json:"name"`
+	Start string `json:"jump_start"`
+}
+
 func (b *BaseApi) Domain(c *gin.Context) {
-	var data dto.DomainDto
+	//var data dto.DomainDto
+	var data jsonData
 	err := c.ShouldBind(&data)
-	fmt.Println("前端过来的短域名", data.ShortUrl)
+	fmt.Println("前端过来的短域名")
+	c.JSON(200, gin.H{
+		"code":       200,
+		"name":       data.Name,
+		"jump_start": data.Start,
+	})
 
 	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
