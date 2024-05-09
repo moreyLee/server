@@ -31,20 +31,20 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	//inviteUrl := c.PostForm("invite_url")
 	url := "https://api.cloudflare.com/client/v4/zones"
 	// 构建请求体
-	body := dto.DomainDto{
-		Name:      data.ShortUrl,
-		JsonStart: "true",
-	}
+	//body := dto.DomainDto{
+	//	Name:      data.ShortUrl,
+	//	JsonStart: "true",
+	//}
 	// 序列化请求体 json 格式
-	jsonBody, err := json.Marshal(body)
-	if err != nil {
-		response.Fail(c)
-		return
-	}
+	//jsonBody, err := json.Marshal(body)
+	//if err != nil {
+	//	response.Fail(c)
+	//	return
+	//}
 	// 创建post 请求
 	//jsonData := fmt.Sprintf("{\"name\":\"%s\",\"jump_start\":\"true\"}", data.ShortUrl)
-	//postData := []byte(`{"name": ,"jump_start": "true"}`)
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonBody))
+	postData := []byte(`{"name": ss36.vip,"jump_start": "true"}`)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(postData))
 	if err != nil {
 		fmt.Println("创建post请求失败:", err)
 		return
@@ -75,6 +75,7 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	}
 	// 打印post 响应的内容
 	fmt.Println(result)
+	//response.OkWithMessage()
 	//response.OkWithMessage(result)
 	//response.OkWithMessage(result)
 
