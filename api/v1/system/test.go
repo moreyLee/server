@@ -69,7 +69,7 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	}
 	// 打印post 响应的内容
 	fmt.Println(result)
-	response.OkWithDetailed(result, "域名创建成功", c)
+	response.OkWithDetailed(result, "域名创建完成", c)
 	//c.JSON(200, gin.H{
 	//	"code":       200,
 	//	"name":       data.Name,
