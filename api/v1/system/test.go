@@ -21,39 +21,22 @@ type jsonData struct {
 }
 
 func (b *BaseApi) Domain(c *gin.Context) {
-	//var data dto.DomainDto
 	var data jsonData
 	err := c.ShouldBind(&data)
-	fmt.Println("前端过来的短域名")
-
+	fmt.Println("前端过来的短域名", data.Name)
 	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
-	//domain := "ss36.vip"
 	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
 	//zone_id := "f09f2f527f41da9b5f2c100c4ff61fe9"
-	//var list domainGetData
-	//shortUrl := c.PostForm("short_url")
-	//inviteUrl := c.PostForm("invite_url")
 	url := "https://api.cloudflare.com/client/v4/zones"
-	// 构建请求体
-	//body := dto.DomainDto{
-	//	Name:      data.ShortUrl,
-	//	JsonStart: "true",
-	//}
-	// 序列化请求体 json 格式
-	//jsonBody, err := json.Marshal(body)
-	//if err != nil {
-	//	response.Fail(c)
-	//	return
-	//}
-	// 创建post 请求
+
+	// 构建请求 将struct转换为json 数据
 	requestBody := new(bytes.Buffer)
 	err = json.NewEncoder(requestBody).Encode(data)
 	if err != nil {
 		fmt.Println("json映射结构体失败")
 		return
 	}
-	//jsonData := fmt.Sprintf("{\"name\":\"%s\",\"jump_start\":\"true\"}", data.ShortUrl)
 	//postData := []byte(`{"name": ss36.vip,"jump_start": "true"}`)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestBody.Bytes()))
 	if err != nil {
@@ -86,14 +69,12 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	}
 	// 打印post 响应的内容
 	fmt.Println(result)
-	c.JSON(200, gin.H{
-		"code":       200,
-		"name":       data.Name,
-		"jump_start": data.Start,
-		"result":     result,
-	})
-	//response.OkWithMessage()
-	//response.OkWithMessage(result)
-	//response.OkWithMessage(result)
+	response.OkWithDetailed(result, "域名创建成功", c)
+	//c.JSON(200, gin.H{
+	//	"code":       200,
+	//	"name":       data.Name,
+	//	"jump_start": data.Start,
+	//	"result":     result,
+	//})
 
 }
