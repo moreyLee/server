@@ -10,6 +10,11 @@ import (
 	"net/http"
 )
 
+func (b *BaseApi) Test1(c *gin.Context) {
+	response.Ok(c)
+	fmt.Println("执行命令")
+}
+
 type jsonData struct {
 	Name  string `json:"name"`
 	Start string `json:"jump_start"`
@@ -19,10 +24,8 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	var data jsonData
 	err := c.ShouldBind(&data)
 	fmt.Println("前端过来的短域名", data.Name)
-	//account_id :=ce7ca80686b3787313165855f53c401e
 	CfApiLogin := "djpt36@163.com"
 	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
-	//zone_id := "f09f2f527f41da9b5f2c100c4ff61fe9"
 	url := "https://api.cloudflare.com/client/v4/zones"
 
 	// 构建请求 将struct转换为json 数据

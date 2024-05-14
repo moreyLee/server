@@ -14,6 +14,7 @@ func (s *DomainRouter) DomainRouter(Router *gin.RouterGroup) {
 	var baseApi = v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{
 		userRouter.POST("domain", baseApi.Domain) // CF 创建域名
+		userRouter.POST("test1", baseApi.Test1)
 	}
 
 }
