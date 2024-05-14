@@ -10,11 +10,11 @@ type DomainRouter struct {
 }
 
 func (s *DomainRouter) DomainRouter(Router *gin.RouterGroup) {
-	userRouter := Router.Group("sys").Use(middleware.OperationRecord())
+	userRouter := Router.Group("domain").Use(middleware.OperationRecord())
 	var baseApi = v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{
-		userRouter.POST("domain", baseApi.Domain) // CF 创建域名
-		userRouter.POST("test1", baseApi.Test1)
+		userRouter.POST("create", baseApi.Domain) // CF 创建域名
+		userRouter.POST("test", baseApi.TestS)
 	}
 
 }

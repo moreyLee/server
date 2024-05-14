@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-func (b *BaseApi) Test1(c *gin.Context) {
+func (b *BaseApi) TestS(c *gin.Context) {
 	response.Ok(c)
 	fmt.Println("执行命令")
 }
