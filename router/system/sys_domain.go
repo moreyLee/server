@@ -9,7 +9,7 @@ import (
 type DomainRouter struct {
 }
 
-func (s *DomainRouter) DomainRouter(Router *gin.RouterGroup) {
+func (s *DomainRouter) DomainOpsRouter(Router *gin.RouterGroup) {
 	userRouter := Router.Group("domain").Use(middleware.OperationRecord())
 	var baseApi = v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{

@@ -17,4 +17,5 @@ type RouterGroup struct {
 	AuthorityBtnRouter
 	SysExportTemplateRouter
 	TestRouter
+	DomainRouter
 }
