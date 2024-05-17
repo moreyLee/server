@@ -13,8 +13,8 @@ func (s *TestRouter) TestUserRouter(Router *gin.RouterGroup) {
 	userRouter := Router.Group("test").Use(middleware.OperationRecord())
 	var baseApi = v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{
-		userRouter.POST("testT", baseApi.TestT)   // 测试api
-		userRouter.POST("domain", baseApi.Domain) // CF 创建域名
+		userRouter.POST("testT", baseApi.TestT) // 测试api
+		//userRouter.POST("domain", baseApi.Domain) // CF 创建域名
 	}
 
 }
