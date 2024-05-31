@@ -10,10 +10,11 @@ import (
 	"net/http"
 )
 
-func (b *BaseApi) TestS(c *gin.Context) {
-	response.Ok(c)
-	fmt.Println("执行命令")
-}
+const (
+	CfApiLogin    = "djpt36@163.com"
+	globalKey     = "0237bd44ec3b541e622d6aa1b187aac9193f0"
+	CloudFlareURL = "https://api.cloudflare.com/client/v4/zones"
+)
 
 type jsonData struct {
 	Name  string `json:"name"`
@@ -24,10 +25,6 @@ func (b *BaseApi) Domain(c *gin.Context) {
 	var data jsonData
 	err := c.ShouldBind(&data)
 	fmt.Println("前端过来的短域名", data.Name)
-	CfApiLogin := "djpt36@163.com"
-	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
-	url := "https://api.cloudflare.com/client/v4/zones"
-
 	// 构建请求 将struct转换为json 数据
 	requestBody := new(bytes.Buffer)
 	err = json.NewEncoder(requestBody).Encode(data)
@@ -36,7 +33,7 @@ func (b *BaseApi) Domain(c *gin.Context) {
 		return
 	}
 	//postData := []byte(`{"name": ss36.vip,"jump_start": "true"}`)
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestBody.Bytes()))
+	req, err := http.NewRequest("POST", CloudFlareURL, bytes.NewBuffer(requestBody.Bytes()))
 	if err != nil {
 		fmt.Println("创建post请求失败:", err)
 		return
@@ -66,7 +63,6 @@ func (b *BaseApi) Domain(c *gin.Context) {
 		return
 	}
 	// 打印post 响应的内容
-	fmt.Println(result)
 	response.OkWithDetailed(result, "域名创建完成", c)
 
 }
@@ -92,11 +88,8 @@ func (b *BaseApi) CreateDnsRecord(c *gin.Context) {
 	err = c.ShouldBindUri(&zoneID)                // 绑定uri 请求参数
 	zoneIDStr := fmt.Sprintf("%v", zoneID.ZoneID) // 结构体转换为字符串
 	fmt.Println("zoneID值", zoneID)
-	CfApiLogin := "djpt36@163.com"
-	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
-	//url := "https://api.cloudflare.com/client/v4/zones/"
 	fmt.Println("zoneIDStr值", zoneIDStr)
-	url := "https://api.cloudflare.com/client/v4/zones/" + zoneIDStr + "/dns_records"
+	url := CloudFlareURL + zoneIDStr + "/dns_records"
 	if zoneIDStr == "" {
 		response.FailWithMessage("zoneID不能为空", c)
 		return
@@ -140,7 +133,6 @@ func (b *BaseApi) CreateDnsRecord(c *gin.Context) {
 		return
 	}
 	// 打印post 响应的内容
-	fmt.Println(result)
 	response.OkWithDetailed(result, "DNS修改记录", c)
 }
 
@@ -172,10 +164,8 @@ func (b *BaseApi) PageRule(c *gin.Context) {
 	err = c.ShouldBindUri(&zoneID)                // 绑定uri 请求参数
 	zoneIDStr := fmt.Sprintf("%v", zoneID.ZoneID) // 结构体转换为字符串
 	fmt.Println("zoneID值", zoneID)
-	CfApiLogin := "djpt36@163.com"
-	globalKey := "0237bd44ec3b541e622d6aa1b187aac9193f0"
 	fmt.Println("zoneIDStr值", zoneIDStr)
-	url := "https://api.cloudflare.com/client/v4/zones/" + zoneIDStr + "/pagerules"
+	url := CloudFlareURL + zoneIDStr + "/pagerules"
 	if zoneIDStr == "" {
 		response.FailWithMessage("zoneID不能为空", c)
 		return
@@ -219,6 +209,5 @@ func (b *BaseApi) PageRule(c *gin.Context) {
 		return
 	}
 	// 打印post 响应的内容
-	fmt.Println(result)
 	response.OkWithDetailed(result, "添加页面规则", c)
 }

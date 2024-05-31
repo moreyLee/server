@@ -18,5 +18,5 @@ type RouterGroup struct {
 	SysExportTemplateRouter
 	TestRouter
 	DomainRouter
-	TelegramRouter
+	ElasticRouter
 }

@@ -2,7 +2,7 @@ captcha:
     key-long: 6
     img-width: 240
     img-height: 80
-    open-captcha: 0
+    open-captcha: 1
     open-captcha-timeout: 3600
 cors:
     mode: strict-whitelist
@@ -114,3 +114,9 @@ zap:
     max-age: 0
     show-line: true
     log-in-console: true
+elasticsearch:
+  enable: true
+  url: http://192.168.217.142:9200
+  sniff: false  #将返回的url 作为请求的路径
+  healthcheckInterval: 5s
+  index-prefix: gva

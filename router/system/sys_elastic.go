@@ -6,14 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type TelegramRouter struct {
+type ElasticRouter struct {
 }
 
-func (s *TelegramRouter) TGRobotRouter(Router *gin.RouterGroup) {
-	TGRouter := Router.Group("telegram").Use(middleware.OperationRecord())
+func (s *ElasticRouter) ElasticOpsRouter(Router *gin.RouterGroup) {
+	EsRouter := Router.Group("es").Use(middleware.OperationRecord())
 	var baseApi = v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{
-		TGRouter.POST("jenkins", baseApi.Domain) // CF 创建域名
+		EsRouter.GET("searchById", baseApi.SearchById) //
 
 	}
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/flipped-aurora/gin-vue-admin/server/task"
 	_ "go.uber.org/automaxprocs"
 	"go.uber.org/zap"
 
@@ -27,7 +28,8 @@ func main() {
 	global.GVA_LOG = core.Zap() // 初始化zap日志库
 	zap.ReplaceGlobals(global.GVA_LOG)
 	global.GVA_DB = initialize.Gorm() // gorm连接数据库
-	initialize.Timer()
+	initialize.Timer()                // 定时器
+
 	initialize.DBList()
 	if global.GVA_DB != nil {
 		initialize.RegisterTables() // 初始化表
@@ -35,5 +37,9 @@ func main() {
 		db, _ := global.GVA_DB.DB()
 		defer db.Close()
 	}
+	initialize.InitES() // 初始化ElasticSearch
+	// 启动一个Goroutine 协程运行后台任务
+	task.SendMessage()
 	core.RunWindowsServer()
+
 }

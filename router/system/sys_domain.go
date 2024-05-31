@@ -16,7 +16,6 @@ func (s *DomainRouter) DomainOpsRouter(Router *gin.RouterGroup) {
 		userRouter.POST("create", baseApi.Domain)                    // CF 创建域名
 		userRouter.POST("operaDns/:zoneID", baseApi.CreateDnsRecord) // 创建DNS 记录
 		userRouter.POST("pageRule/:zoneID", baseApi.PageRule)        // 创建页面规则
-		userRouter.POST("test", baseApi.TestS)
 	}
 
 }
