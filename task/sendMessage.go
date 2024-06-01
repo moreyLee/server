@@ -1,10 +1,16 @@
 package task
 
 import (
+	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 	"strings"
+)
+
+var (
+	botToken = "7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4"
+	chatID   = -4275796428
 )
 
 func SendMessage() {
@@ -16,7 +22,6 @@ func SendMessage() {
 				log.Printf("telegram 机器人运行出错捕获异常信息:\n%v\n", err)
 			}
 		}()
-		botToken := "7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4"
 		// 初始化机器人
 		bot, err := tgbotapi.NewBotAPI(botToken)
 		if err != nil {
@@ -28,8 +33,8 @@ func SendMessage() {
 		log.Printf("机器人名称: @%s", bot.Self.UserName)
 
 		// 创建一个新的消息
-		chatID := int64(-4275796428) // 替换为目标聊天 ID（负数表示群组）
-		messageText := "开始"
+		chatID := int64(chatID) // 替换为目标聊天 ID（负数表示群组）
+		messageText := "欢迎使用CG机器人"
 		// 发送消息
 		msg := tgbotapi.NewMessage(chatID, messageText)
 		//
@@ -55,31 +60,29 @@ func SendMessage() {
 
 			// 检查消息是否提到了机器人
 			if strings.Contains(update.Message.Text, "@"+bot.Self.UserName) {
-
+				args := update.Message.CommandArguments()
+				var response string
 				// 检查命令
 				switch update.Message.Command() {
 				case "jenkins":
-					err := JenkinsBuildJob()
-					msg := tgbotapi.NewMessage(update.Message.Chat.ID, "JobName")
-					msg.ReplyToMessageID = update.Message.MessageID
-					// 发送回复消息
-					_, err = bot.Send(msg)
+					jobName := strings.SplitN(args, " ", 2)[0]
+					log.Printf("Jenkins job name: %s", jobName)
+					//JenkinsBuildJob(jobName)
+					JenkinsBuildJobWithParam(jobName)
 					if err != nil {
-						log.Panic(err)
+						response = fmt.Sprintf("触发构建jenkins任务失败...  '%s': %v", jobName, err)
+					} else {
+						response = fmt.Sprintf("正在构建%s...", jobName)
 					}
-					//
+					msg := tgbotapi.NewMessage(update.Message.Chat.ID, response)
+					bot.Send(msg)
+				default:
+					msg := tgbotapi.NewMessage(update.Message.Chat.ID, "未知命令，请使用/jenkins <jobName>来触发构建")
+					bot.Send(msg)
 				}
-				// 回复消息
-				msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-				msg.ReplyToMessageID = update.Message.MessageID
-				// 发送回复消息
-				_, err = bot.Send(msg)
-				if err != nil {
-					log.Panic(err)
-				}
+
 			}
 		}
-
 		log.Printf("异常以后继续执行后面的业务逻辑")
 	}()
 }

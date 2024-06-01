@@ -52,3 +52,5 @@
 | `--timer` | timer | 定时器接口封装 |
 | `--upload`      | oss                  | oss接口封装        |
 
+### http client 库 
+go get github.com/go-resty/resty/v2 

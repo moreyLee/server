@@ -2,17 +2,20 @@ package main
 
 import (
 	"context"
-	"encoding/base64"
 	"fmt"
 	"github.com/bndr/gojenkins"
+	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"go.uber.org/zap"
+	"io"
 	"net/http"
+	"time"
 )
 
 const (
 	DeveloperToken  = "11c9bc0d6ea88891f45ee4cfe5bd218287"
 	ProductTokenAPI = "11d2d3cd4784aa28379905bf13988ad50e"
 	JenkinsURL      = "http://119.8.127.96:8001"
-	DeveloperURL    = "http://192.168.217.128:8080"
+	DeveloperURL    = "http://192.168.217.128:8082/"
 	JenkinsUser     = "admin"
 	JenkinPassword  = "$C3gR01NiKWLKkg8"
 	JenkinsAPIToken = "11d2d3cd4784aa28379905bf13988ad50e"
@@ -21,27 +24,29 @@ const (
 	ctx
 )
 
-func JenkinsBuildJob() error {
-	jenkinsUrl := fmt.Sprintf("%s/job/%s/build", DeveloperURL, Name)
+func JenkinsBuildJob(JobName string) {
+	jenkinsUrl := DeveloperURL + "job/" + JobName + "/build"
 	req, err := http.NewRequest("POST", jenkinsUrl, nil)
 	if err != nil {
-		return err
+		fmt.Println("创建post请求失败:", err)
+		return
 	}
-	auth := base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", JenkinsUser, JenkinsAPIToken)))
-	req.Header.Add("Authorization", "Basic "+auth)
-
-	client := &http.Client{}
+	// 设置Auth Basic Auth
+	req.SetBasicAuth(JenkinsUser, DeveloperToken)
+	// 发送post请求并获取响应
+	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		return err
+		global.GVA_LOG.Error("发送post请求失败:", zap.Error(err))
+		return
 	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusCreated {
-		return fmt.Errorf("failed to trigger job, status code: %d", resp.StatusCode)
-	}
-
-	return nil
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			global.GVA_LOG.Error("关闭resp失败:", zap.Error(err))
+		}
+	}(resp.Body)
+	return
 }
 
 // 构建指定任务
@@ -61,9 +66,6 @@ func main() {
 	//
 	//// 构建server
 	//buildJob(ctx, jenkins, "web")
-	err := JenkinsBuildJob()
-	if err != nil {
-		return
-	}
+	JenkinsBuildJob("web")
 
 }
