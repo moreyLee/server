@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
@@ -9,8 +8,11 @@ import (
 )
 
 var (
-	botToken = "7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4"
-	chatID   = -4275796428
+	botToken = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
+	// ChatID 测试群组的chatID
+	//chatID = -4275796428
+	// CG 游戏更新发布群
+	chatID = -1001534909056
 )
 
 func SendMessage() {
@@ -55,35 +57,79 @@ func SendMessage() {
 			if update.Message == nil { // 忽略任何非消息更新
 				continue
 			}
-			// 打印收到的消息
-			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-
+			chatID := update.Message.Chat.ID
+			msgText := update.Message.Text
+			msgID := update.Message.MessageID
 			// 检查消息是否提到了机器人
-			if strings.Contains(update.Message.Text, "@"+bot.Self.UserName) {
+			if strings.Contains(msgText, "@"+bot.Self.UserName) {
 				args := update.Message.CommandArguments()
-				var response string
+				// 使用strings.fields 来分割参数
+				argsNum := strings.Fields(args)
+				//log.Printf("args参数个数：%v", len(argsNum))
+				ViewParam := update.Message.CommandArguments()
 				// 检查命令
 				switch update.Message.Command() {
 				case "jenkins":
-					jobName := strings.SplitN(args, " ", 2)[0]
-					log.Printf("Jenkins job name: %s", jobName)
-					//JenkinsBuildJob(jobName)
-					JenkinsBuildJobWithParam(jobName)
-					if err != nil {
-						response = fmt.Sprintf("触发构建jenkins任务失败...  '%s': %v", jobName, err)
+					// 从机器人输入四个参数
+					if len(argsNum) == 3 {
+						//log.Printf("入参:  " + args)
+						field := strings.Fields(args)
+						jobName := field[1]
+						log.Printf("JobName名称: %s", jobName)
+						viewName := strings.SplitN(ViewParam, " ", 2)[0]
+						log.Printf("Jenkins视图名称: %s", viewName)
+						JenkinsBuildJobWithView(viewName, jobName)
+						reply := tgbotapi.NewMessage(chatID, "已收到请求，"+viewName+"_"+jobName+"正在构建中，请稍等")
+						msg.ReplyToMessageID = msgID
+						bot.Send(reply)
 					} else {
-						response = fmt.Sprintf("正在构建%s...", jobName)
+						log.Printf("请输入正确的参数,参考/help")
+						Send("错误: 请输入正确的参数个数,请参考 /help @CG88885_bot\"")
 					}
-					msg := tgbotapi.NewMessage(update.Message.Chat.ID, response)
+				case "help":
+					msg := tgbotapi.NewMessage(update.Message.Chat.ID, "请使用 /jenkins 项目名 [后台API/前台API/H5/后台H5/定时任务]   任选其一，触发构建"+
+						"\n用例: /jenkins 0898国际 后台API @CG33333_bot")
 					bot.Send(msg)
 				default:
-					msg := tgbotapi.NewMessage(update.Message.Chat.ID, "未知命令，请使用/jenkins <jobName>来触发构建")
+					msg := tgbotapi.NewMessage(update.Message.Chat.ID, "请使用 /jenkins 项目名 [后台API/前台API/H5/后台H5/定时任务] 任选其一，来触发构建"+
+						"\n用例: /jenkins 0898国际 后台API @CG33333_bot")
 					bot.Send(msg)
 				}
-
 			}
 		}
 		log.Printf("异常以后继续执行后面的业务逻辑")
+	}()
+}
+
+func Send(Text string) {
+	go func() {
+		defer func() {
+			// recover 函数只能在defer()函数中调用 用于恢复程序控制流
+			if err := recover(); err != nil {
+				log.Printf("telegram 机器人运行出错捕获异常信息:\n%v\n", err)
+			}
+		}()
+		// 初始化机器人
+		bot, err := tgbotapi.NewBotAPI(botToken)
+		if err != nil {
+			log.Panic(err)
+		}
+		// 启用调试模式 慢sql 语句优化
+		bot.Debug = false
+
+		log.Printf("机器人名称: @%s", bot.Self.UserName)
+
+		// 创建一个新的消息
+		chatID := int64(chatID) // 替换为目标聊天 ID（负数表示群组）
+		messageText := Text
+		// 发送消息
+		msg := tgbotapi.NewMessage(chatID, messageText)
+		//
+		// 发送消息
+		_, err = bot.Send(msg)
+		if err != nil {
+			log.Panic(err)
+		}
 	}()
 }
 
