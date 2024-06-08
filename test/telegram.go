@@ -26,7 +26,7 @@ func SendMessage() {
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
 	// 创建一个新的消息
-	chatID := int64(groupID) // 替换为目标聊天 ID（负数表示群组）
+	chatID := groupID // 替换为目标聊天 ID（负数表示群组）
 	messageText := "群组消息"
 	// 发送消息
 	msg := tgbotapi.NewMessage(chatID, messageText)
@@ -53,6 +53,7 @@ func SendMessage() {
 
 		// 检查消息是否提到了机器人
 		if update.Message.IsCommand() || strings.Contains(update.Message.Text, "@"+bot.Self.UserName) {
+			//if strings.HasPrefix(msgText, "@CG33333_bot") {
 			// 回复消息
 			responseText := "你提到我了吗？我在这里！"
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, responseText)
@@ -64,30 +65,8 @@ func SendMessage() {
 		}
 	}
 }
-func GetchatID() {
-	// 创建机器人实例
-	bot, err := tgbotapi.NewBotAPI(botToken)
-	if err != nil {
-		log.Panic(err)
-	}
 
-	bot.Debug = false
-
-	// 设置监听所有传入的更新
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
-
-	updates := bot.GetUpdatesChan(u)
-
-	for update := range updates {
-		if update.Message != nil {
-			chatID := update.Message.Chat.ID
-			log.Printf("Chat ID: %d", chatID)
-			// 在这里可以使用 chatID 进行相应的操作，比如发送消息给该群组
-		}
-	}
-}
 func main() {
-	SendMessage()
+	//SendMessage()
 	//GetchatID()
 }

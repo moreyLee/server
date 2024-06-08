@@ -208,7 +208,7 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 	} else {
 		log.Printf("请输入正确的站点信息")
 
-		Send("错误: 请输入正确的站点参数信息, 具体用法请参考 /help @CG88885_bot")
+		//Send("错误: 请输入正确的站点参数信息, 具体用法请参考 /help @CG88885_bot")
 		return // 返回不在执行后续
 	}
 }

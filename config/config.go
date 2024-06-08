@@ -30,4 +30,8 @@ type Server struct {
 	// 跨域配置
 	Cors          CORS          `mapstructure:"cors" json:"cors" yaml:"cors"`
 	ElasticSearch ElasticSearch `mapstructure:"elasticsearch" json:"elasticsearch" yaml:"elasticsearch"`
+	// TG 机器人
+	Telegram Telegram `mapstructure:"telegram" json:"telegram" yaml:"telegram"`
+	// CloudFlare
+	Cloudflare Cloudflare `mapstructure:"cloudflare" json:"cloudflare" yaml:"cloudflare"`
 }

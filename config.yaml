@@ -116,7 +116,14 @@ zap:
     log-in-console: true
 elasticsearch:
   enable: true
-  url: http://192.168.217.142:9200
+  url: http://192.168.217.142:9200 #http://10.10.182.220:9200
   sniff: false  #将返回的url 作为请求的路径
   healthcheckInterval: 5s
   index-prefix: gva
+telegram:
+  bot-token: 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4 #@CG33333_bot 机器人
+  chat-id: -1001534909056 #测试群组 -4275796428   #CG游戏更新发布群 -1001534909056
+cloudflare:
+  cf-api-login: djpt36@163.com
+  global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0
+  api-url: https://api.cloudflare.com/client/v4/zones

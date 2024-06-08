@@ -4,17 +4,18 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
 )
 
-const (
-	CfApiLogin    = "djpt36@163.com"
-	globalKey     = "0237bd44ec3b541e622d6aa1b187aac9193f0"
-	CloudFlareURL = "https://api.cloudflare.com/client/v4/zones"
-)
+//const (
+//	CfApiLogin    = "djpt36@163.com"
+//	globalKey     = "0237bd44ec3b541e622d6aa1b187aac9193f0"
+//	CloudFlareURL = "https://api.cloudflare.com/client/v4/zones"
+//)
 
 type jsonData struct {
 	Name  string `json:"name"`
@@ -33,15 +34,17 @@ func (b *BaseApi) Domain(c *gin.Context) {
 		return
 	}
 	//postData := []byte(`{"name": ss36.vip,"jump_start": "true"}`)
-	req, err := http.NewRequest("POST", CloudFlareURL, bytes.NewBuffer(requestBody.Bytes()))
+	req, err := http.NewRequest("POST",
+		global.GVA_CONFIG.Cloudflare.ApiUrl,
+		bytes.NewBuffer(requestBody.Bytes()))
 	if err != nil {
 		fmt.Println("创建post请求失败:", err)
 		return
 	}
 	// 设置请求头
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("X-Auth-Email", CfApiLogin)
-	req.Header.Set("X-Auth-Key", globalKey)
+	req.Header.Set("X-Auth-Email", global.GVA_CONFIG.Cloudflare.CfApiLogin)
+	req.Header.Set("X-Auth-Key", global.GVA_CONFIG.Cloudflare.GlobalKey)
 	// 发送post请求并获取响应
 	client := http.Client{}
 	resp, err := client.Do(req)
@@ -89,7 +92,7 @@ func (b *BaseApi) CreateDnsRecord(c *gin.Context) {
 	zoneIDStr := fmt.Sprintf("%v", zoneID.ZoneID) // 结构体转换为字符串
 	fmt.Println("zoneID值", zoneID)
 	fmt.Println("zoneIDStr值", zoneIDStr)
-	url := CloudFlareURL + zoneIDStr + "/dns_records"
+	url := global.GVA_CONFIG.Cloudflare.ApiUrl + zoneIDStr + "/dns_records"
 	if zoneIDStr == "" {
 		response.FailWithMessage("zoneID不能为空", c)
 		return
@@ -110,8 +113,8 @@ func (b *BaseApi) CreateDnsRecord(c *gin.Context) {
 	}
 	// 设置请求头
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("X-Auth-Email", CfApiLogin)
-	req.Header.Set("X-Auth-Key", globalKey)
+	req.Header.Set("X-Auth-Email", global.GVA_CONFIG.Cloudflare.CfApiLogin)
+	req.Header.Set("X-Auth-Key", global.GVA_CONFIG.Cloudflare.GlobalKey)
 	// 发送post请求并获取响应
 	client := http.Client{}
 	resp, err := client.Do(req)
@@ -165,7 +168,7 @@ func (b *BaseApi) PageRule(c *gin.Context) {
 	zoneIDStr := fmt.Sprintf("%v", zoneID.ZoneID) // 结构体转换为字符串
 	fmt.Println("zoneID值", zoneID)
 	fmt.Println("zoneIDStr值", zoneIDStr)
-	url := CloudFlareURL + zoneIDStr + "/pagerules"
+	url := global.GVA_CONFIG.Cloudflare.ApiUrl + zoneIDStr + "/pagerules"
 	if zoneIDStr == "" {
 		response.FailWithMessage("zoneID不能为空", c)
 		return
@@ -186,8 +189,8 @@ func (b *BaseApi) PageRule(c *gin.Context) {
 	}
 	// 设置请求头
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("X-Auth-Email", CfApiLogin)
-	req.Header.Set("X-Auth-Key", globalKey)
+	req.Header.Set("X-Auth-Email", global.GVA_CONFIG.Cloudflare.CfApiLogin)
+	req.Header.Set("X-Auth-Key", global.GVA_CONFIG.Cloudflare.GlobalKey)
 	// 发送post请求并获取响应
 	client := http.Client{}
 	resp, err := client.Do(req)
