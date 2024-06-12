@@ -28,10 +28,13 @@ type Server struct {
 	Excel Excel `mapstructure:"excel" json:"excel" yaml:"excel"`
 
 	// 跨域配置
-	Cors          CORS          `mapstructure:"cors" json:"cors" yaml:"cors"`
+	Cors CORS `mapstructure:"cors" json:"cors" yaml:"cors"`
+	// ElasticSearch
 	ElasticSearch ElasticSearch `mapstructure:"elasticsearch" json:"elasticsearch" yaml:"elasticsearch"`
 	// TG 机器人
 	Telegram Telegram `mapstructure:"telegram" json:"telegram" yaml:"telegram"`
 	// CloudFlare
 	Cloudflare Cloudflare `mapstructure:"cloudflare" json:"cloudflare" yaml:"cloudflare"`
+	// Jenkins
+	Jenkins Jenkins `mapstructure:"jenkins" json:"jenkins" yaml:"jenkins"`
 }

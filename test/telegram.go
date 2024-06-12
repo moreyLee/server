@@ -67,6 +67,6 @@ func SendMessage() {
 }
 
 func main() {
-	//SendMessage()
+	SendMessage()
 	//GetchatID()
 }

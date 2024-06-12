@@ -47,31 +47,31 @@ func BotJob() {
 		log.Printf("机器人名称: @%s", bot.Self.UserName)
 
 		// 创建一个新的消息
-		chatID := global.GVA_CONFIG.Telegram.ChatID // 替换为目标聊天 ID（负数表示群组）
-		messageText := "欢迎使用CG机器人"
+		//chatID := global.GVA_CONFIG.Telegram.ChatID // 替换为目标聊天 ID（负数表示群组）
+		//messageText := "欢迎使用CG机器人"
 		//发送消息
-		msg := tgbotapi.NewMessage(chatID, messageText)
+		//msg := tgbotapi.NewMessage(chatID, messageText)
 		//发送消息
-		bot.Send(msg)
+		//bot.Send(msg)
 
-		//bot := getBotInstance()
 		// 设置更新配置
 		u := tgbotapi.NewUpdate(0)
-		u.Timeout = 60
+		u.Timeout = 120 // 设置超时时间
 		// 触发panic 异常
 		//actualFunction()
 		// 发送启动消息
 
 		// 获取更新通道
 		updates := bot.GetUpdatesChan(u)
-		//updates := make(chan tgbotapi.Update)
-		//messages := make(chan tgbotapi.MessageConfig)
+
 		// 启动消息发送协程
 		//SendMessage(messages)
 		for update := range updates {
 			if update.Message == nil { // 忽略任何非消息更新
 				continue
 			}
+			//time.Sleep(3 * time.Second)
+			// 打印收到的消息
 			//chatID := update.Message.Chat.ID
 			msgText := update.Message.Text
 			// 检查消息是否提到了机器人
@@ -99,25 +99,25 @@ func BotJob() {
 						viewName := strings.SplitN(ViewParam, " ", 2)[0]
 						log.Printf("Jenkins视图名称: %s", viewName)
 						JenkinsBuildJobWithView(viewName, jobName)
-						reply := tgbotapi.NewMessage(update.Message.Chat.ID, "已收到请求，"+viewName+"_"+jobName+"正在构建中，请稍等")
-						reply.ReplyToMessageID = update.Message.MessageID
-						bot.Send(reply)
+						//reply := tgbotapi.NewMessage(update.Message.Chat.ID, "已收到请求，"+viewName+"_"+jobName+"正在构建中，请稍等")
+						//reply.ReplyToMessageID = update.Message.MessageID
+						//bot.Send(reply)
 					} else {
 						log.Printf("请输入正确的参数,参考/help")
-						reply := tgbotapi.NewMessage(update.Message.Chat.ID, "错误: 请输入正确的参数个数,请参考 /help @CG33333_bot")
-						reply.ReplyToMessageID = update.Message.MessageID
-						bot.Send(reply)
+						//reply := tgbotapi.NewMessage(update.Message.Chat.ID, "错误: 请输入正确的参数个数,请参考 /help @CG33333_bot")
+						//reply.ReplyToMessageID = update.Message.MessageID
+						//bot.Send(reply)
 					}
 				case "help":
-					reply := tgbotapi.NewMessage(update.Message.Chat.ID, "请使用 /jenkins 项目名 [后台API/前台API/H5/后台H5/定时任务]   任选其一，触发构建"+
-						"\n用例: /jenkins 0898国际 后台API @CG33333_bot")
-					reply.ReplyToMessageID = update.Message.MessageID
-					bot.Send(reply)
+					//reply := tgbotapi.NewMessage(update.Message.Chat.ID, "请使用 /jenkins 项目名 [后台API/前台API/H5/后台H5/定时任务]   任选其一，触发构建"+
+					//	"\n用例: /jenkins 0898国际 后台API @CG33333_bot")
+					//reply.ReplyToMessageID = update.Message.MessageID
+					//bot.Send(reply)
 				default:
-					reply := tgbotapi.NewMessage(update.Message.Chat.ID, "请使用 /jenkins 项目名 [后台API/前台API/H5/后台H5/定时任务] 任选其一，来触发构建"+
-						"\n用例: /jenkins 0898国际 后台API @CG33333_bot")
-					reply.ReplyToMessageID = update.Message.MessageID
-					bot.Send(reply)
+					//reply := tgbotapi.NewMessage(update.Message.Chat.ID, "请使用 /jenkins 项目名 [后台API/前台API/H5/后台H5/定时任务] 任选其一，来触发构建"+
+					//	"\n用例: /jenkins 0898国际 后台API @CG33333_bot")
+					//reply.ReplyToMessageID = update.Message.MessageID
+					//bot.Send(reply)
 				}
 			}
 		}

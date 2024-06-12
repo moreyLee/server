@@ -44,7 +44,7 @@ type JenkinsView struct {
 
 // GetBuildJobParam 获取JobName构建参数
 func GetBuildJobParam(JobName string) map[interface{}]interface{} {
-	jenkinsUrl := JenkinsURL + "job/" + JobName + "/api/json?pretty=true"
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "job/" + JobName + "/api/json?pretty=true"
 	// 定义一个map  用于保存获取的构建参数
 	params := make(map[interface{}]interface{})
 	req, err := http.NewRequest("GET", jenkinsUrl, nil)
@@ -52,7 +52,7 @@ func GetBuildJobParam(JobName string) map[interface{}]interface{} {
 		global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
 	}
 	// 设置Auth Basic Auth  user &token
-	req.SetBasicAuth(JenkinsUser, JenkinsAPIToken)
+	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
 	// 创建GET请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
@@ -85,7 +85,7 @@ func GetBuildJobParam(JobName string) map[interface{}]interface{} {
 
 // GetExtName 获取JobName构建参数
 func GetExtName(ViewName string) string {
-	jenkinsUrl := JenkinsURL + "view/" + ViewName + "/api/json"
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/api/json"
 	// 定义一个map  用于保存获取的构建参数
 	//params := make(map[interface{}]interface{})
 	req, err := http.NewRequest("GET", jenkinsUrl, nil)
@@ -93,7 +93,7 @@ func GetExtName(ViewName string) string {
 		global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
 	}
 	// 设置Auth Basic Auth  user &token
-	req.SetBasicAuth(JenkinsUser, JenkinsAPIToken)
+	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
 	// 创建GET请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
@@ -124,7 +124,7 @@ func GetExtName(ViewName string) string {
 
 // JenkinsBuildJobWithParam 有参数构建 根据项目名构建
 func JenkinsBuildJobWithParam(JobName string) {
-	jenkinsUrl := JenkinsURL + "job/" + JobName + "/buildWithParameters"
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "job/" + JobName + "/buildWithParameters"
 	//获取构建参数
 	params := GetBuildJobParam(JobName)
 	// 表单数据 将获取的参数转换为表单数据
@@ -141,7 +141,7 @@ func JenkinsBuildJobWithParam(JobName string) {
 		return
 	}
 	// 设置Auth Basic Auth
-	req.SetBasicAuth(JenkinsUser, JenkinsAPIToken)
+	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
 	// 发送post请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
@@ -177,7 +177,7 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 		log.Printf("前缀: %s ", preName)
 		Name := preName + extName
 		log.Printf("Name: %s", Name)
-		jenkinsUrl := JenkinsURL + "view/" + ViewName + "/job/" + Name + "/buildWithParameters"
+		jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/buildWithParameters"
 		// 获取构建参数
 		params := GetBuildJobParam(Name)
 		// 表单数据 将获取的参数转换为表单数据
@@ -190,7 +190,7 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 				global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
 			}
 			//设置Auth Basic Auth
-			req.SetBasicAuth(JenkinsUser, JenkinsAPIToken)
+			req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
 			//发送post请求并获取响应
 			client := http.Client{Timeout: 5 * time.Second}
 			resp, err := client.Do(req)
