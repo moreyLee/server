@@ -1,13 +1,11 @@
 package main
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/task"
-	_ "go.uber.org/automaxprocs"
-	"go.uber.org/zap"
-
 	"github.com/flipped-aurora/gin-vue-admin/server/core"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/initialize"
+	_ "go.uber.org/automaxprocs"
+	"go.uber.org/zap"
 )
 
 //go:generate go env -w GO111MODULE=on
@@ -39,7 +37,7 @@ func main() {
 	}
 	initialize.InitES() // 初始化ElasticSearch
 	// 启动一个Goroutine 协程运行后台任务
-	task.BotJob()
+	//task.WebhookMessage()
 	core.RunWindowsServer()
 
 }

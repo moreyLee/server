@@ -33,6 +33,7 @@ type Server struct {
 	ElasticSearch ElasticSearch `mapstructure:"elasticsearch" json:"elasticsearch" yaml:"elasticsearch"`
 	// TG 机器人
 	Telegram Telegram `mapstructure:"telegram" json:"telegram" yaml:"telegram"`
+
 	// CloudFlare
 	Cloudflare Cloudflare `mapstructure:"cloudflare" json:"cloudflare" yaml:"cloudflare"`
 	// Jenkins

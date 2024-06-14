@@ -11,12 +11,6 @@ import (
 	"net/http"
 )
 
-//const (
-//	CfApiLogin    = "djpt36@163.com"
-//	globalKey     = "0237bd44ec3b541e622d6aa1b187aac9193f0"
-//	CloudFlareURL = "https://api.cloudflare.com/client/v4/zones"
-//)
-
 type jsonData struct {
 	Name  string `json:"name"`
 	Start string `json:"jump_start"`

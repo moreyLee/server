@@ -12,7 +12,7 @@ var (
 	groupID = int64(-4275796428)
 )
 
-func SendMessage() {
+func Send() {
 
 	// 初始化机器人
 	bot, err := tgbotapi.NewBotAPI(botToken)
@@ -67,6 +67,6 @@ func SendMessage() {
 }
 
 func main() {
-	SendMessage()
+	//Send()
 	//GetchatID()
 }

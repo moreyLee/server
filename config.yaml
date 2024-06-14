@@ -125,8 +125,10 @@ jenkins:
   user: admin
   api-token: 11d2d3cd4784aa28379905bf13988ad50e
 telegram:
+  url: https://api.telegram.org/bot
   bot-token: 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4 #@CG33333_bot 机器人
   chat-id: -4275796428 #测试群组 -4275796428   #CG游戏更新发布群 -1001534909056
+  webhook-url: https://cf4b-91-75-118-214.ngrok-free.app/telegram-webhook
 cloudflare:
   cf-api-login: djpt36@163.com
   global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0

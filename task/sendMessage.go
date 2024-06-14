@@ -125,38 +125,6 @@ func BotJob() {
 	}()
 }
 
-func Send(Text string) {
-	go func() {
-		defer func() {
-			// recover 函数只能在defer()函数中调用 用于恢复程序控制流
-			if err := recover(); err != nil {
-				log.Printf("telegram 机器人运行出错捕获异常信息:\n%v\n", err)
-			}
-		}()
-		// 初始化机器人
-		bot, err := tgbotapi.NewBotAPI(global.GVA_CONFIG.Telegram.BotToken)
-		if err != nil {
-			log.Panic(err)
-		}
-		// 启用调试模式 慢sql 语句优化
-		bot.Debug = false
-
-		log.Printf("机器人名称: @%s", bot.Self.UserName)
-
-		// 创建一个新的消息
-		chatID := global.GVA_CONFIG.Telegram.ChatID // 替换为目标聊天 ID（负数表示群组）
-		messageText := Text
-		// 发送消息
-		msg := tgbotapi.NewMessage(chatID, messageText)
-		//
-		// 发送消息
-		_, err = bot.Send(msg)
-		if err != nil {
-			log.Panic(err)
-		}
-	}()
-}
-
 // 测试中断函数 用于触发panic 异常退出
 //func actualFunction() {
 //	global.GVA_LOG.Info("开始执行触发异常函数")
