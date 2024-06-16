@@ -97,13 +97,14 @@ func Webhook(w http.ResponseWriter, r *http.Request) {
 	// if private or group
 	if message.Message.Chat.ID != 0 {
 		fmt.Println("群组ID与消息文本", message.Message.Chat.ID, message.Message.Text)
+		// 获取到消息的chatID 消息内容
 		chatID = message.Message.Chat.ID
 		msgText = message.Message.Text
 	} else {
 		// if channel
 		fmt.Println("频道id和频道文本", message.ChannelPost.Chat.ID, message.ChannelPost.Text)
-		chatID = message.ChannelPost.Chat.ID
-		msgText = message.ChannelPost.Text
+		//chatID = message.ChannelPost.Chat.ID
+		//msgText = message.ChannelPost.Text
 	}
 
 	respMsg := fmt.Sprintf("%s%s/sendMessage?chat_id=%d&text=Received: %s", URL, token, chatID, msgText)
@@ -136,7 +137,8 @@ func main() {
 	}
 	// 遍历收到的消息
 	update := bot.ListenForWebhook("/")
-	http.HandleFunc("/telegram-webhook", Webhook)
+
+	http.HandleFunc("/webhook", Webhook)
 	log.Printf("Starting server on port %s", port)
 	go func() {
 		err := http.ListenAndServe(":"+port, nil)

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
@@ -17,7 +18,8 @@ type jsonData struct {
 }
 
 func (b *BaseApi) Domain(c *gin.Context) {
-	var data jsonData
+	//var data jsonData
+	data := system.CreateDomain{}
 	err := c.ShouldBind(&data)
 	fmt.Println("前端过来的短域名", data.Name)
 	// 构建请求 将struct转换为json 数据

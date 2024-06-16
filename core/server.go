@@ -32,9 +32,11 @@ func RunWindowsServer() {
 	Router.Static("/form-generator", "./resource/page")
 
 	address := fmt.Sprintf(":%d", global.GVA_CONFIG.System.Addr)
+	webhook := fmt.Sprintf(":%s", global.GVA_CONFIG.Telegram.WebhookPort)
 	s := initServer(address, Router)
-
+	a := initServer(webhook, Router)
 	global.GVA_LOG.Info("server run success on ", zap.String("address", address))
+	global.GVA_LOG.Info("webhook run success on ", zap.String("webhook端口", webhook))
 
 	fmt.Printf(`
 	当前版本:v2.6.2
@@ -42,4 +44,5 @@ func RunWindowsServer() {
 	默认前端文件运行地址:http://127.0.0.1:8080
 `, address)
 	global.GVA_LOG.Error(s.ListenAndServe().Error())
+	global.GVA_LOG.Error(a.ListenAndServe().Error())
 }

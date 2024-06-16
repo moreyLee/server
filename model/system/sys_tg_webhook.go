@@ -1,4 +1,4 @@
-package common
+package system
 
 // ReceiveMessage struct
 type ReceiveMessage struct {
