@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 	"net/http"
@@ -78,14 +79,14 @@ var (
 	URL  = "https://api.telegram.org/bot"
 	port = "5299"
 	//webhookURL = "https://devops.3333d.vip/telegram-webhook"
-	webhookUrl = "https://cf4b-91-75-118-214.ngrok-free.app/telegram-webhook"
+	webhookUrl = "https://0126-91-75-118-214.ngrok-free.app/telegram-webhook"
 	token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
 )
 
 const chatID int64 = -4275796428
 
 func Webhook(w http.ResponseWriter, r *http.Request) {
-	message := ReceiveMessage{}
+	message := system.ReceiveMessage{}
 
 	chatID := 0
 	msgText := ""
@@ -138,7 +139,7 @@ func main() {
 	// 遍历收到的消息
 	update := bot.ListenForWebhook("/")
 
-	http.HandleFunc("/webhook", Webhook)
+	http.HandleFunc("/telegram-webhook", Webhook)
 	log.Printf("Starting server on port %s", port)
 	go func() {
 		err := http.ListenAndServe(":"+port, nil)

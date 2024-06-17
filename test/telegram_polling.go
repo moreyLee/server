@@ -21,7 +21,7 @@ func Send() {
 	}
 
 	// 启用调试模式
-	bot.Debug = false
+	bot.Debug = true
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
@@ -67,6 +67,6 @@ func Send() {
 }
 
 func main() {
-	//Send()
+	Send()
 	//GetchatID()
 }

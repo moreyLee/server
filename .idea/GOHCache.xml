@@ -1,0 +1,4629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="Action">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
+              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AddMenuAuthorityInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AliyunOSS">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/oss_aliyun.go" />
+              <option value="file://$PROJECT_DIR$/utils/upload/aliyun_oss.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ApiGroup">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/enter.go" />
+              <option value="file://$PROJECT_DIR$/api/v1/system/enter.go" />
+              <option value="file://$PROJECT_DIR$/plugin/email/api/enter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ApiRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ApiService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityBtnApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_authority_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityBtnRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_authority_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityBtnService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_authority_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityMenuApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthorityService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeHistory">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_auto_code_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeHistoryApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_auto_code_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeHistoryRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_auto_code_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeHistoryService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_autocode_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoCodeStruct">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoPlugInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AutoPlugReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Autocode">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AwsS3">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/oss_aws.go" />
+              <option value="file://$PROJECT_DIR$/utils/upload/aws_s3.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BaseApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_captcha.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BaseClaims">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BaseMenuService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_base_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BaseRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_base.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CORS">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/cors.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CORSWhitelist">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/cors.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Captcha">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/captcha.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CasbinApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CasbinInReceive">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CasbinInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CasbinRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CasbinService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChangePasswordReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChangeUserInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChannelPost">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Chat">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ClearDB">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/clearDB.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Cloudflare">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/Cloudflare.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Column">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Condition">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Constraint">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Cpu">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/server.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateDomain">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CustomClaims">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Cutter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/internal/cutter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DBApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_initdb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Db">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DictionaryApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_dictionary.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DictionaryDetailApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_dictionary_detail.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DictionaryDetailRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_dictionary_detail.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DictionaryDetailService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_dictionary_detail.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DictionaryRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_dictionary.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DictionaryService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_dictionary.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Disk">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/server.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DomainRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ElasticRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_elastic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ElasticSearch">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/elasticsearch.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Email">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/email.go" />
+              <option value="file://$PROJECT_DIR$/plugin/email/config/email.go" />
+              <option value="file://$PROJECT_DIR$/plugin/email/model/response/email.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="EmailApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/email/api/sys_email.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="EmailRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/email/router/sys_email.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="EmailService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/email/service/sys_email.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Empty">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/request/common.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Entities">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Excel">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/excel.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Field">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="From">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GVA_MODEL">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/global/model.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GeneralDB">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/db_list.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetAuthorityId">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/request/common.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetById">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/request/common.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="HuaWeiObs">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/oss_huawei.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="IdsReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/request/common.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Index">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/initialize/mongo.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="InitDB">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_init.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="InitDBService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_initdb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="InitRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_initdb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JWT">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/jwt.go" />
+              <option value="file://$PROJECT_DIR$/utils/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Jenkins">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/jenkins.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JenkinsJob">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JenkinsView">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JoinTemplate">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JwtApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_jwt_blacklist.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JwtBlacklist">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_jwt_blacklist.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JwtRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JwtService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/jwt_black_list.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LimitConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/middleware/limit_ip.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Local">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/oss_local.go" />
+              <option value="file://$PROJECT_DIR$/utils/upload/local.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LogLayout">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/middleware/logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Logger">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/middleware/logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Login">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoginResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MenuRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MenuService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Message">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Meta">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_base_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Mongo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/mongo.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MongoHost">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/mongo.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Mssql">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/gorm_mssql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MssqlInitHandler">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_initdb_mssql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Mysql">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/gorm_mysql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MysqlInitHandler">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_initdb_mysql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Obs">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/upload/obs.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OperationRecordApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_operation_record.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OperationRecordRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_operation_record.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OperationRecordService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_operation_record.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Oracle">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/gorm_oracle.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Os">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/server.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PageInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/request/common.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PageInfoTest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/validator_test.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PageResult">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/response/common.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ParameterDefinitions">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Pgsql">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/gorm_pgsql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PgsqlInitHandler">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_initdb_pgsql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PolicyPathResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Qiniu">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/oss_qiniu.go" />
+              <option value="file://$PROJECT_DIR$/utils/upload/qiniu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Ram">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/server.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ReceiveMessage">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Redis">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/redis.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RedisStore">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/captcha/redis.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Register">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Response">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/common/response/response.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Result">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RollBack">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_auto_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RouterGroup">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/email/router/enter.go" />
+              <option value="file://$PROJECT_DIR$/router/enter.go" />
+              <option value="file://$PROJECT_DIR$/router/system/enter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SearchApiParams">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SendMessage">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Server">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/config.go" />
+              <option value="file://$PROJECT_DIR$/utils/server.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ServiceGroup">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/email/service/enter.go" />
+              <option value="file://$PROJECT_DIR$/service/enter.go" />
+              <option value="file://$PROJECT_DIR$/service/system/enter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SetUserAuth">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SetUserAuthorities">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SpecializedDB">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/db_list.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Sqlite">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/gorm_sqlite.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SqliteInitHandler">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_initdb_sqlite.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAPIListResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAPIResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthority">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthorityBtn">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_authority_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthorityBtnReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_authority_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthorityBtnRes">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_authority_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthorityCopyResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthorityMenu">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_authority_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAuthorityResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAutoCode">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAutoCodeHistory">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_autocode_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysAutoHistory">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_auto_history.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysBaseMenu">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_base_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysBaseMenuBtn">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_menu_btn.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysBaseMenuParameter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_base_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysBaseMenuResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysBaseMenusResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysCaptchaResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_captcha.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysConfigResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_system.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysDictionary">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_dictionary.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysDictionaryDetail">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_dictionary_detail.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysDictionaryDetailSearch">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_dictionary_detail.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysExportTemplate">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysExportTemplateApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysExportTemplateRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysExportTemplateSearch">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysExportTemplateService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_export_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysMenu">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_authority_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysMenusResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysOperationRecord">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_operation_record.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysOperationRecordSearch">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/request/sys_operation_record.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_system.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysUser">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysUserAuthority">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_user_authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysUserResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="System">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/system.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_system.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SystemApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_system.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SystemApiApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SystemConfigService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_system.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Table">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/response/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Telegram">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/telegram.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TelegramRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_telegram.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TencentCOS">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/oss_tencent.go" />
+              <option value="file://$PROJECT_DIR$/utils/upload/tencent_cos.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TestRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/test.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Update">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Visitor">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/ast/ast_enter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Zap">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/zap.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ZoneID">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="_gorm">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/initialize/internal/gorm.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="_zap">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/internal/zap.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="args">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/human_duration_test.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="astInjectionMeta">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="autoCodeMssql">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code_mssql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="autoCodeMysql">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code_mysql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="autoCodeOracle">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code_oracle.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="autoCodePgsql">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code_pgsql.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="autoCodeSqlite">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code_sqlite.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="autoPackage">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="emailPlugin">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/email/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ensureTables">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/initialize/ensure_tables.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="fileRotatelogs">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/internal/file_rotatelogs.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initApi">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/api.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initAuthority">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/authority.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initCasbin">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initDict">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/dictionary.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initDictDetail">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/dictionary_detail.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initExcelTemplate">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/excel_template.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initMenu">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/menu.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initMenuAuthority">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/authorities_menus.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="initUser">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/source/system/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="injectionMeta">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="jsonData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="jsonDnsData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="justFilesFilesystem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/initialize/router.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="mockJob">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/timer/timed_task_test.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="mongo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/initialize/internal/mongo.go" />
+              <option value="file://$PROJECT_DIR$/initialize/mongo.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="orderedInitializer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_initdb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="pageRuleData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="responseBodyWriter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/middleware/operation.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="task">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/timer/timed_task.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="taskManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/timer/timed_task.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="timer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/timer/timed_task.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="tplData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_auto_code.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="writer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/initialize/internal/logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="wsPlugin">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/plugin/ws/ws.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/api/v1/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643644" />
+              <option name="schema">
+                <list>
+                  <option value="ApiGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643646" />
+              <option name="schema">
+                <list>
+                  <option value="ApiGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643646" />
+              <option name="schema">
+                <list>
+                  <option value="SystemApiApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643646" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_authority_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643647" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityBtnApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_auto_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643647" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_auto_code_history.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643647" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeHistoryApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_captcha.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643647" />
+              <option name="schema">
+                <list>
+                  <option value="BaseApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_casbin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643648" />
+              <option name="schema">
+                <list>
+                  <option value="CasbinApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_dictionary.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643648" />
+              <option name="schema">
+                <list>
+                  <option value="DictionaryApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_dictionary_detail.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643648" />
+              <option name="schema">
+                <list>
+                  <option value="DictionaryDetailApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_domain.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709423" />
+              <option name="schema">
+                <list>
+                  <option value="jsonData" />
+                  <option value="jsonDnsData" />
+                  <option value="ZoneID" />
+                  <option value="Constraint" />
+                  <option value="Action" />
+                  <option value="pageRuleData" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_elasticsearch.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717176185924" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_export_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643649" />
+              <option name="schema">
+                <list>
+                  <option value="SysExportTemplateApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_initdb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643649" />
+              <option name="schema">
+                <list>
+                  <option value="DBApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_jwt_blacklist.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643649" />
+              <option name="schema">
+                <list>
+                  <option value="JwtApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643650" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityMenuApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_operation_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643650" />
+              <option name="schema">
+                <list>
+                  <option value="OperationRecordApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_system.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643650" />
+              <option name="schema">
+                <list>
+                  <option value="SystemApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709418" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717177735615" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1715787537875" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/Cloudflare.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717767608025" />
+              <option name="schema">
+                <list>
+                  <option value="Cloudflare" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/auto_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643652" />
+              <option name="schema">
+                <list>
+                  <option value="Autocode" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/captcha.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643652" />
+              <option name="schema">
+                <list>
+                  <option value="Captcha" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718287513306" />
+              <option name="schema">
+                <list>
+                  <option value="Server" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/cors.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643653" />
+              <option name="schema">
+                <list>
+                  <option value="CORS" />
+                  <option value="CORSWhitelist" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/db_list.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643653" />
+              <option name="schema">
+                <list>
+                  <option value="GeneralDB" />
+                  <option value="SpecializedDB" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/elasticsearch.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717163488196" />
+              <option name="schema">
+                <list>
+                  <option value="ElasticSearch" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643653" />
+              <option name="schema">
+                <list>
+                  <option value="Email" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/excel.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643653" />
+              <option name="schema">
+                <list>
+                  <option value="Excel" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/gorm_mssql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643654" />
+              <option name="schema">
+                <list>
+                  <option value="Mssql" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/gorm_mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643654" />
+              <option name="schema">
+                <list>
+                  <option value="Mysql" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/gorm_oracle.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643654" />
+              <option name="schema">
+                <list>
+                  <option value="Oracle" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/gorm_pgsql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643654" />
+              <option name="schema">
+                <list>
+                  <option value="Pgsql" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/gorm_sqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643655" />
+              <option name="schema">
+                <list>
+                  <option value="Sqlite" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/jenkins.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718134025467" />
+              <option name="schema">
+                <list>
+                  <option value="Jenkins" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643655" />
+              <option name="schema">
+                <list>
+                  <option value="JWT" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/mongo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643655" />
+              <option name="schema">
+                <list>
+                  <option value="Mongo" />
+                  <option value="MongoHost" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/oss_aliyun.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643655" />
+              <option name="schema">
+                <list>
+                  <option value="AliyunOSS" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/oss_aws.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643656" />
+              <option name="schema">
+                <list>
+                  <option value="AwsS3" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/oss_huawei.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643656" />
+              <option name="schema">
+                <list>
+                  <option value="HuaWeiObs" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/oss_local.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643656" />
+              <option name="schema">
+                <list>
+                  <option value="Local" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/oss_qiniu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717686632270" />
+              <option name="schema">
+                <list>
+                  <option value="Qiniu" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/oss_tencent.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643657" />
+              <option name="schema">
+                <list>
+                  <option value="TencentCOS" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643657" />
+              <option name="schema">
+                <list>
+                  <option value="Redis" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/system.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643657" />
+              <option name="schema">
+                <list>
+                  <option value="System" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/telegram.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709415" />
+              <option name="schema">
+                <list>
+                  <option value="Telegram" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/zap.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643657" />
+              <option name="schema">
+                <list>
+                  <option value="Zap" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/internal/constant.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643658" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/internal/cutter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643658" />
+              <option name="schema">
+                <list>
+                  <option value="Cutter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/internal/file_rotatelogs.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643659" />
+              <option name="schema">
+                <list>
+                  <option value="fileRotatelogs" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/internal/zap.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643659" />
+              <option name="schema">
+                <list>
+                  <option value="_zap" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709393" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/server_other.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643659" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/server_win.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643660" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/viper.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643660" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/zap.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643660" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/docs/docs.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643661" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/global/global.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717702233115" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/global/model.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643664" />
+              <option name="schema">
+                <list>
+                  <option value="GVA_MODEL" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/db_list.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643665" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/elasticsearch.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717163749353" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/ensure_tables.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643665" />
+              <option name="schema">
+                <list>
+                  <option value="ensureTables" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/gorm.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643665" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/gorm_mssql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643666" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/gorm_mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643666" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/gorm_oracle.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643666" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/gorm_pgsql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643667" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/gorm_sqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643667" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/internal/gorm.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643667" />
+              <option name="schema">
+                <list>
+                  <option value="_gorm" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/internal/logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643668" />
+              <option name="schema">
+                <list>
+                  <option value="writer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/internal/mongo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643668" />
+              <option name="schema">
+                <list>
+                  <option value="mongo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/mongo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643668" />
+              <option name="schema">
+                <list>
+                  <option value="mongo" />
+                  <option value="Index" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/other.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643669" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/plugin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643669" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643669" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/register_init.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643669" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/router.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709385" />
+              <option name="schema">
+                <list>
+                  <option value="justFilesFilesystem" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/telegram_bot.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718395898211" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/timer.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717073849421" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/validator.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643670" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718395976669" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/casbin_rbac.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643672" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/cors.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643672" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643673" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/error.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643673" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643673" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/limit_ip.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643673" />
+              <option name="schema">
+                <list>
+                  <option value="LimitConfig" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/loadtls.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643674" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643674" />
+              <option name="schema">
+                <list>
+                  <option value="LogLayout" />
+                  <option value="Logger" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/middleware/operation.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643674" />
+              <option name="schema">
+                <list>
+                  <option value="responseBodyWriter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/common/clearDB.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643675" />
+              <option name="schema">
+                <list>
+                  <option value="ClearDB" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/common/request/common.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643676" />
+              <option name="schema">
+                <list>
+                  <option value="PageInfo" />
+                  <option value="GetById" />
+                  <option value="IdsReq" />
+                  <option value="GetAuthorityId" />
+                  <option value="Empty" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/common/response/common.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643676" />
+              <option name="schema">
+                <list>
+                  <option value="PageResult" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/common/response/response.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643676" />
+              <option name="schema">
+                <list>
+                  <option value="Response" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643679" />
+              <option name="schema">
+                <list>
+                  <option value="CustomClaims" />
+                  <option value="BaseClaims" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643679" />
+              <option name="schema">
+                <list>
+                  <option value="SearchApiParams" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_authority_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643679" />
+              <option name="schema">
+                <list>
+                  <option value="SysAuthorityBtnReq" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_auto_history.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643680" />
+              <option name="schema">
+                <list>
+                  <option value="SysAutoHistory" />
+                  <option value="RollBack" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_casbin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643680" />
+              <option name="schema">
+                <list>
+                  <option value="CasbinInfo" />
+                  <option value="CasbinInReceive" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_dictionary_detail.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643680" />
+              <option name="schema">
+                <list>
+                  <option value="SysDictionaryDetailSearch" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_export_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643681" />
+              <option name="schema">
+                <list>
+                  <option value="SysExportTemplateSearch" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_init.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643681" />
+              <option name="schema">
+                <list>
+                  <option value="InitDB" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643681" />
+              <option name="schema">
+                <list>
+                  <option value="AddMenuAuthorityInfo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_operation_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643681" />
+              <option name="schema">
+                <list>
+                  <option value="SysOperationRecordSearch" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/request/sys_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1716643439125" />
+              <option name="schema">
+                <list>
+                  <option value="Register" />
+                  <option value="Login" />
+                  <option value="ChangePasswordReq" />
+                  <option value="SetUserAuth" />
+                  <option value="SetUserAuthorities" />
+                  <option value="ChangeUserInfo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643682" />
+              <option name="schema">
+                <list>
+                  <option value="SysAPIResponse" />
+                  <option value="SysAPIListResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643682" />
+              <option name="schema">
+                <list>
+                  <option value="SysAuthorityResponse" />
+                  <option value="SysAuthorityCopyResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_authority_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643683" />
+              <option name="schema">
+                <list>
+                  <option value="SysAuthorityBtnRes" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_auto_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643683" />
+              <option name="schema">
+                <list>
+                  <option value="Db" />
+                  <option value="Table" />
+                  <option value="Column" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_auto_code_history.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643683" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeHistory" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_captcha.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643683" />
+              <option name="schema">
+                <list>
+                  <option value="SysCaptchaResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_casbin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643684" />
+              <option name="schema">
+                <list>
+                  <option value="PolicyPathResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643684" />
+              <option name="schema">
+                <list>
+                  <option value="SysMenusResponse" />
+                  <option value="SysBaseMenusResponse" />
+                  <option value="SysBaseMenuResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_system.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643684" />
+              <option name="schema">
+                <list>
+                  <option value="SysConfigResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/response/sys_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643684" />
+              <option name="schema">
+                <list>
+                  <option value="SysUserResponse" />
+                  <option value="LoginResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643685" />
+              <option name="schema">
+                <list>
+                  <option value="SysApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643685" />
+              <option name="schema">
+                <list>
+                  <option value="SysAuthority" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_authority_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643685" />
+              <option name="schema">
+                <list>
+                  <option value="SysAuthorityBtn" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_authority_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643685" />
+              <option name="schema">
+                <list>
+                  <option value="SysMenu" />
+                  <option value="SysAuthorityMenu" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_auto_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643686" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeStruct" />
+                  <option value="Field" />
+                  <option value="SysAutoCode" />
+                  <option value="AutoPlugReq" />
+                  <option value="AutoPlugInfo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_autocode_history.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643686" />
+              <option name="schema">
+                <list>
+                  <option value="SysAutoCodeHistory" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_base_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643686" />
+              <option name="schema">
+                <list>
+                  <option value="SysBaseMenu" />
+                  <option value="Meta" />
+                  <option value="SysBaseMenuParameter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_dictionary.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643686" />
+              <option name="schema">
+                <list>
+                  <option value="SysDictionary" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_dictionary_detail.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643687" />
+              <option name="schema">
+                <list>
+                  <option value="SysDictionaryDetail" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_domain.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709406" />
+              <option name="schema">
+                <list>
+                  <option value="CreateDomain" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_export_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643687" />
+              <option name="schema">
+                <list>
+                  <option value="SysExportTemplate" />
+                  <option value="JoinTemplate" />
+                  <option value="Condition" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_jwt_blacklist.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643687" />
+              <option name="schema">
+                <list>
+                  <option value="JwtBlacklist" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_menu_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643688" />
+              <option name="schema">
+                <list>
+                  <option value="SysBaseMenuBtn" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_operation_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643688" />
+              <option name="schema">
+                <list>
+                  <option value="SysOperationRecord" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_system.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1715178623174" />
+              <option name="schema">
+                <list>
+                  <option value="System" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718640680629" />
+              <option name="schema">
+                <list>
+                  <option value="ReceiveMessage" />
+                  <option value="Message" />
+                  <option value="ChannelPost" />
+                  <option value="SendMessage" />
+                  <option value="Result" />
+                  <option value="From" />
+                  <option value="Chat" />
+                  <option value="Entities" />
+                  <option value="Update" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643688" />
+              <option name="schema">
+                <list>
+                  <option value="SysUser" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_user_authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643689" />
+              <option name="schema">
+                <list>
+                  <option value="SysUserAuthority" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/packfile/notUsePackFile.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643689" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/packfile/usePackFile.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643689" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/api/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643690" />
+              <option name="schema">
+                <list>
+                  <option value="ApiGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/api/sys_email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643691" />
+              <option name="schema">
+                <list>
+                  <option value="EmailApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/config/email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643691" />
+              <option name="schema">
+                <list>
+                  <option value="Email" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/global/gloabl.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643691" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643692" />
+              <option name="schema">
+                <list>
+                  <option value="emailPlugin" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/model/response/email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643692" />
+              <option name="schema">
+                <list>
+                  <option value="Email" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/router/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643693" />
+              <option name="schema">
+                <list>
+                  <option value="RouterGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/router/sys_email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643693" />
+              <option name="schema">
+                <list>
+                  <option value="EmailRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/service/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643693" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/service/sys_email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643694" />
+              <option name="schema">
+                <list>
+                  <option value="EmailService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/email/utils/email.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643694" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/plugin-tool/utils/check.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643695" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/plugin/ws/ws.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643695" />
+              <option name="schema">
+                <list>
+                  <option value="wsPlugin" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/resource/autocode_template/subcontract/data.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643698" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643722" />
+              <option name="schema">
+                <list>
+                  <option value="RouterGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718299047609" />
+              <option name="schema">
+                <list>
+                  <option value="RouterGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643724" />
+              <option name="schema">
+                <list>
+                  <option value="ApiRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643724" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_authority_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643724" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityBtnRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_auto_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643725" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_auto_code_history.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643725" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeHistoryRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_base.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643725" />
+              <option name="schema">
+                <list>
+                  <option value="BaseRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_casbin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643726" />
+              <option name="schema">
+                <list>
+                  <option value="CasbinRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_dictionary.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643726" />
+              <option name="schema">
+                <list>
+                  <option value="DictionaryRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_dictionary_detail.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643726" />
+              <option name="schema">
+                <list>
+                  <option value="DictionaryDetailRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_domain.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717177756315" />
+              <option name="schema">
+                <list>
+                  <option value="DomainRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_elastic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717170906678" />
+              <option name="schema">
+                <list>
+                  <option value="ElasticRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_export_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643726" />
+              <option name="schema">
+                <list>
+                  <option value="SysExportTemplateRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_initdb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643727" />
+              <option name="schema">
+                <list>
+                  <option value="InitRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643727" />
+              <option name="schema">
+                <list>
+                  <option value="JwtRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643727" />
+              <option name="schema">
+                <list>
+                  <option value="MenuRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_operation_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643727" />
+              <option name="schema">
+                <list>
+                  <option value="OperationRecordRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_system.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643728" />
+              <option name="schema">
+                <list>
+                  <option value="SysRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_telegram.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718569709358" />
+              <option name="schema">
+                <list>
+                  <option value="TelegramRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643728" />
+              <option name="schema">
+                <list>
+                  <option value="UserRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1715786089448" />
+              <option name="schema">
+                <list>
+                  <option value="TestRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643729" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643730" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/jwt_black_list.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643731" />
+              <option name="schema">
+                <list>
+                  <option value="JwtService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643731" />
+              <option name="schema">
+                <list>
+                  <option value="ApiService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643731" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_authority_btn.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643731" />
+              <option name="schema">
+                <list>
+                  <option value="AuthorityBtnService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643732" />
+              <option name="schema">
+                <list>
+                  <option value="autoPackage" />
+                  <option value="injectionMeta" />
+                  <option value="astInjectionMeta" />
+                  <option value="tplData" />
+                  <option value="AutoCodeService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code_interface.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643732" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code_mssql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643732" />
+              <option name="schema">
+                <list>
+                  <option value="autoCodeMssql" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code_mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643733" />
+              <option name="schema">
+                <list>
+                  <option value="autoCodeMysql" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code_oracle.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643733" />
+              <option name="schema">
+                <list>
+                  <option value="autoCodeOracle" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code_pgsql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643733" />
+              <option name="schema">
+                <list>
+                  <option value="autoCodePgsql" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_auto_code_sqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643733" />
+              <option name="schema">
+                <list>
+                  <option value="autoCodeSqlite" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_autocode_history.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643734" />
+              <option name="schema">
+                <list>
+                  <option value="AutoCodeHistoryService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_base_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643734" />
+              <option name="schema">
+                <list>
+                  <option value="BaseMenuService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_casbin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643734" />
+              <option name="schema">
+                <list>
+                  <option value="CasbinService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_dictionary.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643735" />
+              <option name="schema">
+                <list>
+                  <option value="DictionaryService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_dictionary_detail.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643735" />
+              <option name="schema">
+                <list>
+                  <option value="DictionaryDetailService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_export_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643735" />
+              <option name="schema">
+                <list>
+                  <option value="SysExportTemplateService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_initdb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643735" />
+              <option name="schema">
+                <list>
+                  <option value="orderedInitializer" />
+                  <option value="InitDBService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_initdb_mssql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643736" />
+              <option name="schema">
+                <list>
+                  <option value="MssqlInitHandler" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_initdb_mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643736" />
+              <option name="schema">
+                <list>
+                  <option value="MysqlInitHandler" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_initdb_pgsql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643736" />
+              <option name="schema">
+                <list>
+                  <option value="PgsqlInitHandler" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_initdb_sqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643737" />
+              <option name="schema">
+                <list>
+                  <option value="SqliteInitHandler" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643737" />
+              <option name="schema">
+                <list>
+                  <option value="MenuService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_operation_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643737" />
+              <option name="schema">
+                <list>
+                  <option value="OperationRecordService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_system.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643737" />
+              <option name="schema">
+                <list>
+                  <option value="SystemConfigService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643738" />
+              <option name="schema">
+                <list>
+                  <option value="UserService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/api.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643739" />
+              <option name="schema">
+                <list>
+                  <option value="initApi" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/authorities_menus.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643739" />
+              <option name="schema">
+                <list>
+                  <option value="initMenuAuthority" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/authority.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643740" />
+              <option name="schema">
+                <list>
+                  <option value="initAuthority" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/casbin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643740" />
+              <option name="schema">
+                <list>
+                  <option value="initCasbin" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/dictionary.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643740" />
+              <option name="schema">
+                <list>
+                  <option value="initDict" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/dictionary_detail.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643740" />
+              <option name="schema">
+                <list>
+                  <option value="initDictDetail" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/excel_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643741" />
+              <option name="schema">
+                <list>
+                  <option value="initExcelTemplate" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/menu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643741" />
+              <option name="schema">
+                <list>
+                  <option value="initMenu" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/source/system/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643741" />
+              <option name="schema">
+                <list>
+                  <option value="initUser" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/task/JenkinsAPI.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718134082764" />
+              <option name="schema">
+                <list>
+                  <option value="JenkinsJob" />
+                  <option value="Action" />
+                  <option value="ParameterDefinitions" />
+                  <option value="JenkinsView" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/task/clearTable.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643742" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/task/sendMessage.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718641674053" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/task/webhook_switch.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718631911942" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/telegram.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718630516014" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/telegramwebhook.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718650543907" />
+              <option name="schema">
+                <list>
+                  <option value="ReceiveMessage" />
+                  <option value="Message" />
+                  <option value="ChannelPost" />
+                  <option value="SendMessage" />
+                  <option value="Result" />
+                  <option value="From" />
+                  <option value="Chat" />
+                  <option value="Entities" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/webhook_switch.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718653513312" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/ast/ast.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643743" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/ast/ast_auto_enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643743" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/ast/ast_enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643743" />
+              <option name="schema">
+                <list>
+                  <option value="Visitor" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/ast/ast_gorm.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643743" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/ast/ast_rollback.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643744" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/ast/ast_router.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643744" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/breakpoint_continue.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643744" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/captcha/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643745" />
+              <option name="schema">
+                <list>
+                  <option value="RedisStore" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/cgmanageTest/sendMessage.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717007496982" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/cgmanageTest/testJenkins.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717182881593" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/cgmanageTest/testTelegram.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1717186042829" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/clamis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643745" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/directory.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643745" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/fmt_plus.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643745" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/hash.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643746" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/human_duration.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643746" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/human_duration_test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643746" />
+              <option name="schema">
+                <list>
+                  <option value="args" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/injection_code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643747" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/json.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643747" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/json_test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643747" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643747" />
+              <option name="schema">
+                <list>
+                  <option value="JWT" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/plugin/plugin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643748" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/reload.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643748" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643748" />
+              <option name="schema">
+                <list>
+                  <option value="Server" />
+                  <option value="Os" />
+                  <option value="Cpu" />
+                  <option value="Ram" />
+                  <option value="Disk" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/timer/timed_task.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643749" />
+              <option name="schema">
+                <list>
+                  <option value="task" />
+                  <option value="taskManager" />
+                  <option value="timer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/timer/timed_task_test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643749" />
+              <option name="schema">
+                <list>
+                  <option value="mockJob" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/aliyun_oss.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643749" />
+              <option name="schema">
+                <list>
+                  <option value="AliyunOSS" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/aws_s3.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643750" />
+              <option name="schema">
+                <list>
+                  <option value="AwsS3" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/local.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643750" />
+              <option name="schema">
+                <list>
+                  <option value="Local" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/obs.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643750" />
+              <option name="schema">
+                <list>
+                  <option value="Obs" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/qiniu.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643751" />
+              <option name="schema">
+                <list>
+                  <option value="Qiniu" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/tencent_cos.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643751" />
+              <option name="schema">
+                <list>
+                  <option value="TencentCOS" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/upload/upload.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643751" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/validator.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643752" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/validator_test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643752" />
+              <option name="schema">
+                <list>
+                  <option value="PageInfoTest" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/verify.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714827193584" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/zip.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1714046643752" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../下载/WeatherQueryBot/WeatherQueryBot/WeatherRobot/sendMessage.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718652005742" />
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="_gorm" value="_gorm" />
+        <entry key="_zap" value="_zap" />
+        <entry key="action" value="Action" />
+        <entry key="add_menu_authority_info" value="AddMenuAuthorityInfo" />
+        <entry key="aliyun_oss" value="AliyunOSS" />
+        <entry key="api_group" value="ApiGroup" />
+        <entry key="api_router" value="ApiRouter" />
+        <entry key="api_service" value="ApiService" />
+        <entry key="args" value="args" />
+        <entry key="ast_injection_meta" value="astInjectionMeta" />
+        <entry key="authority_api" value="AuthorityApi" />
+        <entry key="authority_btn_api" value="AuthorityBtnApi" />
+        <entry key="authority_btn_router" value="AuthorityBtnRouter" />
+        <entry key="authority_btn_service" value="AuthorityBtnService" />
+        <entry key="authority_menu_api" value="AuthorityMenuApi" />
+        <entry key="authority_router" value="AuthorityRouter" />
+        <entry key="authority_service" value="AuthorityService" />
+        <entry key="auto_code_api" value="AutoCodeApi" />
+        <entry key="auto_code_history" value="AutoCodeHistory" />
+        <entry key="auto_code_history_api" value="AutoCodeHistoryApi" />
+        <entry key="auto_code_history_router" value="AutoCodeHistoryRouter" />
+        <entry key="auto_code_history_service" value="AutoCodeHistoryService" />
+        <entry key="auto_code_mssql" value="autoCodeMssql" />
+        <entry key="auto_code_mysql" value="autoCodeMysql" />
+        <entry key="auto_code_oracle" value="autoCodeOracle" />
+        <entry key="auto_code_pgsql" value="autoCodePgsql" />
+        <entry key="auto_code_router" value="AutoCodeRouter" />
+        <entry key="auto_code_service" value="AutoCodeService" />
+        <entry key="auto_code_sqlite" value="autoCodeSqlite" />
+        <entry key="auto_code_struct" value="AutoCodeStruct" />
+        <entry key="auto_package" value="autoPackage" />
+        <entry key="auto_plug_info" value="AutoPlugInfo" />
+        <entry key="auto_plug_req" value="AutoPlugReq" />
+        <entry key="autocode" value="Autocode" />
+        <entry key="aws_s3" value="AwsS3" />
+        <entry key="base_api" value="BaseApi" />
+        <entry key="base_claims" value="BaseClaims" />
+        <entry key="base_menu_service" value="BaseMenuService" />
+        <entry key="base_router" value="BaseRouter" />
+        <entry key="captcha" value="Captcha" />
+        <entry key="casbin_api" value="CasbinApi" />
+        <entry key="casbin_in_receive" value="CasbinInReceive" />
+        <entry key="casbin_info" value="CasbinInfo" />
+        <entry key="casbin_router" value="CasbinRouter" />
+        <entry key="casbin_service" value="CasbinService" />
+        <entry key="change_password_req" value="ChangePasswordReq" />
+        <entry key="change_user_info" value="ChangeUserInfo" />
+        <entry key="channel_post" value="ChannelPost" />
+        <entry key="chat" value="Chat" />
+        <entry key="clear_db" value="ClearDB" />
+        <entry key="cloudflare" value="Cloudflare" />
+        <entry key="column" value="Column" />
+        <entry key="condition" value="Condition" />
+        <entry key="constraint" value="Constraint" />
+        <entry key="cors" value="CORS" />
+        <entry key="cors_whitelist" value="CORSWhitelist" />
+        <entry key="cpu" value="Cpu" />
+        <entry key="create_domain" value="CreateDomain" />
+        <entry key="custom_claims" value="CustomClaims" />
+        <entry key="cutter" value="Cutter" />
+        <entry key="db" value="Db" />
+        <entry key="db_api" value="DBApi" />
+        <entry key="dictionary_api" value="DictionaryApi" />
+        <entry key="dictionary_detail_api" value="DictionaryDetailApi" />
+        <entry key="dictionary_detail_router" value="DictionaryDetailRouter" />
+        <entry key="dictionary_detail_service" value="DictionaryDetailService" />
+        <entry key="dictionary_router" value="DictionaryRouter" />
+        <entry key="dictionary_service" value="DictionaryService" />
+        <entry key="disk" value="Disk" />
+        <entry key="domain_router" value="DomainRouter" />
+        <entry key="elastic_router" value="ElasticRouter" />
+        <entry key="elastic_search" value="ElasticSearch" />
+        <entry key="email" value="Email" />
+        <entry key="email_api" value="EmailApi" />
+        <entry key="email_plugin" value="emailPlugin" />
+        <entry key="email_router" value="EmailRouter" />
+        <entry key="email_service" value="EmailService" />
+        <entry key="empty" value="Empty" />
+        <entry key="ensure_tables" value="ensureTables" />
+        <entry key="entities" value="Entities" />
+        <entry key="excel" value="Excel" />
+        <entry key="field" value="Field" />
+        <entry key="file_rotatelogs" value="fileRotatelogs" />
+        <entry key="from" value="From" />
+        <entry key="general_db" value="GeneralDB" />
+        <entry key="get_authority_id" value="GetAuthorityId" />
+        <entry key="get_by_id" value="GetById" />
+        <entry key="gva_model" value="GVA_MODEL" />
+        <entry key="hua_wei_obs" value="HuaWeiObs" />
+        <entry key="ids_req" value="IdsReq" />
+        <entry key="index" value="Index" />
+        <entry key="init_api" value="initApi" />
+        <entry key="init_authority" value="initAuthority" />
+        <entry key="init_casbin" value="initCasbin" />
+        <entry key="init_db" value="InitDB" />
+        <entry key="init_db_service" value="InitDBService" />
+        <entry key="init_dict" value="initDict" />
+        <entry key="init_dict_detail" value="initDictDetail" />
+        <entry key="init_excel_template" value="initExcelTemplate" />
+        <entry key="init_menu" value="initMenu" />
+        <entry key="init_menu_authority" value="initMenuAuthority" />
+        <entry key="init_router" value="InitRouter" />
+        <entry key="init_user" value="initUser" />
+        <entry key="injection_meta" value="injectionMeta" />
+        <entry key="jenkins" value="Jenkins" />
+        <entry key="jenkins_job" value="JenkinsJob" />
+        <entry key="jenkins_view" value="JenkinsView" />
+        <entry key="join_template" value="JoinTemplate" />
+        <entry key="json_data" value="jsonData" />
+        <entry key="json_dns_data" value="jsonDnsData" />
+        <entry key="just_files_filesystem" value="justFilesFilesystem" />
+        <entry key="jwt" value="JWT" />
+        <entry key="jwt_api" value="JwtApi" />
+        <entry key="jwt_blacklist" value="JwtBlacklist" />
+        <entry key="jwt_router" value="JwtRouter" />
+        <entry key="jwt_service" value="JwtService" />
+        <entry key="limit_config" value="LimitConfig" />
+        <entry key="local" value="Local" />
+        <entry key="log_layout" value="LogLayout" />
+        <entry key="logger" value="Logger" />
+        <entry key="login" value="Login" />
+        <entry key="login_response" value="LoginResponse" />
+        <entry key="menu_router" value="MenuRouter" />
+        <entry key="menu_service" value="MenuService" />
+        <entry key="message" value="Message" />
+        <entry key="meta" value="Meta" />
+        <entry key="mock_job" value="mockJob" />
+        <entry key="mongo" value="mongo" />
+        <entry key="mongo_host" value="MongoHost" />
+        <entry key="mssql" value="Mssql" />
+        <entry key="mssql_init_handler" value="MssqlInitHandler" />
+        <entry key="mysql" value="Mysql" />
+        <entry key="mysql_init_handler" value="MysqlInitHandler" />
+        <entry key="obs" value="Obs" />
+        <entry key="operation_record_api" value="OperationRecordApi" />
+        <entry key="operation_record_router" value="OperationRecordRouter" />
+        <entry key="operation_record_service" value="OperationRecordService" />
+        <entry key="oracle" value="Oracle" />
+        <entry key="ordered_initializer" value="orderedInitializer" />
+        <entry key="os" value="Os" />
+        <entry key="page_info" value="PageInfo" />
+        <entry key="page_info_test" value="PageInfoTest" />
+        <entry key="page_result" value="PageResult" />
+        <entry key="page_rule_data" value="pageRuleData" />
+        <entry key="parameter_definitions" value="ParameterDefinitions" />
+        <entry key="pgsql" value="Pgsql" />
+        <entry key="pgsql_init_handler" value="PgsqlInitHandler" />
+        <entry key="policy_path_response" value="PolicyPathResponse" />
+        <entry key="qiniu" value="Qiniu" />
+        <entry key="ram" value="Ram" />
+        <entry key="receive_message" value="ReceiveMessage" />
+        <entry key="redis" value="Redis" />
+        <entry key="redis_store" value="RedisStore" />
+        <entry key="register" value="Register" />
+        <entry key="response" value="Response" />
+        <entry key="response_body_writer" value="responseBodyWriter" />
+        <entry key="result" value="Result" />
+        <entry key="roll_back" value="RollBack" />
+        <entry key="router_group" value="RouterGroup" />
+        <entry key="search_api_params" value="SearchApiParams" />
+        <entry key="send_message" value="SendMessage" />
+        <entry key="server" value="Server" />
+        <entry key="service_group" value="ServiceGroup" />
+        <entry key="set_user_auth" value="SetUserAuth" />
+        <entry key="set_user_authorities" value="SetUserAuthorities" />
+        <entry key="specialized_db" value="SpecializedDB" />
+        <entry key="sqlite" value="Sqlite" />
+        <entry key="sqlite_init_handler" value="SqliteInitHandler" />
+        <entry key="sys_api" value="SysApi" />
+        <entry key="sys_api_list_response" value="SysAPIListResponse" />
+        <entry key="sys_api_response" value="SysAPIResponse" />
+        <entry key="sys_authority" value="SysAuthority" />
+        <entry key="sys_authority_btn" value="SysAuthorityBtn" />
+        <entry key="sys_authority_btn_req" value="SysAuthorityBtnReq" />
+        <entry key="sys_authority_btn_res" value="SysAuthorityBtnRes" />
+        <entry key="sys_authority_copy_response" value="SysAuthorityCopyResponse" />
+        <entry key="sys_authority_menu" value="SysAuthorityMenu" />
+        <entry key="sys_authority_response" value="SysAuthorityResponse" />
+        <entry key="sys_auto_code" value="SysAutoCode" />
+        <entry key="sys_auto_code_history" value="SysAutoCodeHistory" />
+        <entry key="sys_auto_history" value="SysAutoHistory" />
+        <entry key="sys_base_menu" value="SysBaseMenu" />
+        <entry key="sys_base_menu_btn" value="SysBaseMenuBtn" />
+        <entry key="sys_base_menu_parameter" value="SysBaseMenuParameter" />
+        <entry key="sys_base_menu_response" value="SysBaseMenuResponse" />
+        <entry key="sys_base_menus_response" value="SysBaseMenusResponse" />
+        <entry key="sys_captcha_response" value="SysCaptchaResponse" />
+        <entry key="sys_config_response" value="SysConfigResponse" />
+        <entry key="sys_dictionary" value="SysDictionary" />
+        <entry key="sys_dictionary_detail" value="SysDictionaryDetail" />
+        <entry key="sys_dictionary_detail_search" value="SysDictionaryDetailSearch" />
+        <entry key="sys_export_template" value="SysExportTemplate" />
+        <entry key="sys_export_template_api" value="SysExportTemplateApi" />
+        <entry key="sys_export_template_router" value="SysExportTemplateRouter" />
+        <entry key="sys_export_template_search" value="SysExportTemplateSearch" />
+        <entry key="sys_export_template_service" value="SysExportTemplateService" />
+        <entry key="sys_menu" value="SysMenu" />
+        <entry key="sys_menus_response" value="SysMenusResponse" />
+        <entry key="sys_operation_record" value="SysOperationRecord" />
+        <entry key="sys_operation_record_search" value="SysOperationRecordSearch" />
+        <entry key="sys_router" value="SysRouter" />
+        <entry key="sys_user" value="SysUser" />
+        <entry key="sys_user_authority" value="SysUserAuthority" />
+        <entry key="sys_user_response" value="SysUserResponse" />
+        <entry key="system" value="System" />
+        <entry key="system_api" value="SystemApi" />
+        <entry key="system_api_api" value="SystemApiApi" />
+        <entry key="system_config_service" value="SystemConfigService" />
+        <entry key="table" value="Table" />
+        <entry key="task" value="task" />
+        <entry key="task_manager" value="taskManager" />
+        <entry key="telegram" value="Telegram" />
+        <entry key="telegram_router" value="TelegramRouter" />
+        <entry key="tencent_cos" value="TencentCOS" />
+        <entry key="test_router" value="TestRouter" />
+        <entry key="timer" value="timer" />
+        <entry key="tpl_data" value="tplData" />
+        <entry key="update" value="Update" />
+        <entry key="user_router" value="UserRouter" />
+        <entry key="user_service" value="UserService" />
+        <entry key="visitor" value="Visitor" />
+        <entry key="writer" value="writer" />
+        <entry key="ws_plugin" value="wsPlugin" />
+        <entry key="zap" value="Zap" />
+        <entry key="zone_id" value="ZoneID" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1718569973789" />
+  </component>
+</project>
