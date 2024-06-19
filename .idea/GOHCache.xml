@@ -1338,6 +1338,13 @@
             </set>
           </value>
         </entry>
+        <entry key="WebhookRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Zap">
           <value>
             <set>
@@ -4028,7 +4035,7 @@
         <entry key="file://$PROJECT_DIR$/test/telegramwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718650543907" />
+              <option name="lastModified" value="1718824181164" />
               <option name="schema">
                 <list>
                   <option value="ReceiveMessage" />
@@ -4047,7 +4054,12 @@
         <entry key="file://$PROJECT_DIR$/test/webhook_switch.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718653513312" />
+              <option name="lastModified" value="1718824033043" />
+              <option name="schema">
+                <list>
+                  <option value="WebhookRequest" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -4389,7 +4401,7 @@
         <entry key="file://$PROJECT_DIR$/../../下载/WeatherQueryBot/WeatherQueryBot/WeatherRobot/sendMessage.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718652005742" />
+              <option name="lastModified" value="1718733331485" />
             </ScannedPath>
           </value>
         </entry>
@@ -4618,6 +4630,7 @@
         <entry key="user_router" value="UserRouter" />
         <entry key="user_service" value="UserService" />
         <entry key="visitor" value="Visitor" />
+        <entry key="webhook_request" value="WebhookRequest" />
         <entry key="writer" value="writer" />
         <entry key="ws_plugin" value="wsPlugin" />
         <entry key="zap" value="Zap" />

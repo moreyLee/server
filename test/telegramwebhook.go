@@ -79,11 +79,9 @@ var (
 	URL  = "https://api.telegram.org/bot"
 	port = "5299"
 	//webhookURL = "https://devops.3333d.vip/telegram-webhook"
-	webhookUrl = "https://0126-91-75-118-214.ngrok-free.app/telegram-webhook"
+	webhookUrl = "https://e692-91-75-118-214.ngrok-free.app/telegram-webhook"
 	token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
 )
-
-const chatID int64 = -4275796428
 
 func Webhook(w http.ResponseWriter, r *http.Request) {
 	message := system.ReceiveMessage{}
