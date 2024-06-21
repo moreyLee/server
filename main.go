@@ -36,8 +36,6 @@ func main() {
 		defer db.Close()
 	}
 	initialize.InitES() // 初始化ElasticSearch
-	// 启动一个Goroutine 协程运行后台任务
-	//task.WebhookMessage()
 	core.RunWindowsServer()
 
 }

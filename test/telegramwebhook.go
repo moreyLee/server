@@ -9,12 +9,12 @@ import (
 	"net/http"
 )
 
-// ReceiveMessage struct
-type ReceiveMessage struct {
-	UpdateID    int         `json:"update_id"`
-	Message     Message     `json:"message"`
-	ChannelPost ChannelPost `json:"channel_post"`
-}
+//// ReceiveMessage struct
+//type ReceiveMessage struct {
+//	UpdateID    int         `json:"update_id"`
+//	Message     Message     `json:"message"`
+//	ChannelPost ChannelPost `json:"channel_post"`
+//}
 
 // Message struct
 type Message struct {
@@ -35,10 +35,10 @@ type ChannelPost struct {
 }
 
 // SendMessage struct
-type SendMessage struct {
-	Ok     bool   `json:"ok"`
-	Result Result `json:"result"`
-}
+//type SendMessage struct {
+//	Ok     bool   `json:"ok"`
+//	Result Result `json:"result"`
+//}
 
 // Result struct
 type Result struct {
@@ -79,10 +79,11 @@ var (
 	URL  = "https://api.telegram.org/bot"
 	port = "5299"
 	//webhookURL = "https://devops.3333d.vip/telegram-webhook"
-	webhookUrl = "https://e692-91-75-118-214.ngrok-free.app/telegram-webhook"
+	webhookUrl = "https://e692-91-75-118-214.ngrok-free.app/jenkins/telegram-webhook"
 	token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
 )
 
+// Webhook /**
 func Webhook(w http.ResponseWriter, r *http.Request) {
 	message := system.ReceiveMessage{}
 
@@ -137,7 +138,7 @@ func main() {
 	// 遍历收到的消息
 	update := bot.ListenForWebhook("/")
 
-	http.HandleFunc("/telegram-webhook", Webhook)
+	http.HandleFunc("/jenkins/telegram-webhook", Webhook)
 	log.Printf("Starting server on port %s", port)
 	go func() {
 		err := http.ListenAndServe(":"+port, nil)
@@ -156,3 +157,5 @@ func main() {
 		}
 	}
 }
+
+// 用法

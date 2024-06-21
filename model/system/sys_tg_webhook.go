@@ -1,5 +1,7 @@
 package system
 
+import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+
 // ReceiveMessage struct
 type ReceiveMessage struct {
 	UpdateID    int         `json:"update_id"`
@@ -85,4 +87,16 @@ type Update struct {
 		Date int    `json:"date"`
 		Text string `json:"text"`
 	} `json:"message"`
+}
+
+// WebhookRequest struct 处理webhook请求的结构体 响应群组中的消息
+type WebhookRequest struct {
+	UpdateID int              `json:"update_id"`
+	Message  tgbotapi.Message `json:"message"`
+}
+
+// JenkinsBuild struct 构建项目时的视图名和项目名
+type JenkinsBuild struct {
+	ViewName string `json:"view_name"` // 视图名称
+	JobName  string `json:"job_name"`  // 项目名称
 }

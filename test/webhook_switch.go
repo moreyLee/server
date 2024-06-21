@@ -1,13 +1,9 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/flipped-aurora/gin-vue-admin/server/task"
 	"github.com/gin-gonic/gin"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -17,47 +13,41 @@ type WebhookRequest struct {
 	UpdateID int              `json:"update_id"`
 	Message  tgbotapi.Message `json:"message"`
 }
+type JenkinsBuild struct {
+	ViewName string `json:"view_name"`
+	JobName  string `json:"job_name"`
+}
 
 var (
-	ChatID         int64 = -4275796428
-	BotToken             = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
-	telegramAPIURL       = "https://api.telegram.org/bot" + BotToken + "/sendMessage"
-	bot, _               = tgbotapi.NewBotAPI(BotToken)
-	hookUrl              = "https://e692-91-75-118-214.ngrok-free.app/telegram-webhook"
+	BotToken = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
+	hookUrl  = "https://e692-91-75-118-214.ngrok-free.app/jenkins/telegram-webhook"
 )
 
-func MessageCommandStart(message tgbotapi.Message, bot *tgbotapi.BotAPI) {
-	reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:正在构建中，请稍等")
+func (j *JenkinsBuild) SendMessageCommand(message tgbotapi.Message, bot *tgbotapi.BotAPI) {
+	reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:  "+j.ViewName+j.JobName+"正在构建中...请稍等")
 	reply.ReplyToMessageID = message.MessageID
-	bot.Send(reply)
+	if _, err := bot.Send(reply); err != nil {
+		return
+	}
 	return
 }
 func MessageCommandHelp(message tgbotapi.Message, bot *tgbotapi.BotAPI) {
 	args := message.CommandArguments()
 	reply := tgbotapi.NewMessage(message.Chat.ID, "帮助，来触发构建用例: /jenkins 0898国际 后台API @CG33333_bot"+"\n参数"+args)
 	reply.ReplyToMessageID = message.MessageID
-	bot.Send(reply)
+	if _, err := bot.Send(reply); err != nil {
+		return
+	}
 }
 
-func tgWebhook(bot *tgbotapi.BotAPI) gin.HandlerFunc {
+func (j *JenkinsBuild) tgWebhook(bot *tgbotapi.BotAPI) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var request WebhookRequest
-
 		// 解析请求体
 		if err := c.ShouldBindJSON(&request); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
 			return
 		}
-		//var command string
-		//message := request.Message
-		//if strings.Contains(message.Text, "@") {
-		//	index := strings.Index(message.Text, "@")
-		//	if index != -1 && index < len(message.Text)-1 {
-		//		command = strings.Split(message.Text, "@")[0]
-		//	}
-		//} else {
-		//	command = message.Text
-		//}
 		// 处理请求   基于命令处理请求 不支持中文指令
 		message := request.Message
 		if !message.IsCommand() {
@@ -76,17 +66,17 @@ func tgWebhook(bot *tgbotapi.BotAPI) gin.HandlerFunc {
 			log.Printf("接收到的命令: %s", command)
 			log.Printf("接收到的全部参数: %s", args)
 			if len(argsNum) == 3 {
-				log.Printf("视图名称%v", argsNum[0])
-				log.Printf("JobName名称%v", argsNum[1])
-				viewName := argsNum[0]
-				JobName := argsNum[1]
-				task.JenkinsBuildJobWithView(viewName, JobName)
+				log.Printf("视图名称: %v ", argsNum[0])
+				log.Printf("JobName名称: %v", argsNum[1])
+				j.ViewName = argsNum[0]
+				j.JobName = argsNum[1]
+				task.JenkinsBuildJobWithView(j.ViewName, j.JobName)
+				j.SendMessageCommand(message, bot)
 			}
-			MessageCommandStart(message, bot)
 		case "help":
 			MessageCommandHelp(message, bot)
 		case "构建":
-			MessageCommandStart(message, bot)
+			j.SendMessageCommand(message, bot)
 		case "帮助":
 			MessageCommandHelp(message, bot)
 		default:
@@ -94,7 +84,9 @@ func tgWebhook(bot *tgbotapi.BotAPI) gin.HandlerFunc {
 			reply := tgbotapi.NewMessage(message.Chat.ID, "默认"+
 				"\n用例: /build 0898国际 后台API @CG33333_bot")
 			reply.ReplyToMessageID = message.MessageID
-			bot.Send(reply)
+			if _, err := bot.Send(reply); err != nil {
+				return
+			}
 		}
 
 		// 返回响应
@@ -102,56 +94,6 @@ func tgWebhook(bot *tgbotapi.BotAPI) gin.HandlerFunc {
 	}
 }
 
-func webhookHandler(c *gin.Context) {
-	var update system.Update
-	body, err := io.ReadAll(c.Request.Body)
-	if err != nil {
-		log.Println("Error reading body:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Error reading body"})
-		return
-	}
-
-	if err := json.Unmarshal(body, &update); err != nil {
-		log.Println("Error unmarshalling JSON:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Error unmarshalling JSON"})
-		return
-	}
-
-	log.Printf("接收消息  from %s: %s", update.Message.From.Username, update.Message.Text)
-
-	// 处理接收到的消息
-	c.JSON(http.StatusOK, gin.H{"status": "ok"})
-	sendMessage(ChatID, update.Message.Text)
-}
-
-//
-
-// 发送消息到 Telegram
-func sendMessage(chatID int64, text string) {
-	message := map[string]interface{}{
-		"chat_id": chatID,
-		"text":    text,
-	}
-
-	messageBody, err := json.Marshal(message)
-	if err != nil {
-		log.Println("Error marshalling JSON:", err)
-		return
-	}
-
-	resp, err := http.Post(telegramAPIURL, "application/json", bytes.NewBuffer(messageBody))
-	if err != nil {
-		log.Println("Error sending message:", err)
-		return
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		log.Printf("Non-OK HTTP status: %s", resp.Status)
-		body, _ := io.ReadAll(resp.Body)
-		log.Printf("Response body: %s", body)
-	}
-}
 func main() {
 	// 初始化 bot 实例
 	bot, err := tgbotapi.NewBotAPI(BotToken)
@@ -173,12 +115,14 @@ func main() {
 	}
 	// 创建一个 Gin 路由器
 	r := gin.Default()
-
+	jb := &JenkinsBuild{}
 	// 设置 Webhook 回调路由
-	r.POST("/telegram-webhook", tgWebhook(bot))
+	r.POST("/jenkins/telegram-webhook", jb.tgWebhook(bot))
 
 	// 启动 Gin 服务器，并监听在 127.0.0.1:5299 端口
-	if err := r.Run("127.0.0.1:5299"); err != nil {
+	if err := r.Run("127.0.0.1:8888"); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
 }
+
+// 用法 /build AK国际 后台API @机器人

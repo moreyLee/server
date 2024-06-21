@@ -10,7 +10,7 @@ type TelegramRouter struct {
 }
 
 func (s *TelegramRouter) InitTelegramRouter(Router *gin.RouterGroup) {
-	userRouter := Router.Group("").Use(middleware.OperationRecord())
+	userRouter := Router.Group("jenkins").Use(middleware.OperationRecord())
 	var baseApi = v1.ApiGroupApp.SystemApiGroup.BaseApi
 	{
 		userRouter.POST("telegram-webhook", baseApi.TelegramWebhook) //webhook 发送消息

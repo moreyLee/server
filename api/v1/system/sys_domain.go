@@ -12,10 +12,10 @@ import (
 	"net/http"
 )
 
-type jsonData struct {
-	Name  string `json:"name"`
-	Start string `json:"jump_start"`
-}
+//type jsonData struct {
+//	Name  string `json:"name"`
+//	Start string `json:"jump_start"`
+//}
 
 func (b *BaseApi) Domain(c *gin.Context) {
 	//var data jsonData

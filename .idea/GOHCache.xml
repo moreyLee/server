@@ -596,6 +596,14 @@
             </set>
           </value>
         </entry>
+        <entry key="JenkinsBuild">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
+              <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="JenkinsJob">
           <value>
             <set>
@@ -1291,6 +1299,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/router/system/sys_telegram.go" />
+              <option value="file://$PROJECT_DIR$/router/system/sys_tg_webhook.go" />
             </set>
           </value>
         </entry>
@@ -1341,6 +1350,7 @@
         <entry key="WebhookRequest">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
               <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
             </set>
           </value>
@@ -1758,10 +1768,9 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_domain.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718569709423" />
+              <option name="lastModified" value="1718917261447" />
               <option name="schema">
                 <list>
-                  <option value="jsonData" />
                   <option value="jsonDnsData" />
                   <option value="ZoneID" />
                   <option value="Constraint" />
@@ -1854,7 +1863,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718569709418" />
+              <option name="lastModified" value="1718927672844" />
             </ScannedPath>
           </value>
         </entry>
@@ -2245,7 +2254,7 @@
         <entry key="file://$PROJECT_DIR$/core/server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718569709393" />
+              <option name="lastModified" value="1718921682222" />
             </ScannedPath>
           </value>
         </entry>
@@ -2287,7 +2296,7 @@
         <entry key="file://$PROJECT_DIR$/global/global.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1717702233115" />
+              <option name="lastModified" value="1718919499453" />
             </ScannedPath>
           </value>
         </entry>
@@ -2451,7 +2460,7 @@
         <entry key="file://$PROJECT_DIR$/initialize/router.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718569709385" />
+              <option name="lastModified" value="1718925687689" />
               <option name="schema">
                 <list>
                   <option value="justFilesFilesystem" />
@@ -2464,6 +2473,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1718395898211" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/initialize/tg_webhook.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718922652207" />
             </ScannedPath>
           </value>
         </entry>
@@ -2484,7 +2500,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718395976669" />
+              <option name="lastModified" value="1718926568811" />
             </ScannedPath>
           </value>
         </entry>
@@ -3078,7 +3094,7 @@
         <entry key="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718640680629" />
+              <option name="lastModified" value="1718922652255" />
               <option name="schema">
                 <list>
                   <option value="ReceiveMessage" />
@@ -3090,6 +3106,8 @@
                   <option value="Chat" />
                   <option value="Entities" />
                   <option value="Update" />
+                  <option value="WebhookRequest" />
+                  <option value="JenkinsBuild" />
                 </list>
               </option>
             </ScannedPath>
@@ -3513,6 +3531,18 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1718569709358" />
+              <option name="schema">
+                <list>
+                  <option value="TelegramRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_tg_webhook.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1718923863778" />
               <option name="schema">
                 <list>
                   <option value="TelegramRouter" />
@@ -3992,7 +4022,7 @@
         <entry key="file://$PROJECT_DIR$/task/JenkinsAPI.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718134082764" />
+              <option name="lastModified" value="1718910310715" />
               <option name="schema">
                 <list>
                   <option value="JenkinsJob" />
@@ -4035,7 +4065,7 @@
         <entry key="file://$PROJECT_DIR$/test/telegramwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718824181164" />
+              <option name="lastModified" value="1718925510704" />
               <option name="schema">
                 <list>
                   <option value="ReceiveMessage" />
@@ -4054,10 +4084,11 @@
         <entry key="file://$PROJECT_DIR$/test/webhook_switch.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718824033043" />
+              <option name="lastModified" value="1718927968242" />
               <option name="schema">
                 <list>
                   <option value="WebhookRequest" />
+                  <option value="JenkinsBuild" />
                 </list>
               </option>
             </ScannedPath>
@@ -4514,6 +4545,7 @@
         <entry key="init_user" value="initUser" />
         <entry key="injection_meta" value="injectionMeta" />
         <entry key="jenkins" value="Jenkins" />
+        <entry key="jenkins_build" value="JenkinsBuild" />
         <entry key="jenkins_job" value="JenkinsJob" />
         <entry key="jenkins_view" value="JenkinsView" />
         <entry key="join_template" value="JoinTemplate" />
