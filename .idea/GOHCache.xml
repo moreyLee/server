@@ -1863,7 +1863,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718927672844" />
+              <option name="lastModified" value="1718928469572" />
             </ScannedPath>
           </value>
         </entry>
@@ -2296,7 +2296,7 @@
         <entry key="file://$PROJECT_DIR$/global/global.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718919499453" />
+              <option name="lastModified" value="1718928434337" />
             </ScannedPath>
           </value>
         </entry>
@@ -4065,13 +4065,11 @@
         <entry key="file://$PROJECT_DIR$/test/telegramwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718925510704" />
+              <option name="lastModified" value="1718928469462" />
               <option name="schema">
                 <list>
-                  <option value="ReceiveMessage" />
                   <option value="Message" />
                   <option value="ChannelPost" />
-                  <option value="SendMessage" />
                   <option value="Result" />
                   <option value="From" />
                   <option value="Chat" />
@@ -4084,7 +4082,7 @@
         <entry key="file://$PROJECT_DIR$/test/webhook_switch.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718927968242" />
+              <option name="lastModified" value="1719033363039" />
               <option name="schema">
                 <list>
                   <option value="WebhookRequest" />
