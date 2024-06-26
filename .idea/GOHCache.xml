@@ -211,6 +211,13 @@
             </set>
           </value>
         </entry>
+        <entry key="Build">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/test/text_webhook.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="CORS">
           <value>
             <set>
@@ -285,7 +292,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -293,7 +299,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -485,7 +490,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -507,7 +511,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -600,7 +603,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
             </set>
           </value>
         </entry>
@@ -714,7 +716,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -877,7 +878,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -913,7 +913,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -944,7 +943,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/telegramwebhook.go" />
             </set>
           </value>
         </entry>
@@ -1298,7 +1296,6 @@
         <entry key="TelegramRouter">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/router/system/sys_telegram.go" />
               <option value="file://$PROJECT_DIR$/router/system/sys_tg_webhook.go" />
             </set>
           </value>
@@ -1318,11 +1315,18 @@
             </set>
           </value>
         </entry>
+        <entry key="TextMessage">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/test/text_webhook.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Update">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
+              <option value="file://$PROJECT_DIR$/test/text_webhook.go" />
             </set>
           </value>
         </entry>
@@ -1351,7 +1355,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/webhook_switch.go" />
             </set>
           </value>
         </entry>
@@ -1527,13 +1530,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/service/system/sys_auto_code.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="jsonData">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
             </set>
           </value>
         </entry>
@@ -1863,7 +1859,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718928469572" />
+              <option name="lastModified" value="1718928470551" />
             </ScannedPath>
           </value>
         </entry>
@@ -2254,7 +2250,7 @@
         <entry key="file://$PROJECT_DIR$/core/server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718921682222" />
+              <option name="lastModified" value="1718921684026" />
             </ScannedPath>
           </value>
         </entry>
@@ -2469,20 +2465,6 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/initialize/telegram_bot.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1718395898211" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/initialize/tg_webhook.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1718922652207" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/initialize/timer.go">
           <value>
             <ScannedPath>
@@ -2500,7 +2482,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718926568811" />
+              <option name="lastModified" value="1718926570539" />
             </ScannedPath>
           </value>
         </entry>
@@ -3527,22 +3509,10 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/router/system/sys_telegram.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1718569709358" />
-              <option name="schema">
-                <list>
-                  <option value="TelegramRouter" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/router/system/sys_tg_webhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718923863778" />
+              <option name="lastModified" value="1718923865006" />
               <option name="schema">
                 <list>
                   <option value="TelegramRouter" />
@@ -4022,7 +3992,7 @@
         <entry key="file://$PROJECT_DIR$/task/JenkinsAPI.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718910310715" />
+              <option name="lastModified" value="1719051485690" />
               <option name="schema">
                 <list>
                   <option value="JenkinsJob" />
@@ -4048,45 +4018,15 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/task/webhook_switch.go">
+        <entry key="file://$PROJECT_DIR$/test/text_webhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718631911942" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/telegram.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1718630516014" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/telegramwebhook.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1718928469462" />
+              <option name="lastModified" value="1719432242011" />
               <option name="schema">
                 <list>
-                  <option value="Message" />
-                  <option value="ChannelPost" />
-                  <option value="Result" />
-                  <option value="From" />
-                  <option value="Chat" />
-                  <option value="Entities" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/webhook_switch.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1719033363039" />
-              <option name="schema">
-                <list>
-                  <option value="WebhookRequest" />
-                  <option value="JenkinsBuild" />
+                  <option value="TextMessage" />
+                  <option value="Build" />
+                  <option value="Update" />
                 </list>
               </option>
             </ScannedPath>
@@ -4427,13 +4367,6 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/../../下载/WeatherQueryBot/WeatherQueryBot/WeatherRobot/sendMessage.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1718733331485" />
-            </ScannedPath>
-          </value>
-        </entry>
       </map>
     </option>
     <option name="tableStructMapping">
@@ -4477,6 +4410,7 @@
         <entry key="base_claims" value="BaseClaims" />
         <entry key="base_menu_service" value="BaseMenuService" />
         <entry key="base_router" value="BaseRouter" />
+        <entry key="build" value="Build" />
         <entry key="captcha" value="Captcha" />
         <entry key="casbin_api" value="CasbinApi" />
         <entry key="casbin_in_receive" value="CasbinInReceive" />
@@ -4547,7 +4481,6 @@
         <entry key="jenkins_job" value="JenkinsJob" />
         <entry key="jenkins_view" value="JenkinsView" />
         <entry key="join_template" value="JoinTemplate" />
-        <entry key="json_data" value="jsonData" />
         <entry key="json_dns_data" value="jsonDnsData" />
         <entry key="just_files_filesystem" value="justFilesFilesystem" />
         <entry key="jwt" value="JWT" />
@@ -4654,6 +4587,7 @@
         <entry key="telegram_router" value="TelegramRouter" />
         <entry key="tencent_cos" value="TencentCOS" />
         <entry key="test_router" value="TestRouter" />
+        <entry key="text_message" value="TextMessage" />
         <entry key="timer" value="timer" />
         <entry key="tpl_data" value="tplData" />
         <entry key="update" value="Update" />
@@ -4667,6 +4601,6 @@
         <entry key="zone_id" value="ZoneID" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1718569973789" />
+    <option name="lastTimeChecked" value="1719414968181" />
   </component>
 </project>

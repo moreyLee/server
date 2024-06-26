@@ -20,7 +20,7 @@ type JenkinsBuild struct {
 
 var (
 	BotToken = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
-	hookUrl  = "https://8ca3-91-75-118-214.ngrok-free.app/jenkins/telegram-webhook"
+	hookUrl  = "https://a404-91-75-118-214.ngrok-free.app/jenkins/telegram-webhook"
 )
 
 func (j *JenkinsBuild) SendMessageCommand(message tgbotapi.Message, bot *tgbotapi.BotAPI) {

@@ -95,14 +95,14 @@ func GetExtName(ViewName string) string {
 	}
 	// 设置Auth Basic Auth  user &token
 	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
-
+	fmt.Println("Jenkins URL:" + jenkinsUrl)
 	fmt.Println("全局变量jenkinsUser:" + global.GVA_CONFIG.Jenkins.User)
 	fmt.Println("全部变量JenkinsToken:" + global.GVA_CONFIG.Jenkins.ApiToken)
 	// 创建GET请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		global.GVA_LOG.Error("发送GET请求失败:请检查jenkins url 用户名和token", zap.Error(err))
+		global.GVA_LOG.Error("发送GET请求失败:请检查jenkins url, 用户名和token", zap.Error(err))
 	}
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
