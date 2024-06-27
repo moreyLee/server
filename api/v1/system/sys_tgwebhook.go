@@ -3,7 +3,6 @@ package system
 import (
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/flipped-aurora/gin-vue-admin/server/task"
 	"github.com/gin-gonic/gin"
@@ -18,10 +17,63 @@ var jkBuild system.JenkinsBuild
 func SendMessageCommand(message tgbotapi.Message, bot *tgbotapi.BotAPI) {
 	reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
 	reply.ReplyToMessageID = message.MessageID
-	if _, err := bot.Send(reply); err != nil {
-		return
-	}
+	_, _ = bot.Send(reply)
 	return
+}
+func handleText(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+	text := message.Text
+	responseText := "You said: " + text
+	reply := tgbotapi.NewMessage(message.Chat.ID, responseText)
+	if _, err := bot.Send(reply); err != nil {
+		log.Println("Failed to send reply:", err)
+	}
+}
+
+func handleUpdate(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	if update.Message != nil {
+		if update.Message.IsCommand() {
+			handleCommand(bot, update.Message)
+		} else if update.Message.Text != "" {
+			handleText(bot, update.Message)
+		}
+	}
+}
+func handleCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+	command := message.Command()
+	args := message.CommandArguments() // 获取全部参数
+	argsNum := strings.Fields(args)    // 已空格为定界符 将参数进行分割
+	switch command {
+	case "build":
+		if len(argsNum) == 3 {
+			log.Printf("视图名称: %v ", argsNum[0])
+			log.Printf("JobName名称: %v", argsNum[1])
+			jkBuild.ViewName = argsNum[0]
+			jkBuild.JobName = argsNum[1]
+			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
+			reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
+			reply.ReplyToMessageID = message.MessageID
+			_, _ = bot.Send(reply)
+		}
+	case "help":
+		reply := tgbotapi.NewMessage(message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
+			"/build 0898国际 后台API @CG33333_bot\n"+
+			"/build 0898国际 前台API @CG33333_bot\n"+
+			"/build 0898国际 H5 @CG33333_bot\n"+
+			"/build 0898国际 后台H5 @CG33333_bot\n"+
+			"/build 0898国际 定时任务 @CG33333_bot")
+		reply.ReplyToMessageID = message.MessageID
+		_, _ = bot.Send(reply)
+	default:
+		reply := tgbotapi.NewMessage(message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
+			"/build 0898国际 后台API @CG33333_bot\n"+
+			"/build 0898国际 前台API @CG33333_bot\n"+
+			"/build 0898国际 H5 @CG33333_bot\n"+
+			"/build 0898国际 后台H5 @CG33333_bot\n"+
+			"/build 0898国际 定时任务 @CG33333_bot")
+		reply.ReplyToMessageID = message.MessageID
+		_, _ = bot.Send(reply)
+
+	}
 }
 
 func (b *BaseApi) TelegramWebhook(c *gin.Context) {
@@ -56,59 +108,21 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	log.Printf("bot Name:%s %s\n", bot.Self.FirstName, bot.Self.LastName)
 	fmt.Println("-----------------------------------------------------")
 	var request system.WebhookRequest // telegram消息响应结构体
+	var update tgbotapi.Update        // telegram update结构体
 	// jenkins构建结构体()
 	// 解析请求体
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
 		return
 	}
-	// 处理请求   基于命令处理请求 不支持中文指令
 	message := request.Message
-	if !message.IsCommand() {
-		response.OkWithDetailed("success", "不是一个命令", c)
-		return
-	}
-	command := message.Command()       // 获取命令
-	args := message.CommandArguments() // 获取全部参数
-	argsNum := strings.Fields(args)    // 已空格为定界符 将参数进行分割
-	// 检查命令是否包含bot的用户名（在群组中会有这种情况）
-	if strings.Contains(command, "@") {
-		command = strings.Split(command, "@")[0]
-	}
-	switch command {
-	case "build":
-		log.Printf("接收到的命令: %s", command)
-		log.Printf("接收到的全部参数: %s", args)
-		if len(argsNum) == 3 {
-			log.Printf("视图名称: %v ", argsNum[0])
-			log.Printf("JobName名称: %v", argsNum[1])
-			jkBuild.ViewName = argsNum[0]
-			jkBuild.JobName = argsNum[1]
-			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
-			SendMessageCommand(message, bot)
-		}
-	case "help":
-		reply := tgbotapi.NewMessage(message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
-			"/build 0898国际 后台API @CG33333_bot\n"+
-			"/build 0898国际 前台API @CG33333_bot\n"+
-			"/build 0898国际 H5 @CG33333_bot\n"+
-			"/build 0898国际 后台H5 @CG33333_bot\n"+
-			"/build 0898国际 定时任务 @CG33333_bot")
-		reply.ReplyToMessageID = message.MessageID
-		if _, err := bot.Send(reply); err != nil {
-			return
-		}
-	default:
-		reply := tgbotapi.NewMessage(message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
-			"/build 0898国际 后台API @CG33333_bot\n"+
-			"/build 0898国际 前台API @CG33333_bot\n"+
-			"/build 0898国际 H5 @CG33333_bot\n"+
-			"/build 0898国际 后台H5 @CG33333_bot\n"+
-			"/build 0898国际 定时任务 @CG33333_bot")
-		reply.ReplyToMessageID = message.MessageID
-		if _, err := bot.Send(reply); err != nil {
-			return
-		}
-	}
-
+	command := message.Command()
+	reply := tgbotapi.NewMessage(message.Chat.ID, command)
+	reply.ReplyToMessageID = message.MessageID
+	_, _ = bot.Send(reply)
+	msg := message.Text
+	replyText := tgbotapi.NewMessage(message.Chat.ID, "返回消息输入"+msg)
+	reply.ReplyToMessageID = message.MessageID
+	_, _ = bot.Send(replyText)
+	handleUpdate(bot, update)
 }

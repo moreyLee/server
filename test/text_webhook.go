@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 	"net/http"
 )
@@ -37,7 +37,7 @@ type Update struct {
 }
 
 const (
-	Token      = "7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4"                      // Replace with your Telegram Bot Token
+	Token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"                      // Replace with your Telegram Bot Token
 	WebhookURL = "https://11f7-94-204-212-107.ngrok-free.app/jenkins/telegram-webhook" // Replace with your webhook URL
 )
 
@@ -106,11 +106,9 @@ func main() {
 	})
 
 	// Set up the Telegram Webhook
-	Webhookconfig := tgbotapi.NewWebhook(WebhookURL)
-	_, err = bot.SetWebhook(Webhookconfig)
-	if err != nil {
-		log.Fatal(err)
-	}
+	webhook, err := tgbotapi.NewWebhook(WebhookURL)
+	// 对webhook实例发起请求
+	_, err = bot.Request(webhook)
 	if err := r.Run(":" + "8888"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
