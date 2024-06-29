@@ -39,6 +39,7 @@ func BuildJobsWithText(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 			_, _ = bot.Send(replyText)
 		}
 	}
+	return
 }
 
 //	func handleUpdate(bot *tgbotapi.BotAPI, update *system.WebhookRequest) {
