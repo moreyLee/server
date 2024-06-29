@@ -14,31 +14,43 @@ import (
 
 var jkBuild system.JenkinsBuild
 
-func SendMessageCommand(message tgbotapi.Message, bot *tgbotapi.BotAPI) {
+func SendMessage(bot *tgbotapi.BotAPI, message tgbotapi.Message) {
 	reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
 	reply.ReplyToMessageID = message.MessageID
 	_, _ = bot.Send(reply)
 	return
 }
-func handleText(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
-	text := message.Text
-	responseText := "You said: " + text
-	reply := tgbotapi.NewMessage(message.Chat.ID, responseText)
-	if _, err := bot.Send(reply); err != nil {
-		log.Println("Failed to send reply:", err)
-	}
-}
-
-func handleUpdate(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	if update.Message != nil {
-		if update.Message.IsCommand() {
-			handleCommand(bot, update.Message)
-		} else if update.Message.Text != "" {
-			handleText(bot, update.Message)
+func BuildJobsWithText(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
+	msg := webhook.Message.Text
+	botUsername := bot.Self.UserName
+	if strings.Contains(msg, "@"+botUsername) {
+		params := strings.Fields(msg)
+		if len(params) == 4 {
+			log.Printf("参数%s", params)
+			jkBuild.ViewName = params[1]
+			jkBuild.JobName = params[2]
+			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
+			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
+			replyText.ReplyToMessageID = webhook.Message.MessageID
+			_, _ = bot.Send(replyText)
+		} else {
+			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "详细用法"+msg+"任务名:"+jkBuild.JobName)
+			replyText.ReplyToMessageID = webhook.Message.MessageID
+			_, _ = bot.Send(replyText)
 		}
 	}
 }
-func handleCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+
+//	func handleUpdate(bot *tgbotapi.BotAPI, update *system.WebhookRequest) {
+//		if update.Message != nil {
+//			if update.Message.IsCommand() {
+//				handleCommand(bot, update.Message)
+//			} else if update.Message.Text != "" {
+//				handleText(bot, update.Message)
+//			}
+//		}
+//	}
+func BuildJobsCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
 	command := message.Command()
 	args := message.CommandArguments() // 获取全部参数
 	argsNum := strings.Fields(args)    // 已空格为定界符 将参数进行分割
@@ -107,22 +119,15 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	fmt.Println("-----------------------------------------------------")
 	log.Printf("bot Name:%s %s\n", bot.Self.FirstName, bot.Self.LastName)
 	fmt.Println("-----------------------------------------------------")
-	var request system.WebhookRequest // telegram消息响应结构体
-	var update tgbotapi.Update        // telegram update结构体
+	var update system.WebhookRequest // telegram消息响应结构体
+	//var message *tgbotapi.Message    // telegram update结构体
+	//message := request.Message
 	// jenkins构建结构体()
 	// 解析请求体
-	if err := c.ShouldBindJSON(&request); err != nil {
+	if err := c.ShouldBindJSON(&update); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
 		return
 	}
-	message := request.Message
-	command := message.Command()
-	reply := tgbotapi.NewMessage(message.Chat.ID, command)
-	reply.ReplyToMessageID = message.MessageID
-	_, _ = bot.Send(reply)
-	msg := message.Text
-	replyText := tgbotapi.NewMessage(message.Chat.ID, "返回消息输入"+msg)
-	reply.ReplyToMessageID = message.MessageID
-	_, _ = bot.Send(replyText)
-	handleUpdate(bot, update)
+	BuildJobsWithText(bot, update)
+	//BuildJobsCommand(bot, message)
 }

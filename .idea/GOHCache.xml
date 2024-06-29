@@ -1859,7 +1859,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719513890787" />
+              <option name="lastModified" value="1719643266183" />
             </ScannedPath>
           </value>
         </entry>
@@ -4015,6 +4015,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1718641674053" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/qinqstor-func.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719578741993" />
             </ScannedPath>
           </value>
         </entry>
