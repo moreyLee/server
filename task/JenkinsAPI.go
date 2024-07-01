@@ -15,10 +15,9 @@ import (
 )
 
 const (
-	JenkinsURL      = "http://119.8.127.96:8001/"
-	DevelopURL      = "http://192.168.217.128:8082/"
-	JenkinsUser     = "admin"
-	JenkinsAPIToken = "11d2d3cd4784aa28379905bf13988ad50e" //生产
+	DevelopURL  = "http://192.168.217.128:8082/"
+	JenkinsUser = "admin"
+	//JenkinsAPIToken = "11d2d3cd4784aa28379905bf13988ad50e" //生产
 	DevelopAPIToken = "11c9bc0d6ea88891f45ee4cfe5bd218287"
 )
 
@@ -102,7 +101,7 @@ func GetExtName(ViewName string) string {
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		global.GVA_LOG.Error("发送GET请求失败:请检查jenkins url, 用户名和token", zap.Error(err))
+		global.GVA_LOG.Error("发送GET请求失败:请检查jenkins url 是否异常\n,", zap.Error(err))
 	}
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
@@ -182,6 +181,11 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 		Name := preName + extName
 		log.Printf("Name: %s", Name)
 		jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/buildWithParameters"
+		// 判断一下 jenkins URL 是否有效
+		_, err := url.ParseRequestURI(jenkinsUrl)
+		if err != nil {
+			global.GVA_LOG.Error("无效的jenkins URL:\n", zap.Error(err))
+		}
 		// 获取构建参数 params为map类型
 		params := GetBuildJobParam(Name)
 		// 表单数据 将获取的参数转换为表单数据

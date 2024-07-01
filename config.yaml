@@ -121,7 +121,7 @@ elasticsearch:
   healthcheckInterval: 5s
   index-prefix: gva
 jenkins:
-  url: http://119.8.127.96:8001/
+  url: https://jenkins.3333d.vip
   user: admin
   api-token: 11d2d3cd4784aa28379905bf13988ad50e
 telegram:
