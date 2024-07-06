@@ -14,13 +14,6 @@ import (
 	"time"
 )
 
-const (
-	DevelopURL  = "http://192.168.217.128:8082/"
-	JenkinsUser = "admin"
-	//JenkinsAPIToken = "11d2d3cd4784aa28379905bf13988ad50e" //生产
-	DevelopAPIToken = "11c9bc0d6ea88891f45ee4cfe5bd218287"
-)
-
 type JenkinsJob struct {
 	Actions []Action `json:"actions"`
 }
@@ -188,9 +181,9 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 		}
 		// 获取构建参数 params为map类型
 		params := GetBuildJobParam(Name)
-		log.Printf("都忘了这参数什么样%s", params)
-		if params == nil {
+		if len(params) == 0 {
 			JenkinsBuildJob(ViewName, Name)
+			return
 		}
 		// 表单数据 将获取的参数转换为表单数据
 		data := url.Values{}
@@ -233,7 +226,7 @@ func JenkinsBuildJob(ViewName string, Name string) {
 		return
 	}
 	// 设置Auth Basic Auth
-	req.SetBasicAuth(JenkinsUser, DevelopAPIToken)
+	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
 	// 发送post请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)

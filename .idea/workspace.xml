@@ -4,24 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="检验jenkins url">
-      <change afterPath="$PROJECT_DIR$/api/v1/system/sys_qingstor.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router/system/sys_qingstor.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/qingstor.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/qingstor_func.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/selenium.go" afterDir="false" />
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="dddd">
+      <change afterPath="$PROJECT_DIR$/devops-api" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/GOHCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GOHCache.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/system/sys_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/system/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/system/enter.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/qinqstor-func.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/clamis.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/clamis.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +200,8 @@
     <MESSAGE value="测试" />
     <MESSAGE value="最新代码" />
     <MESSAGE value="检验jenkins url" />
-    <option name="LAST_COMMIT_MESSAGE" value="检验jenkins url" />
+    <MESSAGE value="dddd" />
+    <option name="LAST_COMMIT_MESSAGE" value="dddd" />
   </component>
   <component name="VgoProject">
     <environment>

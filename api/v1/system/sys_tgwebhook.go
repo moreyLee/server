@@ -19,22 +19,24 @@ func BuildJobsWithText(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	botUsername := bot.Self.UserName
 	if strings.Contains(msg, "@"+botUsername) {
 		params := strings.Fields(msg)
-		log.Printf("参数%s", params)
-		jkBuild.ViewName = params[1]
-		jkBuild.JobName = params[2]
-		task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
-		replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
-		replyText.ReplyToMessageID = webhook.Message.MessageID
-		_, _ = bot.Send(replyText)
+		if len(params) > 3 {
+			log.Printf("参数%s", params)
+			jkBuild.ViewName = params[1]
+			jkBuild.JobName = params[2]
+			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
+			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
+			replyText.ReplyToMessageID = webhook.Message.MessageID
+			_, _ = bot.Send(replyText)
+		}
 	} else if strings.Contains(msg, "@"+botUsername) {
-		reply := tgbotapi.NewMessage(webhook.Message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
-			"@CG33333_bot 0898国际 后台API  \n"+
-			"@CG33333_bot 0898国际 前台API \n"+
-			"@CG33333_bot 0898国际 H5 \n"+
-			"@CG33333_bot 0898国际 后台H5 \n"+
-			"@CG33333_bot 0898国际 定时任务 ")
-		reply.ReplyToMessageID = webhook.Message.MessageID
-		_, _ = bot.Send(reply)
+		text := tgbotapi.NewMessage(webhook.Message.Chat.ID, "请提供足够的参数触发构建任务 \n"+""+
+			"@"+botUsername+" 0898国际 后台API  \n"+
+			"@"+botUsername+" 0898国际 前台API \n"+
+			"@"+botUsername+" 0898国际 H5 \n"+
+			"@"+botUsername+" 0898国际 后台H5 \n"+
+			"@"+botUsername+" 0898国际 定时任务 ")
+		text.ReplyToMessageID = webhook.Message.MessageID
+		_, _ = bot.Send(text)
 	}
 	return
 }
@@ -54,7 +56,7 @@ func BuildJobsCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
 	argsNum := strings.Fields(args)    // 已空格为定界符 将参数进行分割
 	switch command {
 	case "build":
-		if len(argsNum) == 3 {
+		if len(argsNum) > 3 {
 			log.Printf("视图名称: %v ", argsNum[0])
 			log.Printf("JobName名称: %v", argsNum[1])
 			jkBuild.ViewName = argsNum[0]
@@ -86,6 +88,15 @@ func BuildJobsCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
 	}
 }
 
+func TextHelp(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+	botUsername := bot.Self.UserName
+	text := message.Text
+	if strings.Contains(text, "@"+botUsername) {
+		responseText := "You said: " + text
+		reply := tgbotapi.NewMessage(message.Chat.ID, responseText)
+		_, _ = bot.Send(reply)
+	}
+}
 func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	// 初始化 bot 实例
 	bot, err := tgbotapi.NewBotAPI(global.GVA_CONFIG.Telegram.BotToken)
@@ -113,14 +124,8 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	fmt.Println("-----------------------------------------------------")
 	log.Printf("User ID:%v\n", bot.Self.UserName)
 	fmt.Println("-----------------------------------------------------")
-	log.Printf("PEER ID:%v\n", bot.Self.ID)
-	fmt.Println("-----------------------------------------------------")
-	log.Printf("bot Name:%s %s\n", bot.Self.FirstName, bot.Self.LastName)
-	fmt.Println("-----------------------------------------------------")
+	var message *tgbotapi.Message
 	var update system.WebhookRequest // telegram消息响应结构体
-	//var message *tgbotapi.Message    // telegram update结构体
-	//message := request.Message
-	// jenkins构建结构体()
 	// 解析请求体
 	if err := c.ShouldBindJSON(&update); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
@@ -128,4 +133,5 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	}
 	BuildJobsWithText(bot, update)
 	//BuildJobsCommand(bot, message)
+	TextHelp(bot, message)
 }
