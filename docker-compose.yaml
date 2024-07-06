@@ -1,11 +1,11 @@
 version: "3"
 
 services:
-  game-api:
+  devops-api:
     image: centos:7
     working_dir: /opt
-    container_name: game-api    #自定义
-    command: "./devops-api -f config.yaml"
+    container_name: devops-api    #自定义
+    command: "./devops-api "
     ports:
       - "8888:8888"
     volumes:

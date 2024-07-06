@@ -1,7 +1,6 @@
 package system
 
 import (
-	"fmt"
 	"strconv"
 	"time"
 
@@ -52,7 +51,6 @@ func (b *BaseApi) Login(c *gin.Context) {
 
 	if !oc || (l.CaptchaId != "" && l.Captcha != "" && store.Verify(l.CaptchaId, l.Captcha, true)) {
 		u := &system.SysUser{Username: l.Username, Password: l.Password}
-		fmt.Println("用户密码信息:", u)
 		user, err := userService.Login(u)
 		if err != nil {
 			global.GVA_LOG.Error("登陆失败! 用户名不存在或者密码错误!", zap.Error(err))
@@ -75,7 +73,6 @@ func (b *BaseApi) Login(c *gin.Context) {
 			return
 		}
 		b.TokenNext(c, *user)
-		fmt.Println("用户密码,token 值:", user.Password, user.Username, user.Enable)
 		return
 	}
 	// 验证码次数+1

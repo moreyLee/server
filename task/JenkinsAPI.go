@@ -188,6 +188,10 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 		}
 		// 获取构建参数 params为map类型
 		params := GetBuildJobParam(Name)
+		log.Printf("都忘了这参数什么样%s", params)
+		if params == nil {
+			JenkinsBuildJob(ViewName, Name)
+		}
 		// 表单数据 将获取的参数转换为表单数据
 		data := url.Values{}
 		for key, value := range params {
@@ -221,8 +225,8 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 }
 
 // JenkinsBuildJob  无参数构建/**
-func JenkinsBuildJob(JobName string) {
-	jenkinsUrl := DevelopURL + "job/" + JobName + "/build"
+func JenkinsBuildJob(ViewName string, Name string) {
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/build"
 	req, err := http.NewRequest("POST", jenkinsUrl, nil)
 	if err != nil {
 		global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
@@ -243,5 +247,8 @@ func JenkinsBuildJob(JobName string) {
 			global.GVA_LOG.Error("关闭响应体失败:", zap.Error(err))
 		}
 	}(resp.Body)
-
 }
+
+// 获取jenkins执行状态 通过jobName
+
+// jenkins 获取 分支名

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="检验jenkins url">
+      <change afterPath="$PROJECT_DIR$/api/v1/system/sys_qingstor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/system/sys_qingstor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/qingstor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/qingstor_func.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/selenium.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/GOHCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GOHCache.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/v1/system/sys_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/system/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/system/enter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/qinqstor-func.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/clamis.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/clamis.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://C:/Program Files/Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2fakrSEZTHCuHADZjNFCDpYNzQ2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server.executor": "Run",
+    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1).executor": "Run",
+    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2).executor": "Run",
+    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor": "Run",
+    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cgmanageTest.executor": "Run",
+    "Go Build.go build qingstor_func.go.executor": "Run",
+    "Go Build.go build selenium.go.executor": "Run",
+    "Go Build.go build sendMessage.go (1).executor": "Run",
+    "Go Build.go build sendMessage.go.executor": "Run",
+    "Go Build.go build telegram.go.executor": "Run",
+    "Go Build.go build telegram_polling.go.executor": "Run",
+    "Go Build.go build telegramwebhook.go.executor": "Run",
+    "Go Build.go build testTelegram.go.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "D:/下载/my_home_logic.dart",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\server\task" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\server" />
+      <recent name="D:\projects\server\task" />
+      <recent name="D:\projects\server\test" />
+      <recent name="D:\projects\server\model\system" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="GoApplicationRunConfiguration" />
+        <option value="js.build_tools.npm" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server">
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/qinqstor-func.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/qingstor.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build qingstor_func.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/qingstor_func.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build selenium.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/selenium.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
+        <item itemvalue="Go Build.go build qingstor_func.go" />
+        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2)" />
+        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1)" />
+        <item itemvalue="Go Build.go build selenium.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-e58f7cfedaf7-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14015.113" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+    <MESSAGE value="dd" />
+    <MESSAGE value="新增域名" />
+    <MESSAGE value="域名跳转" />
+    <MESSAGE value="增加ElasticSearch模块" />
+    <MESSAGE value="获取jenkins构建参数" />
+    <MESSAGE value="通过jenkinsAPI 构建项目 &#10;TG发送消息" />
+    <MESSAGE value="TG 消息单实例" />
+    <MESSAGE value="测试群组" />
+    <MESSAGE value="测试webhook" />
+    <MESSAGE value="上传" />
+    <MESSAGE value="webhook fuck you" />
+    <MESSAGE value="webhook" />
+    <MESSAGE value="webhook构建jenkins 已完成" />
+    <MESSAGE value="404修复" />
+    <MESSAGE value="404修复1" />
+    <MESSAGE value="修复全局变量" />
+    <MESSAGE value="不识别纯文本消息" />
+    <MESSAGE value="真慢啊" />
+    <MESSAGE value="测试" />
+    <MESSAGE value="最新代码" />
+    <MESSAGE value="检验jenkins url" />
+    <option name="LAST_COMMIT_MESSAGE" value="检验jenkins url" />
+  </component>
+  <component name="VgoProject">
+    <environment>
+      <map>
+        <entry key="GPPROXY" value="https://goproxy.cn,direct" />
+      </map>
+    </environment>
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="DlvErrorBreakpoint" />
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

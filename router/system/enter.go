@@ -20,4 +20,5 @@ type RouterGroup struct {
 	DomainRouter
 	TelegramRouter
 	ElasticRouter
+	QingStorRouter
 }

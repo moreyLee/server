@@ -14,30 +14,27 @@ import (
 
 var jkBuild system.JenkinsBuild
 
-func SendMessage(bot *tgbotapi.BotAPI, message tgbotapi.Message) {
-	reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
-	reply.ReplyToMessageID = message.MessageID
-	_, _ = bot.Send(reply)
-	return
-}
 func BuildJobsWithText(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	msg := webhook.Message.Text
 	botUsername := bot.Self.UserName
 	if strings.Contains(msg, "@"+botUsername) {
 		params := strings.Fields(msg)
-		if len(params) == 4 {
-			log.Printf("参数%s", params)
-			jkBuild.ViewName = params[1]
-			jkBuild.JobName = params[2]
-			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
-			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
-			replyText.ReplyToMessageID = webhook.Message.MessageID
-			_, _ = bot.Send(replyText)
-		} else {
-			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "详细用法"+msg+"任务名:"+jkBuild.JobName)
-			replyText.ReplyToMessageID = webhook.Message.MessageID
-			_, _ = bot.Send(replyText)
-		}
+		log.Printf("参数%s", params)
+		jkBuild.ViewName = params[1]
+		jkBuild.JobName = params[2]
+		task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
+		replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
+		replyText.ReplyToMessageID = webhook.Message.MessageID
+		_, _ = bot.Send(replyText)
+	} else if strings.Contains(msg, "@"+botUsername) {
+		reply := tgbotapi.NewMessage(webhook.Message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
+			"@CG33333_bot 0898国际 后台API  \n"+
+			"@CG33333_bot 0898国际 前台API \n"+
+			"@CG33333_bot 0898国际 H5 \n"+
+			"@CG33333_bot 0898国际 后台H5 \n"+
+			"@CG33333_bot 0898国际 定时任务 ")
+		reply.ReplyToMessageID = webhook.Message.MessageID
+		_, _ = bot.Send(reply)
 	}
 	return
 }

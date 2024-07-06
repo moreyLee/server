@@ -93,9 +93,9 @@ func Routers() *gin.Engine {
 		systemRouter.TestUserRouter(PrivateGroup)                   // 测试
 		systemRouter.DomainOpsRouter(PrivateGroup)                  // 多平台域名替换
 		systemRouter.ElasticOpsRouter(PrivateGroup)                 //	ElasticSearch
+		systemRouter.InitQingStorRouter(PrivateGroup)               //	青云对象存储(APP)
 		exampleRouter.InitCustomerRouter(PrivateGroup)              // 客户路由
 		exampleRouter.InitFileUploadAndDownloadRouter(PrivateGroup) // 文件上传下载功能路由
-
 	}
 
 	global.GVA_LOG.Info("router register success")

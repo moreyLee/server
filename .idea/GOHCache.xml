@@ -211,13 +211,6 @@
             </set>
           </value>
         </entry>
-        <entry key="Build">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/test/text_webhook.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="CORS">
           <value>
             <set>
@@ -432,6 +425,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/router/system/sys_domain.go" />
+              <option value="file://$PROJECT_DIR$/router/system/sys_qingstor.go" />
             </set>
           </value>
         </entry>
@@ -856,6 +850,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/response/sys_casbin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QingStorRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_qingstor.go" />
             </set>
           </value>
         </entry>
@@ -1315,18 +1316,10 @@
             </set>
           </value>
         </entry>
-        <entry key="TextMessage">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/test/text_webhook.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="Update">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go" />
-              <option value="file://$PROJECT_DIR$/test/text_webhook.go" />
             </set>
           </value>
         </entry>
@@ -1844,6 +1837,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_qingstor.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1720243558577" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_system.go">
           <value>
             <ScannedPath>
@@ -1859,14 +1859,14 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719647476499" />
+              <option name="lastModified" value="1720173153707" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_user.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1717177735615" />
+              <option name="lastModified" value="1720079039550" />
             </ScannedPath>
           </value>
         </entry>
@@ -2456,7 +2456,7 @@
         <entry key="file://$PROJECT_DIR$/initialize/router.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718925687689" />
+              <option name="lastModified" value="1720077515917" />
               <option name="schema">
                 <list>
                   <option value="justFilesFilesystem" />
@@ -3296,7 +3296,7 @@
         <entry key="file://$PROJECT_DIR$/router/system/enter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718299047609" />
+              <option name="lastModified" value="1720077515880" />
               <option name="schema">
                 <list>
                   <option value="RouterGroup" />
@@ -3492,6 +3492,18 @@
               <option name="schema">
                 <list>
                   <option value="OperationRecordRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_qingstor.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1720078634062" />
+              <option name="schema">
+                <list>
+                  <option value="QingStorRouter" />
                 </list>
               </option>
             </ScannedPath>
@@ -3992,7 +4004,7 @@
         <entry key="file://$PROJECT_DIR$/task/JenkinsAPI.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719810650381" />
+              <option name="lastModified" value="1720178241608" />
               <option name="schema">
                 <list>
                   <option value="JenkinsJob" />
@@ -4018,24 +4030,17 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/test/qinqstor-func.go">
+        <entry key="file://$PROJECT_DIR$/test/qingstor.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719578741993" />
+              <option name="lastModified" value="1720070721852" />
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/test/text_webhook.go">
+        <entry key="file://$PROJECT_DIR$/test/qingstor_func.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719498106954" />
-              <option name="schema">
-                <list>
-                  <option value="TextMessage" />
-                  <option value="Build" />
-                  <option value="Update" />
-                </list>
-              </option>
+              <option name="lastModified" value="1720074644645" />
             </ScannedPath>
           </value>
         </entry>
@@ -4129,7 +4134,7 @@
         <entry key="file://$PROJECT_DIR$/utils/clamis.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1714046643745" />
+              <option name="lastModified" value="1719984637275" />
             </ScannedPath>
           </value>
         </entry>
@@ -4417,7 +4422,6 @@
         <entry key="base_claims" value="BaseClaims" />
         <entry key="base_menu_service" value="BaseMenuService" />
         <entry key="base_router" value="BaseRouter" />
-        <entry key="build" value="Build" />
         <entry key="captcha" value="Captcha" />
         <entry key="casbin_api" value="CasbinApi" />
         <entry key="casbin_in_receive" value="CasbinInReceive" />
@@ -4527,6 +4531,7 @@
         <entry key="pgsql" value="Pgsql" />
         <entry key="pgsql_init_handler" value="PgsqlInitHandler" />
         <entry key="policy_path_response" value="PolicyPathResponse" />
+        <entry key="qing_stor_router" value="QingStorRouter" />
         <entry key="qiniu" value="Qiniu" />
         <entry key="ram" value="Ram" />
         <entry key="receive_message" value="ReceiveMessage" />
@@ -4594,7 +4599,6 @@
         <entry key="telegram_router" value="TelegramRouter" />
         <entry key="tencent_cos" value="TencentCOS" />
         <entry key="test_router" value="TestRouter" />
-        <entry key="text_message" value="TextMessage" />
         <entry key="timer" value="timer" />
         <entry key="tpl_data" value="tplData" />
         <entry key="update" value="Update" />
@@ -4608,6 +4612,6 @@
         <entry key="zone_id" value="ZoneID" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1719414968181" />
+    <option name="lastTimeChecked" value="1720066170744" />
   </component>
 </project>
