@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="dddd">
-      <change afterPath="$PROJECT_DIR$/devops-api" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/GetGitDetails.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/GOHCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GOHCache.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/system/sys_tg_webhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/clamis.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/clamis.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,47 +52,48 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server.executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1).executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2).executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cgmanageTest.executor": "Run",
-    "Go Build.go build qingstor_func.go.executor": "Run",
-    "Go Build.go build selenium.go.executor": "Run",
-    "Go Build.go build sendMessage.go (1).executor": "Run",
-    "Go Build.go build sendMessage.go.executor": "Run",
-    "Go Build.go build telegram.go.executor": "Run",
-    "Go Build.go build telegram_polling.go.executor": "Run",
-    "Go Build.go build telegramwebhook.go.executor": "Run",
-    "Go Build.go build testTelegram.go.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "D:/下载/my_home_logic.dart",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cgmanageTest.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build qingstor_func.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build selenium.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build sendMessage.go (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build sendMessage.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build telegram.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build telegram_polling.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build telegramwebhook.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build testTelegram.go.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/下载/my_home_logic.dart&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.vgo&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\projects\server\task" />
@@ -107,7 +113,16 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server">
+  <component name="RunManager" selected="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -117,49 +132,24 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/qinqstor-func.go" />
+      <filePath value="$PROJECT_DIR$/test/GetGitDetails.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/qingstor.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build qingstor_func.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/qingstor_func.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build selenium.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/selenium.go" />
-      <method v="2" />
-    </configuration>
+    <list>
+      <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
-        <item itemvalue="Go Build.go build qingstor_func.go" />
-        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2)" />
-        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1)" />
-        <item itemvalue="Go Build.go build selenium.go" />
+        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
+        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
       </list>
     </recent_temporary>
   </component>

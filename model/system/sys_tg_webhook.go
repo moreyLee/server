@@ -99,4 +99,5 @@ type WebhookRequest struct {
 type JenkinsBuild struct {
 	ViewName string `json:"view_name"` // 视图名称
 	JobName  string `json:"job_name"`  // 项目名称
+
 }

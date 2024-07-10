@@ -323,6 +323,13 @@
             </set>
           </value>
         </entry>
+        <entry key="Config">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/test/GetGitDetails.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Constraint">
           <value>
             <set>
@@ -425,7 +432,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/router/system/sys_domain.go" />
-              <option value="file://$PROJECT_DIR$/router/system/sys_qingstor.go" />
             </set>
           </value>
         </entry>
@@ -611,6 +617,14 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JobConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+              <option value="file://$PROJECT_DIR$/test/GetGitDetails.go" />
             </set>
           </value>
         </entry>
@@ -930,6 +944,14 @@
               <option value="file://$PROJECT_DIR$/plugin/email/router/enter.go" />
               <option value="file://$PROJECT_DIR$/router/enter.go" />
               <option value="file://$PROJECT_DIR$/router/system/enter.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SCM">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+              <option value="file://$PROJECT_DIR$/test/GetGitDetails.go" />
             </set>
           </value>
         </entry>
@@ -1840,7 +1862,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_qingstor.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720243558577" />
+              <option name="lastModified" value="1720243559444" />
             </ScannedPath>
           </value>
         </entry>
@@ -1859,7 +1881,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720275498571" />
+              <option name="lastModified" value="1720604520441" />
             </ScannedPath>
           </value>
         </entry>
@@ -3076,7 +3098,7 @@
         <entry key="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718922652255" />
+              <option name="lastModified" value="1720594319246" />
               <option name="schema">
                 <list>
                   <option value="ReceiveMessage" />
@@ -3524,7 +3546,7 @@
         <entry key="file://$PROJECT_DIR$/router/system/sys_tg_webhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718923865006" />
+              <option name="lastModified" value="1720503242595" />
               <option name="schema">
                 <list>
                   <option value="TelegramRouter" />
@@ -4004,13 +4026,15 @@
         <entry key="file://$PROJECT_DIR$/task/JenkinsAPI.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720274356501" />
+              <option name="lastModified" value="1720608379857" />
               <option name="schema">
                 <list>
                   <option value="JenkinsJob" />
+                  <option value="SCM" />
                   <option value="Action" />
                   <option value="ParameterDefinitions" />
                   <option value="JenkinsView" />
+                  <option value="JobConfig" />
                 </list>
               </option>
             </ScannedPath>
@@ -4030,17 +4054,17 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/test/qingstor.go">
+        <entry key="file://$PROJECT_DIR$/test/GetGitDetails.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720070721852" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/qingstor_func.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1720074644645" />
+              <option name="lastModified" value="1720608394977" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                  <option value="SCM" />
+                  <option value="JobConfig" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -4134,7 +4158,7 @@
         <entry key="file://$PROJECT_DIR$/utils/clamis.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719984637275" />
+              <option name="lastModified" value="1720502861046" />
             </ScannedPath>
           </value>
         </entry>
@@ -4436,6 +4460,7 @@
         <entry key="cloudflare" value="Cloudflare" />
         <entry key="column" value="Column" />
         <entry key="condition" value="Condition" />
+        <entry key="config" value="Config" />
         <entry key="constraint" value="Constraint" />
         <entry key="cors" value="CORS" />
         <entry key="cors_whitelist" value="CORSWhitelist" />
@@ -4491,6 +4516,7 @@
         <entry key="jenkins_build" value="JenkinsBuild" />
         <entry key="jenkins_job" value="JenkinsJob" />
         <entry key="jenkins_view" value="JenkinsView" />
+        <entry key="job_config" value="JobConfig" />
         <entry key="join_template" value="JoinTemplate" />
         <entry key="json_dns_data" value="jsonDnsData" />
         <entry key="just_files_filesystem" value="justFilesFilesystem" />
@@ -4543,6 +4569,7 @@
         <entry key="result" value="Result" />
         <entry key="roll_back" value="RollBack" />
         <entry key="router_group" value="RouterGroup" />
+        <entry key="scm" value="SCM" />
         <entry key="search_api_params" value="SearchApiParams" />
         <entry key="send_message" value="SendMessage" />
         <entry key="server" value="Server" />
@@ -4612,6 +4639,6 @@
         <entry key="zone_id" value="ZoneID" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1720066170744" />
+    <option name="lastTimeChecked" value="1720606157936" />
   </component>
 </project>

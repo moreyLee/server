@@ -18,85 +18,58 @@ func BuildJobsWithText(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	msg := webhook.Message.Text
 	botUsername := bot.Self.UserName
 	if strings.Contains(msg, "@"+botUsername) {
+		// 获取外部参数
 		params := strings.Fields(msg)
+		log.Printf("参数: %v", params)
 		if len(params) > 3 {
 			log.Printf("参数%s", params)
 			jkBuild.ViewName = params[1]
 			jkBuild.JobName = params[2]
-			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
-			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
-			replyText.ReplyToMessageID = webhook.Message.MessageID
-			_, _ = bot.Send(replyText)
+			if params[3] == "更新" {
+				task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
+				replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
+				replyText.ReplyToMessageID = webhook.Message.MessageID
+				_, _ = bot.Send(replyText)
+			}
 		}
-	} else if strings.Contains(msg, "@"+botUsername) {
-		text := tgbotapi.NewMessage(webhook.Message.Chat.ID, "请提供足够的参数触发构建任务 \n"+""+
-			"@"+botUsername+" 0898国际 后台API  \n"+
-			"@"+botUsername+" 0898国际 前台API \n"+
-			"@"+botUsername+" 0898国际 H5 \n"+
-			"@"+botUsername+" 0898国际 后台H5 \n"+
-			"@"+botUsername+" 0898国际 定时任务 ")
-		text.ReplyToMessageID = webhook.Message.MessageID
-		_, _ = bot.Send(text)
+	} else {
+		log.Printf("未找到@%s", botUsername)
+		//text := tgbotapi.NewMessage(webhook.Message.Chat.ID, "请提供足够的参数触发构建任务 \n"+"构建用例:\n"+
+		//	"@"+botUsername+" 0898国际 后台API  \n"+
+		//	"@"+botUsername+" 0898国际 前台API \n"+
+		//	"@"+botUsername+" 0898国际 H5 \n"+
+		//	"@"+botUsername+" 0898国际 后台H5 \n"+
+		//	"@"+botUsername+" 0898国际 定时任务 ")
+		//text.ReplyToMessageID = webhook.Message.MessageID
+		//_, _ = bot.Send(text)
 	}
 	return
 }
 
-//	func handleUpdate(bot *tgbotapi.BotAPI, update *system.WebhookRequest) {
-//		if update.Message != nil {
-//			if update.Message.IsCommand() {
-//				handleCommand(bot, update.Message)
-//			} else if update.Message.Text != "" {
-//				handleText(bot, update.Message)
-//			}
-//		}
-//	}
-func BuildJobsCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
-	command := message.Command()
-	args := message.CommandArguments() // 获取全部参数
-	argsNum := strings.Fields(args)    // 已空格为定界符 将参数进行分割
-	switch command {
-	case "build":
-		if len(argsNum) > 3 {
-			log.Printf("视图名称: %v ", argsNum[0])
-			log.Printf("JobName名称: %v", argsNum[1])
-			jkBuild.ViewName = argsNum[0]
-			jkBuild.JobName = argsNum[1]
-			task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
-			reply := tgbotapi.NewMessage(message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...请稍等")
-			reply.ReplyToMessageID = message.MessageID
-			_, _ = bot.Send(reply)
-		}
-	case "help":
-		reply := tgbotapi.NewMessage(message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
-			"/build 0898国际 后台API @CG33333_bot\n"+
-			"/build 0898国际 前台API @CG33333_bot\n"+
-			"/build 0898国际 H5 @CG33333_bot\n"+
-			"/build 0898国际 后台H5 @CG33333_bot\n"+
-			"/build 0898国际 定时任务 @CG33333_bot")
-		reply.ReplyToMessageID = message.MessageID
-		_, _ = bot.Send(reply)
-	default:
-		reply := tgbotapi.NewMessage(message.Chat.ID, "Jenkins构建用例:"+"  "+"字母大写\n"+
-			"/build 0898国际 后台API @CG33333_bot\n"+
-			"/build 0898国际 前台API @CG33333_bot\n"+
-			"/build 0898国际 H5 @CG33333_bot\n"+
-			"/build 0898国际 后台H5 @CG33333_bot\n"+
-			"/build 0898国际 定时任务 @CG33333_bot")
-		reply.ReplyToMessageID = message.MessageID
-		_, _ = bot.Send(reply)
-
-	}
-}
-
-func TextHelp(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+func GetProjectParams(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
+	msg := webhook.Message.Text
 	botUsername := bot.Self.UserName
-	text := message.Text
-	if strings.Contains(text, "@"+botUsername) {
-		responseText := "You said: " + text
-		reply := tgbotapi.NewMessage(message.Chat.ID, responseText)
-		_, _ = bot.Send(reply)
+	if strings.Contains(msg, "@"+botUsername) {
+		// 获取外部参数
+		params := strings.Fields(msg)
+		log.Printf("参数: %v", params)
+		if len(params) > 3 {
+			log.Printf("参数%s", params)
+			jkBuild.ViewName = params[1]
+			jkBuild.JobName = params[2]
+			if params[3] == "获取分支" {
+				jobConfig := task.GetBranch(jkBuild.ViewName, jkBuild.JobName)
+				if len(jobConfig.SCM.UserRemoteConfigs.URLs) > 0 && len(jobConfig.SCM.Branches) > 0 {
+					replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, jkBuild.ViewName+"  "+jkBuild.JobName+"的git分支:  "+jobConfig.SCM.Branches[0])
+					replyText.ReplyToMessageID = webhook.Message.MessageID
+					_, _ = bot.Send(replyText)
+				}
+			}
+		}
 	}
+
 }
+
 func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	// 初始化 bot 实例
 	bot, err := tgbotapi.NewBotAPI(global.GVA_CONFIG.Telegram.BotToken)
@@ -122,9 +95,8 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 	fmt.Println("-----------------------------------------------------")
 	log.Printf("验证成功\n")
 	fmt.Println("-----------------------------------------------------")
-	log.Printf("User ID:%v\n", bot.Self.UserName)
+	log.Printf("userID:%v\n", bot.Self.UserName)
 	fmt.Println("-----------------------------------------------------")
-	var message *tgbotapi.Message
 	var update system.WebhookRequest // telegram消息响应结构体
 	// 解析请求体
 	if err := c.ShouldBindJSON(&update); err != nil {
@@ -132,6 +104,5 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 		return
 	}
 	BuildJobsWithText(bot, update)
-	//BuildJobsCommand(bot, message)
-	TextHelp(bot, message)
+	GetProjectParams(bot, update)
 }

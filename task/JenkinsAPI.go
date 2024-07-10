@@ -3,6 +3,7 @@ package task
 import (
 	"bytes"
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"go.uber.org/zap"
@@ -16,6 +17,15 @@ import (
 
 type JenkinsJob struct {
 	Actions []Action `json:"actions"`
+}
+
+// SCM 结构体用于存储 SCM 配置信息
+type SCM struct {
+	ConfigVersion     string `xml:"configVersion"`
+	UserRemoteConfigs struct {
+		URLs []string `xml:"hudson.plugins.git.UserRemoteConfig>url"`
+	} `xml:"userRemoteConfigs"`
+	Branches []string `xml:"branches>hudson.plugins.git.BranchSpec>name"`
 }
 type Action struct {
 	ParameterDefinitions []ParameterDefinitions `json:"parameterDefinitions"`
@@ -32,6 +42,19 @@ type JenkinsView struct {
 	Jobs []struct {
 		Name string `json:"name"`
 	} `json:"jobs"`
+}
+
+// JobConfig 结构体用于存储 Jenkins Job 的配置信息
+type JobConfig struct {
+	XMLName xml.Name `xml:"project"`
+	//SCM     SCM      `xml:"scm"`
+	SCM struct {
+		ConfigVersion     string `xml:"configVersion"`
+		UserRemoteConfigs struct {
+			URLs []string `xml:"hudson.plugins.git.UserRemoteConfig>url"`
+		} `xml:"userRemoteConfigs"`
+		Branches []string `xml:"branches>hudson.plugins.git.BranchSpec>name"`
+	} `xml:"scm"`
 }
 
 // GetBuildJobParam 获取JobName构建参数
@@ -116,6 +139,54 @@ func GetExtName(ViewName string) string {
 	//fmt.Printf("后缀%s", extName)
 
 	return extName
+}
+
+// GetBranch  获取jenkins git仓库和代码分支
+func GetBranch(ViewName string, JobName string) *JobConfig {
+	if JobName == "" || ViewName == "" {
+		log.Printf("视图名和任务名不能为空")
+	}
+	var extensionMap = map[string]string{
+		"后台API": "_adminapi",
+		"前台API": "_api",
+		"H5":    "_h5",
+		"后台H5":  "_h5admin",
+		"定时任务":  "_quartz",
+	}
+	log.Printf("映射名称来源: " + JobName)
+	extName := extensionMap[JobName]
+	log.Printf("后缀: %s", extName)
+	preName := GetExtName(ViewName)
+	log.Printf("前缀: %s ", preName)
+	Name := preName + extName
+	log.Printf("Name: %s", Name)
+
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/config.xml"
+	log.Printf("jenkins URL: " + jenkinsUrl)
+	// 创建http 请求
+	req, _ := http.NewRequest("GET", jenkinsUrl, nil)
+	// 设置Auth Basic Auth  user &token 认证信息
+	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+	// 创建GET请求并获取响应
+	client := &http.Client{Timeout: 10 * time.Second}
+	resp, err := client.Do(req)
+	if err != nil {
+		global.GVA_LOG.Error("发送GET请求失败 \n,", zap.Error(err))
+	}
+	defer resp.Body.Close()
+	// 读取响应体
+	body, err := io.ReadAll(resp.Body)
+	bodyStr := strings.Replace(string(body), `<?xml version='1.1' encoding='UTF-8'?>`, `<?xml version='1.0' encoding='UTF-8'?>`, -1)
+	bodyStr = strings.Replace(bodyStr, `<?xml version="1.1" encoding="UTF-8"?>`, `<?xml version="1.0" encoding="UTF-8"?>`, -1)
+	//bodyStr := strings.Replace(string(body), `<?xml version='1.1' encoding='UTF-8'?>`, `<?xml version='1.0' encoding='UTF-8'?>`, 1)
+
+	// 解析xml 响应
+	var jobConfig JobConfig
+	if err := xml.Unmarshal([]byte(bodyStr), &jobConfig); err != nil {
+		global.GVA_LOG.Error("解析xml响应失败:", zap.Error(err))
+	}
+
+	return &jobConfig
 }
 
 // JenkinsBuildJobWithParam 有参数构建 根据项目名构建
@@ -212,7 +283,6 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 		}
 	} else {
 		log.Printf("请输入正确的站点信息")
-		//Send("错误: 请输入正确的站点参数信息, 具体用法请参考 /help @CG88885_bot")
 		return // 返回不在执行后续
 	}
 }
@@ -241,7 +311,3 @@ func JenkinsBuildJob(ViewName string, Name string) {
 		}
 	}(resp.Body)
 }
-
-// 获取jenkins执行状态 通过jobName
-
-// jenkins 获取 分支名
