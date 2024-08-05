@@ -4,47 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="获取git分支">
-      <change afterPath="$PROJECT_DIR$/api/v1/jenkins/jenkinsApi.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/v1/system/sys_lottery.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/v1/system/sys_lottery_record.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/captcha.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chromedriver.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/op_adminLink.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/lottery/gam_lottery.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/lottery/gam_record.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router/gamble/enter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router/system/sys_lottery.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router/system/sys_lottery_record.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/lottery/enter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/system/sys_lottery.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task/JenkinsCommon.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/GetJobStatusJK.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/GetsiteInfo.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/TestOCR.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/specUserTrigerBot.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/SendMsg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/GOHCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GOHCache.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/system/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/enter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/system/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/system/enter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/enter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/sendMessage.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/GetGitDetails.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/GetGitDetails.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/telegramwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/telegramwebhook.go" afterDir="false" />
-    </list>
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="验证码识别真是日了狗了" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,7 +169,8 @@
     <MESSAGE value="检验jenkins url" />
     <MESSAGE value="dddd" />
     <MESSAGE value="获取git分支" />
-    <option name="LAST_COMMIT_MESSAGE" value="获取git分支" />
+    <MESSAGE value="验证码识别真是日了狗了" />
+    <option name="LAST_COMMIT_MESSAGE" value="验证码识别真是日了狗了" />
   </component>
   <component name="VgoProject">
     <environment>
