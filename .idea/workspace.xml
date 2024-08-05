@@ -4,18 +4,46 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="dddd">
-      <change afterPath="$PROJECT_DIR$/test/GetGitDetails.go" afterDir="false" />
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="获取git分支">
+      <change afterPath="$PROJECT_DIR$/api/v1/jenkins/jenkinsApi.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/v1/system/sys_lottery.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/v1/system/sys_lottery_record.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/captcha.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chromedriver.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/op_adminLink.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/lottery/gam_lottery.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/lottery/gam_record.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/gamble/enter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/system/sys_lottery.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/system/sys_lottery_record.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/lottery/enter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/system/sys_lottery.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task/JenkinsCommon.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/GetJobStatusJK.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/GetsiteInfo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/TestOCR.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/specUserTrigerBot.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/SendMsg.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/GOHCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GOHCache.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/v1/system/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/enter.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/system/sys_tg_webhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/system/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/system/enter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/enter.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/enter.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/clamis.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/clamis.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/sendMessage.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/GetGitDetails.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/GetGitDetails.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/telegramwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/telegramwebhook.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +86,8 @@
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build TestOCR.go (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build TestOCR.go.executor&quot;: &quot;Run&quot;,
     &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server.executor&quot;: &quot;Run&quot;,
     &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1).executor&quot;: &quot;Run&quot;,
     &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2).executor&quot;: &quot;Run&quot;,
@@ -81,11 +111,11 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/下载/my_home_logic.dart&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/A&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;go.vgo&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -99,10 +129,11 @@
       <recent name="D:\projects\server\task" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projects\server" />
-      <recent name="D:\projects\server\task" />
       <recent name="D:\projects\server\test" />
-      <recent name="D:\projects\server\model\system" />
+      <recent name="D:\projects\server" />
+      <recent name="D:\projects\server\service\system" />
+      <recent name="D:\projects\server\router\system" />
+      <recent name="D:\projects\server\task" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -113,7 +144,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test">
+  <component name="RunManager">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -123,7 +154,7 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
@@ -132,23 +163,9 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/GetGitDetails.go" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
-      <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
-        <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
         <item itemvalue="Go Build.go build github.com/flipped-aurora/gin-vue-admin/server" />
       </list>
     </recent_temporary>
@@ -191,7 +208,8 @@
     <MESSAGE value="最新代码" />
     <MESSAGE value="检验jenkins url" />
     <MESSAGE value="dddd" />
-    <option name="LAST_COMMIT_MESSAGE" value="dddd" />
+    <MESSAGE value="获取git分支" />
+    <option name="LAST_COMMIT_MESSAGE" value="获取git分支" />
   </component>
   <component name="VgoProject">
     <environment>

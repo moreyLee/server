@@ -94,6 +94,8 @@ func Routers() *gin.Engine {
 		systemRouter.DomainOpsRouter(PrivateGroup)                  // 多平台域名替换
 		systemRouter.ElasticOpsRouter(PrivateGroup)                 //	ElasticSearch
 		systemRouter.InitQingStorRouter(PrivateGroup)               //	青云对象存储(APP)
+		systemRouter.InitGambleRouter(PrivateGroup)                 // 记牌
+		systemRouter.InitSysLotteryRecordRouter(PrivateGroup)       // 庄赢
 		exampleRouter.InitCustomerRouter(PrivateGroup)              // 客户路由
 		exampleRouter.InitFileUploadAndDownloadRouter(PrivateGroup) // 文件上传下载功能路由
 	}

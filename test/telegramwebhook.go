@@ -9,13 +9,6 @@ import (
 	"net/http"
 )
 
-//// ReceiveMessage struct
-//type ReceiveMessage struct {
-//	UpdateID    int         `json:"update_id"`
-//	Message     Message     `json:"message"`
-//	ChannelPost ChannelPost `json:"channel_post"`
-//}
-
 // Message struct
 type Message struct {
 	MessageID int        `json:"message_id"`

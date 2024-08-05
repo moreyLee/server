@@ -35,7 +35,7 @@ type JobConfig struct {
 // GetJobConfig 函数用于获取 Jenkins Job 的配置信息
 func GetJobConfig(viewName string, jobName string) (*JobConfig, error) {
 	// 构建 API URL
-	apiURL := fmt.Sprintf("http://jenkins.3333d.vip/view/%s/job/%s/config.xml", viewName, jobName)
+	apiURL := fmt.Sprintf("http://jenkins1.3333d.vip/view/%s/job/%s/config.xml", viewName, jobName)
 
 	// 创建 HTTP 请求
 	req, err := http.NewRequest("GET", apiURL, nil)
@@ -88,4 +88,5 @@ func main() {
 	} else {
 		fmt.Println("未找到 Git 仓库或分支信息")
 	}
+
 }

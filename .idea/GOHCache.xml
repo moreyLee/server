@@ -7,7 +7,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/api/v1/system/sys_domain.go" />
-              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
             </set>
           </value>
         </entry>
@@ -32,6 +32,7 @@
               <option value="file://$PROJECT_DIR$/api/v1/enter.go" />
               <option value="file://$PROJECT_DIR$/api/v1/system/enter.go" />
               <option value="file://$PROJECT_DIR$/plugin/email/api/enter.go" />
+              <option value="file://$PROJECT_DIR$/router/gamble/enter.go" />
             </set>
           </value>
         </entry>
@@ -211,6 +212,13 @@
             </set>
           </value>
         </entry>
+        <entry key="Build">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="CORS">
           <value>
             <set>
@@ -320,13 +328,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/sys_export_template.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="Config">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/test/GetGitDetails.go" />
             </set>
           </value>
         </entry>
@@ -521,6 +522,20 @@
             </set>
           </value>
         </entry>
+        <entry key="GamService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/service/system/sys_lottery.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GambleRouter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/router/system/sys_lottery.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="GeneralDB">
           <value>
             <set>
@@ -609,22 +624,21 @@
         <entry key="JenkinsJob">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
             </set>
           </value>
         </entry>
         <entry key="JenkinsView">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
             </set>
           </value>
         </entry>
         <entry key="JobConfig">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
-              <option value="file://$PROJECT_DIR$/test/GetGitDetails.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
             </set>
           </value>
         </entry>
@@ -783,6 +797,13 @@
             </set>
           </value>
         </entry>
+        <entry key="OpAdminLink">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/op_adminLink.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="OperationRecordApi">
           <value>
             <set>
@@ -842,7 +863,7 @@
         <entry key="ParameterDefinitions">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
             </set>
           </value>
         </entry>
@@ -950,8 +971,7 @@
         <entry key="SCM">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/task/JenkinsAPI.go" />
-              <option value="file://$PROJECT_DIR$/test/GetGitDetails.go" />
+              <option value="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" />
             </set>
           </value>
         </entry>
@@ -982,6 +1002,7 @@
             <set>
               <option value="file://$PROJECT_DIR$/plugin/email/service/enter.go" />
               <option value="file://$PROJECT_DIR$/service/enter.go" />
+              <option value="file://$PROJECT_DIR$/service/lottery/enter.go" />
               <option value="file://$PROJECT_DIR$/service/system/enter.go" />
             </set>
           </value>
@@ -1217,6 +1238,13 @@
             </set>
           </value>
         </entry>
+        <entry key="SysLottery">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/lottery/gam_lottery.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="SysMenu">
           <value>
             <set>
@@ -1242,6 +1270,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/model/system/request/sys_operation_record.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SysRecord">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/model/lottery/gam_record.go" />
             </set>
           </value>
         </entry>
@@ -1647,7 +1682,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/enter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1714046643644" />
+              <option name="lastModified" value="1720856367799" />
               <option name="schema">
                 <list>
                   <option value="ApiGroup" />
@@ -1656,10 +1691,17 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/jenkins/jenkinsApi.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721289186771" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/api/v1/system/enter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1714046643646" />
+              <option name="lastModified" value="1720694539021" />
               <option name="schema">
                 <list>
                   <option value="ApiGroup" />
@@ -1835,6 +1877,20 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_lottery.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721894181321" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/v1/system/sys_lottery_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1722246957021" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_menu.go">
           <value>
             <ScannedPath>
@@ -1881,7 +1937,7 @@
         <entry key="file://$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720604520441" />
+              <option name="lastModified" value="1722497101195" />
             </ScannedPath>
           </value>
         </entry>
@@ -1938,7 +1994,7 @@
         <entry key="file://$PROJECT_DIR$/config/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718287513306" />
+              <option name="lastModified" value="1721296092035" />
               <option name="schema">
                 <list>
                   <option value="Server" />
@@ -2101,6 +2157,18 @@
                 <list>
                   <option value="Mongo" />
                   <option value="MongoHost" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/op_adminLink.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721296091974" />
+              <option name="schema">
+                <list>
+                  <option value="OpAdminLink" />
                 </list>
               </option>
             </ScannedPath>
@@ -2478,7 +2546,7 @@
         <entry key="file://$PROJECT_DIR$/initialize/router.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720077515917" />
+              <option name="lastModified" value="1721906153429" />
               <option name="schema">
                 <list>
                   <option value="justFilesFilesystem" />
@@ -2634,6 +2702,30 @@
               <option name="schema">
                 <list>
                   <option value="Response" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/lottery/gam_lottery.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721050909670" />
+              <option name="schema">
+                <list>
+                  <option value="SysLottery" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/model/lottery/gam_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721892020545" />
+              <option name="schema">
+                <list>
+                  <option value="SysRecord" />
                 </list>
               </option>
             </ScannedPath>
@@ -3047,6 +3139,24 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/model/system/sys_jenkinsAPI.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721733285464" />
+              <option name="schema">
+                <list>
+                  <option value="JenkinsJob" />
+                  <option value="SCM" />
+                  <option value="Action" />
+                  <option value="ParameterDefinitions" />
+                  <option value="JenkinsView" />
+                  <option value="JobConfig" />
+                  <option value="Build" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/model/system/sys_jwt_blacklist.go">
           <value>
             <ScannedPath>
@@ -3098,7 +3208,7 @@
         <entry key="file://$PROJECT_DIR$/model/system/sys_tg_webhook.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720594319246" />
+              <option name="lastModified" value="1721736088613" />
               <option name="schema">
                 <list>
                   <option value="ReceiveMessage" />
@@ -3315,10 +3425,22 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/router/gamble/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1720856024772" />
+              <option name="schema">
+                <list>
+                  <option value="ApiGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/router/system/enter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720077515880" />
+              <option name="lastModified" value="1720856024702" />
               <option name="schema">
                 <list>
                   <option value="RouterGroup" />
@@ -3495,6 +3617,25 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_lottery.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721903665373" />
+              <option name="schema">
+                <list>
+                  <option value="GambleRouter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/router/system/sys_lottery_record.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721903926221" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/router/system/sys_menu.go">
           <value>
             <ScannedPath>
@@ -3582,7 +3723,19 @@
         <entry key="file://$PROJECT_DIR$/service/enter.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1714046643729" />
+              <option name="lastModified" value="1720694013065" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceGroup" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/service/lottery/enter.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1720854581648" />
               <option name="schema">
                 <list>
                   <option value="ServiceGroup" />
@@ -3867,6 +4020,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/service/system/sys_lottery.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1722246936648" />
+              <option name="schema">
+                <list>
+                  <option value="GamService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/service/system/sys_menu.go">
           <value>
             <ScannedPath>
@@ -4026,17 +4191,14 @@
         <entry key="file://$PROJECT_DIR$/task/JenkinsAPI.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720608379857" />
-              <option name="schema">
-                <list>
-                  <option value="JenkinsJob" />
-                  <option value="SCM" />
-                  <option value="Action" />
-                  <option value="ParameterDefinitions" />
-                  <option value="JenkinsView" />
-                  <option value="JobConfig" />
-                </list>
-              </option>
+              <option name="lastModified" value="1721797181163" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/task/JenkinsCommon.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721720651147" />
             </ScannedPath>
           </value>
         </entry>
@@ -4047,24 +4209,10 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/task/sendMessage.go">
+        <entry key="file://$PROJECT_DIR$/utils/SendMsg.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718641674053" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/GetGitDetails.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1720608394977" />
-              <option name="schema">
-                <list>
-                  <option value="Config" />
-                  <option value="SCM" />
-                  <option value="JobConfig" />
-                </list>
-              </option>
+              <option name="lastModified" value="1721283246445" />
             </ScannedPath>
           </value>
         </entry>
@@ -4246,6 +4394,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1714046643748" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/selenium/selenium.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1722521183427" />
             </ScannedPath>
           </value>
         </entry>
@@ -4446,6 +4601,7 @@
         <entry key="base_claims" value="BaseClaims" />
         <entry key="base_menu_service" value="BaseMenuService" />
         <entry key="base_router" value="BaseRouter" />
+        <entry key="build" value="Build" />
         <entry key="captcha" value="Captcha" />
         <entry key="casbin_api" value="CasbinApi" />
         <entry key="casbin_in_receive" value="CasbinInReceive" />
@@ -4460,7 +4616,6 @@
         <entry key="cloudflare" value="Cloudflare" />
         <entry key="column" value="Column" />
         <entry key="condition" value="Condition" />
-        <entry key="config" value="Config" />
         <entry key="constraint" value="Constraint" />
         <entry key="cors" value="CORS" />
         <entry key="cors_whitelist" value="CORSWhitelist" />
@@ -4492,6 +4647,8 @@
         <entry key="field" value="Field" />
         <entry key="file_rotatelogs" value="fileRotatelogs" />
         <entry key="from" value="From" />
+        <entry key="gam_service" value="GamService" />
+        <entry key="gamble_router" value="GambleRouter" />
         <entry key="general_db" value="GeneralDB" />
         <entry key="get_authority_id" value="GetAuthorityId" />
         <entry key="get_by_id" value="GetById" />
@@ -4543,6 +4700,7 @@
         <entry key="mysql" value="Mysql" />
         <entry key="mysql_init_handler" value="MysqlInitHandler" />
         <entry key="obs" value="Obs" />
+        <entry key="op_admin_link" value="OpAdminLink" />
         <entry key="operation_record_api" value="OperationRecordApi" />
         <entry key="operation_record_router" value="OperationRecordRouter" />
         <entry key="operation_record_service" value="OperationRecordService" />
@@ -4607,10 +4765,12 @@
         <entry key="sys_export_template_router" value="SysExportTemplateRouter" />
         <entry key="sys_export_template_search" value="SysExportTemplateSearch" />
         <entry key="sys_export_template_service" value="SysExportTemplateService" />
+        <entry key="sys_lottery" value="SysLottery" />
         <entry key="sys_menu" value="SysMenu" />
         <entry key="sys_menus_response" value="SysMenusResponse" />
         <entry key="sys_operation_record" value="SysOperationRecord" />
         <entry key="sys_operation_record_search" value="SysOperationRecordSearch" />
+        <entry key="sys_record" value="SysRecord" />
         <entry key="sys_router" value="SysRouter" />
         <entry key="sys_user" value="SysUser" />
         <entry key="sys_user_authority" value="SysUserAuthority" />
@@ -4639,6 +4799,6 @@
         <entry key="zone_id" value="ZoneID" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1720606157936" />
+    <option name="lastTimeChecked" value="1722835549947" />
   </component>
 </project>

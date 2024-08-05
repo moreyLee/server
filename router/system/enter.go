@@ -21,4 +21,5 @@ type RouterGroup struct {
 	TelegramRouter
 	ElasticRouter
 	QingStorRouter
+	GambleRouter
 }

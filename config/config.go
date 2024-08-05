@@ -38,4 +38,6 @@ type Server struct {
 	Cloudflare Cloudflare `mapstructure:"cloudflare" json:"cloudflare" yaml:"cloudflare"`
 	// Jenkins
 	Jenkins Jenkins `mapstructure:"jenkins" json:"jenkins" yaml:"jenkins"`
+	//	Operator AdminApi
+	OpsLink OpAdminLink `mapstructure:"admin-link" json:"admin-link" yaml:"admin-link"`
 }
