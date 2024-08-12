@@ -1,12 +1,16 @@
 package selenium
 
 import (
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
-	"github.com/otiai10/gosseract/v2"
 	"github.com/tebeka/selenium"
 	"image"
 	"image/png"
+	"io"
 	"log"
+	"net/http"
+	"net/url"
 	"os"
 	"time"
 )
@@ -15,14 +19,15 @@ const (
 	adminURL               = "https://web.3333c.vip/"
 	username               = "yunwei"
 	password               = "IRbj2pY27Vm&eMAM"
-	captchaFile            = "D:\\projects\\server\\captcha.png"
-	fullPageScreenshotFile = "D:\\projects\\server\\full_page_screenshot.png"
+	captchaFile            = "/Users/david/Downloads/projects/server/captcha.png"
+	fullPageScreenshotFile = "/Users/david/Downloads/projects/server/full_page_screenshot.png"
+	ApiOCRUrl              = "http://localhost:8000/ocr"
 )
 
 func GetAdminLinkTools() {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
-	service, err := selenium.NewChromeDriverService("D:\\projects\\server\\chromedriver.exe", 4444, opts...)
+	service, err := selenium.NewChromeDriverService("/Users/david/tools/chromedriver", 4444, opts...)
 	if err != nil {
 		log.Printf("ChromeDriver server启动错误: %v", err)
 		return
@@ -55,7 +60,7 @@ func GetAdminLinkTools() {
 	if err := wd.Refresh(); err != nil {
 		panic(err)
 	}
-	time.Sleep(2 * time.Second)
+	time.Sleep(5 * time.Second)
 	// 输入用户名
 	usernameElem, _ := wd.FindElement(selenium.ByID, "username")
 	usernameElem.SendKeys(username)
@@ -78,8 +83,6 @@ func GetAdminLinkTools() {
 		fmt.Printf("Error getting captcha size: %v\n", err)
 		return
 	}
-	captchaUrl, _ := captchaElem.GetAttribute("src")
-	fmt.Printf("验证码图片链接: %s\n", captchaUrl)
 	fmt.Printf("截取验证码的坐标位置:%v\n,\n", loc)
 	// 获取整个页面截图
 	screenshot, err := wd.Screenshot()
@@ -90,8 +93,6 @@ func GetAdminLinkTools() {
 	if err := os.WriteFile(fullPageScreenshotFile, screenshot, 0644); err != nil {
 		log.Fatalf("Error saving the full page screenshot: %v", err)
 	}
-	fmt.Printf("成功截图整个登录页面 %s\n", fullPageScreenshotFile)
-
 	// 打开保存的整个页面截图文件
 	file, err := os.Open(fullPageScreenshotFile)
 	if err != nil {
@@ -114,21 +115,54 @@ func GetAdminLinkTools() {
 		log.Fatalf("保存截取后的验证码图像到文件报错Error: %v", err)
 	}
 	defer captchaOutputFile.Close()
-
 	if err := png.Encode(captchaOutputFile, captchaImg); err != nil {
 		log.Fatalf("验证码图像解码报错Error: %v", err)
 	}
 	fmt.Printf("验证码图像成功保存到文件:%s\n", captchaFile)
-	// 使用 OCR 识别验证码
-	client := gosseract.NewClient()
-	defer client.Close()
-	client.SetImage(captchaFile)
-	captchaText, err := client.Text()
-	if err != nil {
-		fmt.Printf("Error recognizing captcha: %v\n", err)
-		return
-	}
+	// 获取OCR 解析的 验证码
+	captchaCode, _ := GetCaptchaCode()
 
-	fmt.Printf("Recognized captcha text: %s\n", captchaText)
-	//time.Sleep(15 * time.Second)
+	captchaElem, _ = wd.FindElement(selenium.ByID, "captcha")
+	captchaElem.SendKeys(captchaCode)
+	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
+	submitElem.Click()
+
+	time.Sleep(300 * time.Second)
+}
+
+// GetCaptchaCode  获取OCR 解析的验证码
+func GetCaptchaCode() (string, error) {
+	imageData, err := os.ReadFile(captchaFile)
+	if err != nil {
+		panic(err)
+	}
+	base64Image := base64.StdEncoding.EncodeToString(imageData)
+	data := url.Values{}
+	data.Set("image", base64Image)
+	data.Set("probability", "false")
+	data.Set("png_fix", "false")
+	resp, err := http.PostForm(ApiOCRUrl, data)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("验证码json:  " + string(body))
+	// 定义一个结构体或map 来存储解析后的 JSON 数据
+	var result map[string]interface{}
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		panic(err)
+	}
+	// 提取验证码对应的data 字段的值
+	if data, ok := result["data"].(string); ok {
+		fmt.Println("验证码:", data)
+		return data, err
+	} else {
+		fmt.Println("OCR解析验证码错误")
+	}
+	return "获取OCR验证码错误", nil
 }

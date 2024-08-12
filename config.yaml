@@ -77,8 +77,8 @@ mysql:
     config: charset=utf8mb4&parseTime=True&loc=Local
     db-name: cg_devops
     username: root
-    password: Devops%8
-    path: 192.168.217.134
+    password: Devops%588
+    path: localhost
     engine: ""
     log-mode: error
     max-idle-conns: 10
@@ -116,7 +116,7 @@ zap:
     log-in-console: true
 elasticsearch:
   enable: true
-  url: http://192.168.217.142:9200 #http://10.10.182.220:9200
+  url: http://localhost:9200 #http://10.10.182.220:9200
   sniff: false  #将返回的url 作为请求的路径
   healthcheckInterval: 5s
   index-prefix: gva
@@ -128,7 +128,7 @@ telegram:
   url: https://api.telegram.org/bot
   bot-token: 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4 #@CG33333_bot 机器人
   #chat-id: -4275796428 #测试群组 -4275796428   #CG游戏更新发布群 -1001534909056 #未使用
-  webhook-url: https://be02-87-200-210-97.ngrok-free.app/jenkins/telegram-webhook
+  webhook-url: https://f04e-87-200-210-97.ngrok-free.app/jenkins/telegram-webhook
 cloudflare:
   cf-api-login: djpt36@163.com
   global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0

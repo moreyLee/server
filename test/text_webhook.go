@@ -37,8 +37,8 @@ type Update struct {
 }
 
 const (
-	Token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"                      // Replace with your Telegram Bot Token
-	WebhookURL = "https://11f7-94-204-212-107.ngrok-free.app/jenkins/telegram-webhook" // Replace with your webhook URL
+	Token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"                     // Replace with your Telegram Bot Token
+	WebhookURL = "https://7988-87-200-210-97.ngrok-free.app/jenkins/telegram-webhook" // Replace with your webhook URL
 )
 
 func handleUpdate(bot *tgbotapi.BotAPI, update tgbotapi.Update) {

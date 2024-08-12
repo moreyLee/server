@@ -56,3 +56,6 @@
 go get github.com/go-resty/resty/v2 
 ### 删除冲突库
 新增CGO_CFLAGS="" 环境变量参数
+
+修改 telegram webhook   先删除webhook 
+https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/setwebhook?url=https://f04e-87-200-210-97.ngrok-free.app/jenkins/telegram-webhook
