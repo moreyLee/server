@@ -121,6 +121,9 @@ elasticsearch:
   healthcheckInterval: 5s
   index-prefix: gva
 jenkins:
+  testUrl: https://jenkins.qiyinyun.com/    #测试环境
+  testUser: root
+  testToken: 117a9f29e2793cb262426c8fbbb39b27cd
   url: http://jenkins1.3333d.vip/
   user: admin
   api-token: 11d2d3cd4784aa28379905bf13988ad50e

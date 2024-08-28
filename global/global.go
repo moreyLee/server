@@ -53,3 +53,17 @@ func MustGetGlobalDBByDBName(dbname string) *gorm.DB {
 	}
 	return db
 }
+
+// globalMap 定义全局的映射关系 jenkins job 后缀对应的项目job名称后缀
+var globalMap = map[string]string{
+	"后台API":  "_adminapi",
+	"前台API":  "_api",
+	"前台H5":   "_h5",
+	"后台H5":   "_h5admin",
+	"定时任务":   "_quartz",
+	"重启报表":   "/etc/init.d/admin",
+	"重启API":  "/etc/init.d/api",
+	"重启定时任务": "/etc/init.d/quartz",
+	"重启游戏拉单": "/etc/init.d/thirdOrder",
+	"重启机器人":  "systemctl status robot",
+}

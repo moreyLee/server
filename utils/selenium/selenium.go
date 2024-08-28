@@ -17,43 +17,48 @@ import (
 
 const (
 	adminURL               = "https://web.3333c.vip/"
+	cookiesUrl             = "https://web.3333c.vip/#/dashboard"
 	username               = "yunwei"
 	password               = "IRbj2pY27Vm&eMAM"
 	captchaFile            = "/Users/david/Downloads/projects/server/captcha.png"
 	fullPageScreenshotFile = "/Users/david/Downloads/projects/server/full_page_screenshot.png"
 	ApiOCRUrl              = "http://localhost:8000/ocr"
+	cookiesFile            = "/Users/david/Downloads/projects/server/cookies.json"
 )
 
-func GetAdminLinkTools() {
+func GetAdminLinkTools(siteName string) string {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
 	service, err := selenium.NewChromeDriverService("/Users/david/tools/chromedriver", 4444, opts...)
 	if err != nil {
 		log.Printf("ChromeDriver server启动错误: %v", err)
-		return
 	}
 	defer service.Stop()
 	// 配置 Chrome 浏览器选项以无痕模式启动
 	chromeCaps := selenium.Capabilities{
-		"browserName": "chrome",
-		"goog:chromeOptions": map[string]interface{}{
-			"args": []string{
-				"--incognito",
-			},
-		},
+		"browserName": "chrome"}
+	chromeOptions := []string{
+		"--disable-gpu", // 禁用GPU硬件加速
+		"--headless",    // 开启无界面模式
+		"--incognito",   // 无痕模式
+		//"--windows-size=1920,1080,",
+		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
+	}
+	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
+		"args": chromeOptions,
 	}
 	//  最大化浏览器窗口
 	wd, err := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
 	if err != nil {
 		log.Printf("WebDriver 连接失败: %v", err)
-		return
 	}
+
 	err = wd.MaximizeWindow("")
 	defer wd.Quit()
+
 	// 打开管理后台
 	if err := wd.Get(adminURL); err != nil {
 		log.Printf("总后台登录首页打开失败:https://web.3333c.vip : %v", err)
-		return
 	}
 	time.Sleep(3 * time.Second)
 	// 刷新页面
@@ -76,12 +81,10 @@ func GetAdminLinkTools() {
 	loc, err := captchaElem.Location()
 	if err != nil {
 		fmt.Printf("Error getting captcha location: %v\n", err)
-		return
 	}
 	size, err := captchaElem.Size()
 	if err != nil {
 		fmt.Printf("Error getting captcha size: %v\n", err)
-		return
 	}
 	fmt.Printf("截取验证码的坐标位置:%v\n,\n", loc)
 	// 获取整个页面截图
@@ -121,13 +124,48 @@ func GetAdminLinkTools() {
 	fmt.Printf("验证码图像成功保存到文件:%s\n", captchaFile)
 	// 获取OCR 解析的 验证码
 	captchaCode, _ := GetCaptchaCode()
-
 	captchaElem, _ = wd.FindElement(selenium.ByID, "captcha")
 	captchaElem.SendKeys(captchaCode)
+	// 点击登录按钮
 	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
 	submitElem.Click()
+	time.Sleep(5 * time.Second)
 
-	time.Sleep(300 * time.Second)
+	//  点击 租户管理
+	rentAdminElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/aside[1]/div/div/ul/li[1]/div")
+	rentAdminElem.Click()
+	time.Sleep(1 * time.Second)
+	// 点击 站点管理
+	siteAdminElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"/merchants$Menu\"]/li[1]/a")
+	siteAdminElem.Click()
+	time.Sleep(10 * time.Second)
+	// 点击 没有权限 弹窗
+	IknowElem, _ := wd.FindElement(selenium.ByCSSSelector, ".ant-modal-confirm-btns")
+	IknowElem.Click()
+	// 输入 站点名称
+	siteNameElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[1]/div[1]/div/span/span/span[2]/input")
+	siteNameElem.SendKeys(siteName)
+	time.Sleep(1 * time.Second)
+	// 点击 搜索按钮
+	searchElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[1]/div[7]/button")
+	searchElem.Click()
+	time.Sleep(2 * time.Second)
+	//进入站点  需要加载稍慢
+	enterSiteElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[12]/div/div[1]/button[1]")
+	enterSiteElem.Click()
+	time.Sleep(10 * time.Second)
+	// 获取站点地址链接
+	handles, _ := wd.WindowHandles() // 获取当前所有窗口句柄
+	// 点击打开一个新窗口 切换到新窗口
+	if len(handles) > 1 {
+		newWindowHandle := handles[len(handles)-1]
+		wd.SwitchWindow(newWindowHandle)
+	}
+	// 获取 新打开页面的站点url
+	siteLink, _ := wd.CurrentURL()
+	fmt.Println(siteName+"站点地址: ", siteLink)
+	fmt.Println()
+	return siteLink
 }
 
 // GetCaptchaCode  获取OCR 解析的验证码
@@ -165,4 +203,49 @@ func GetCaptchaCode() (string, error) {
 		fmt.Println("OCR解析验证码错误")
 	}
 	return "获取OCR验证码错误", nil
+}
+
+// GetLinkNoLogin 基于cookie 模式免登录 获取后台链接地址
+func GetLinkNoLogin(siteName string) string {
+	var opts []selenium.ServiceOption
+	selenium.SetDebug(true)
+	service, err := selenium.NewChromeDriverService("/Users/david/tools/chromedriver", 4444, opts...)
+	if err != nil {
+		log.Printf("ChromeDriver server启动错误: %v", err)
+	}
+	defer service.Stop()
+	// 配置 Chrome 浏览器选项以无痕模式启动
+	chromeCaps := selenium.Capabilities{
+		"browserName": "chrome"}
+	chromeOptions := []string{
+		"--disable-gpu", // 禁用GPU硬件加速
+		//"--headless",    // 启用无界面模式
+		"--no-sandbox", // 禁用沙箱命令解决浏览器崩溃问题
+		//"--incognito",             // 无痕模式
+		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
+		"user-data-dir=/Users/david/Library/Application Support/Google/Chrome",
+	}
+	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
+		"args": chromeOptions,
+	}
+	//  最大化浏览器窗口
+	wd, err := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
+	if err != nil {
+		log.Printf("WebDriver 连接失败: %v", err)
+	}
+
+	//err = wd.MaximizeWindow("")
+	defer wd.Quit()
+	// 打开目标网站
+
+	if err := wd.Get(cookiesUrl); err != nil {
+		log.Printf("总后台登录首页打开失败: %v"+cookiesUrl, err)
+	}
+
+	// 获取所有cookies
+	//cookies, _ := wd.GetCookies()
+	// 将cookies 序列化 JSON 并保存到文件
+	//cookiesJSON, _ := json.Marshal(cookies)
+	//os.WriteFile(cookiesFile, cookiesJSON, 0644)
+	return "已写入" + siteName
 }

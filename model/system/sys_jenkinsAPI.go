@@ -3,10 +3,16 @@ package system
 import "encoding/xml"
 
 type JenkinsJob struct {
-	Actions   []Action `json:"actions"`
-	LastBuild Build    `json:"lastBuild"`
-	Name      string   `json:"name"`
-	Builds    []Build  `json:"builds"`
+	Actions   []Action   `json:"actions"`
+	LastBuild Build      `json:"lastBuild"`
+	Name      string     `json:"name"`
+	Builds    []Build    `json:"builds"`
+	Property  []Property `json:"property"`
+}
+
+type Property struct {
+	Class                string                `json:"_class,omitempty"`
+	ParameterDefinitions []ParameterDefinition `json:"parameterDefinitions,omitempty"`
 }
 
 // SCM 结构体用于存储 SCM 配置信息
@@ -17,14 +23,29 @@ type SCM struct {
 	} `xml:"userRemoteConfigs"`
 	Branches []string `xml:"branches>hudson.plugins.git.BranchSpec>name"`
 }
+
 type Action struct {
+	Class                string                 ``
 	ParameterDefinitions []ParameterDefinitions `json:"parameterDefinitions"`
 }
+
 type ParameterDefinitions struct {
 	Name                  string `json:"name"`
 	DefaultParameterValue struct {
 		Value interface{} `json:"value"`
 	} `json:"defaultParameterValue"`
+}
+type ParameterDefinition struct {
+	Class                 string         `json:"_class"`
+	DefaultParameterValue ParameterValue `json:"defaultParameterValue"`
+	Description           string         `json:"description"`
+	Name                  string         `json:"name"`
+	Type                  string         `json:"type"`
+}
+type ParameterValue struct {
+	Class string `json:"_class"`
+	Name  string `json:"name"`
+	Value string `json:"value"`
 }
 
 // JenkinsView represents a Jenkins view

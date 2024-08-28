@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	system2 "github.com/flipped-aurora/gin-vue-admin/server/service/system"
 	"go.uber.org/zap"
 	"io"
 	"log"
@@ -17,18 +18,32 @@ import (
 	"time"
 )
 
-// GetBuildJobParam 获取JobName构建参数
-func GetBuildJobParam(JobName string) map[interface{}]interface{} {
-	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "job/" + JobName + "/api/json?pretty=true"
+// GetBuildJobParam 获取JobName构建参数  根据参数选择环境
+func GetBuildJobParam(JobName string, isProduction bool) map[interface{}]interface{} {
+	fmt.Printf("是否调用")
+	// 根据 isProduction 参数选择URL
+	var baseUrl, user, token string
+	if isProduction {
+		baseUrl = global.GVA_CONFIG.Jenkins.Url
+		user = global.GVA_CONFIG.Jenkins.User
+		token = global.GVA_CONFIG.Jenkins.ApiToken
+		fmt.Printf("生产url: " + baseUrl)
+	} else {
+		baseUrl = global.GVA_CONFIG.Jenkins.TestUrl
+		user = global.GVA_CONFIG.Jenkins.TestUser
+		token = global.GVA_CONFIG.Jenkins.TestToken
+		fmt.Printf("测试url " + baseUrl)
+	}
+	Url := baseUrl + "job/" + JobName + "/api/json?pretty=true"
+	fmt.Println("合成的Url: " + Url)
 	// 定义一个map  用于保存获取的构建参数
-	params := make(map[interface{}]interface{})
-	req, err := http.NewRequest("GET", jenkinsUrl, nil)
+	//params := make(map[interface{}]interface{})
+	req, err := http.NewRequest("GET", Url, nil)
 	if err != nil {
-		global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
+		global.GVA_LOG.Error("创建GET请求失败:", zap.Error(err))
 	}
 	// 设置Auth Basic Auth  user &token
-	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
-
+	req.SetBasicAuth(user, token)
 	// 创建GET请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
@@ -44,16 +59,35 @@ func GetBuildJobParam(JobName string) map[interface{}]interface{} {
 	}(resp.Body)
 	// 读取响应体
 	body, err := io.ReadAll(resp.Body)
-	//fmt.Printf(string(body))  // 输出响应体
-	// 解析json 响应
+	//fmt.Printf(string(body)) // 输出响应体
+	return parseJenkinsJobParams(body) // 解析 JSON 数据
+}
+
+// parseJenkinsJobParams  解析 jenkins Job 的参数
+func parseJenkinsJobParams(body []byte) map[interface{}]interface{} {
+	// 定义一个 map 用于保存解析结果
+	params := make(map[interface{}]interface{})
+	// 解析 JSON 响应  结构体
 	var job system.JenkinsJob
-	err = json.Unmarshal(body, &job)
-	// 输出构建参数的名称和值
+	err := json.Unmarshal(body, &job)
+	if err != nil {
+		global.GVA_LOG.Error("解析 JSON 失败:", zap.Error(err))
+		return params
+	}
+	// 处理 Actions 中的参数定义
 	for _, action := range job.Actions {
 		for _, param := range action.ParameterDefinitions {
 			// 构建参数赋值给 params map
 			params[param.Name] = param.DefaultParameterValue.Value
-			//fmt.Printf("参数名称: %s, 默认值:  %v\n", param.Name, param.DefaultParameterValue.Value)
+			fmt.Printf("参数名称: %s, 默认值:  %v\n", param.Name, param.DefaultParameterValue.Value)
+		}
+	}
+	// 处理 Property 中参数定义
+	for _, property := range job.Property {
+		for _, param := range property.ParameterDefinitions {
+			// 构建参数写入map 中
+			params[param.Name] = param.DefaultParameterValue.Value
+			//fmt.Printf(" key: %s,  value: %v\n", param.Name, param.DefaultParameterValue.Value)
 		}
 	}
 	return params
@@ -133,7 +167,6 @@ func GetBranch(ViewName string, JobName string) *system.JobConfig {
 	body, err := io.ReadAll(resp.Body)
 	bodyStr := strings.Replace(string(body), `<?xml version='1.1' encoding='UTF-8'?>`, `<?xml version='1.0' encoding='UTF-8'?>`, -1)
 	bodyStr = strings.Replace(bodyStr, `<?xml version="1.1" encoding="UTF-8"?>`, `<?xml version="1.0" encoding="UTF-8"?>`, -1)
-	//bodyStr := strings.Replace(string(body), `<?xml version='1.1' encoding='UTF-8'?>`, `<?xml version='1.0' encoding='UTF-8'?>`, 1)
 
 	// 解析xml 响应
 	var jobConfig system.JobConfig
@@ -179,23 +212,22 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 			global.GVA_LOG.Error("无效的jenkins URL:\n", zap.Error(err))
 		}
 		// 获取构建参数 params为map类型
-		params := GetBuildJobParam(Name)
+		params := GetBuildJobParam(Name, true)
 		if len(params) == 0 {
 			JenkinsBuildJob(ViewName, Name)
 			return
 		}
-		// 表单数据 将获取的参数转换为表单数据
+		// 表单数据 将获取的参数转换 表单数据
 		data := url.Values{}
 		for key, value := range params {
 			fmt.Printf("参数名称: %s, 默认值: %v\n", key, value)
-			//}
 			req, err := http.NewRequest("POST", jenkinsUrl, bytes.NewBufferString(data.Encode()))
 			if err != nil {
 				global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
 			}
-			//设置Auth Basic Auth
+			// 设置Auth Basic Auth
 			req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
-			//发送post请求并获取响应
+			// 发送post请求并获取响应
 			client := http.Client{Timeout: 5 * time.Second}
 			resp, err := client.Do(req)
 			if err != nil {
@@ -211,7 +243,6 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 		}
 	} else {
 		log.Printf("未找到构建任务名")
-		//system.SendMsg()
 		return // 返回不在执行后续
 	}
 }
@@ -314,4 +345,45 @@ func GetLastBuildStatus(ViewName string, JobName string) (system.Build, error) {
 	}
 	// 返回最近的构建
 	return build, nil
+}
+
+// ManageService 测试环境 重启应用服务 参数 站点名称 环境参数  命令映射
+func ManageService(siteName string, EnvName string, command string) {
+	type OrderedMap struct {
+		Keys   []string
+		Values map[string]interface{}
+	}
+	if siteName == "" {
+		log.Printf("站点信息为空")
+	}
+	jobName := "exec_command"
+	server := "csapi"
+	// 获取测试环境执行命令job的参数   false 表示测试环境
+	params := GetBuildJobParam(jobName, false)
+	fmt.Printf("jenkins 参数 parms: %v\n", params)
+	// 从数据库中获取站点信息 参数入参  站点名称 或 站点ID   返回值 站点名称对应的一条记录
+	var siteConfig system.YzSiteConfig
+	siteConfig.SiteName = siteName
+	// 创建 TgService 实例
+	tgService := system2.TgService{}
+	err := tgService.SelectBySiteName(&siteConfig)
+	if err != nil {
+		log.Printf("查询数据为空")
+	}
+	fmt.Printf("对象 %v\n", siteConfig)
+	siteID := siteConfig.SiteID
+	siteName = siteConfig.SiteName
+	siteDomain := siteConfig.Domains
+	beginTime := siteConfig.BeginTime
+	fmt.Printf("站点ID: %v\n站点名称: %v\n开站时间: %v\n建站时间: %v\n", siteID, siteName, siteDomain, beginTime)
+	// 创建表单数据 数据库的值 赋值给 jenkins
+	data := url.Values{} // 用于处理查询jenkins URL参数或表单数据
+	for key, value := range params {
+		data.Set(key.(string), value.(string))
+	}
+	fmt.Printf("Jenkins赋值给表单data%v\n", data)
+	data["site_id"] = []string{strconv.Itoa(int(siteID))}
+	data["site"] = []string{siteName}
+	data["server"] = []string{server}
+	fmt.Printf("jenkins修改后%v\n", data)
 }
