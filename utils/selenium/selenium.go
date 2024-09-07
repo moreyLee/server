@@ -17,7 +17,7 @@ import (
 
 const (
 	adminURL               = "https://web.3333c.vip/"
-	cookiesUrl             = "https://web.3333c.vip/#/dashboard"
+	cookiesUrl             = "https://api.3333c.vip/admin/site/config/site/login?siteId=2209" //https://web.3333c.vip/#/site/index" //"https://web.3333c.vip/#/dashboard"
 	username               = "yunwei"
 	password               = "IRbj2pY27Vm&eMAM"
 	captchaFile            = "/Users/david/Downloads/projects/server/captcha.png"
@@ -219,11 +219,10 @@ func GetLinkNoLogin(siteName string) string {
 		"browserName": "chrome"}
 	chromeOptions := []string{
 		"--disable-gpu", // 禁用GPU硬件加速
-		//"--headless",    // 启用无界面模式
-		"--no-sandbox", // 禁用沙箱命令解决浏览器崩溃问题
-		//"--incognito",             // 无痕模式
+		//"--headless",    // 开启无界面模式
+		//"--incognito", // 无痕模式
+		//"--windows-size=1920,1080,",
 		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
-		"user-data-dir=/Users/david/Library/Application Support/Google/Chrome",
 	}
 	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
 		"args": chromeOptions,
@@ -234,18 +233,42 @@ func GetLinkNoLogin(siteName string) string {
 		log.Printf("WebDriver 连接失败: %v", err)
 	}
 
-	//err = wd.MaximizeWindow("")
+	err = wd.MaximizeWindow("")
 	defer wd.Quit()
-	// 打开目标网站
 
-	if err := wd.Get(cookiesUrl); err != nil {
-		log.Printf("总后台登录首页打开失败: %v"+cookiesUrl, err)
+	// 打开管理后台
+	if err := wd.Get(adminURL); err != nil {
+		log.Printf("总后台登录首页打开失败:https://web.3333c.vip : %v", err)
 	}
-
-	// 获取所有cookies
-	//cookies, _ := wd.GetCookies()
+	// 刷新页面
+	if err := wd.Refresh(); err != nil {
+		panic(err)
+	}
+	time.Sleep(5 * time.Second)
+	// 输入用户名
+	usernameElem, _ := wd.FindElement(selenium.ByID, "username")
+	usernameElem.SendKeys(username)
+	// 输入密码
+	passwordElem, _ := wd.FindElement(selenium.ByID, "password")
+	passwordElem.SendKeys(password)
+	// 等待60秒 输入验证码
+	time.Sleep(40 * time.Second)
+	// 登录
+	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
+	submitElem.Click()
+	time.Sleep(30 * time.Second)
+	// 获取登录后的所有cookies
+	cookies, _ := wd.GetCookies()
 	// 将cookies 序列化 JSON 并保存到文件
-	//cookiesJSON, _ := json.Marshal(cookies)
-	//os.WriteFile(cookiesFile, cookiesJSON, 0644)
-	return "已写入" + siteName
+	cookiesJSON, _ := json.Marshal(cookies)
+	os.WriteFile(cookiesFile, cookiesJSON, 0644)
+	// 打印获取的Cookies
+	if len(cookies) == 0 {
+		fmt.Println("没有cookies")
+	} else {
+		for _, cookie := range cookies {
+			fmt.Println(cookie.Name, cookie.Value)
+		}
+	}
+	return "cookies" + cookies[0].Name
 }

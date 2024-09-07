@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="selenium实现总后台登录">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cookies.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/system/sys_yz_site_config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/system/sys_tgwebhook.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/execCMD.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/tgwebhook/sendfile.go" afterDir="false" />
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="待实现获取cookies。。。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captcha.png" beforeDir="false" afterPath="$PROJECT_DIR$/captcha.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/jenkins.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/jenkins.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/full_page_screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global/global.go" beforeDir="false" afterPath="$PROJECT_DIR$/global/global.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/system/sys_domain.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_domain.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_jenkinsAPI.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/GetsiteInfo.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/specUserTrigerBot.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/selenium/selenium.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -228,7 +214,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="dd" />
     <MESSAGE value="新增域名" />
     <MESSAGE value="域名跳转" />
     <MESSAGE value="增加ElasticSearch模块" />
@@ -253,7 +238,8 @@
     <MESSAGE value="获取git分支" />
     <MESSAGE value="验证码识别真是日了狗了" />
     <MESSAGE value="selenium实现总后台登录" />
-    <option name="LAST_COMMIT_MESSAGE" value="selenium实现总后台登录" />
+    <MESSAGE value="待实现获取cookies。。。" />
+    <option name="LAST_COMMIT_MESSAGE" value="待实现获取cookies。。。" />
   </component>
   <component name="VgoProject">
     <environment>

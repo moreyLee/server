@@ -31,10 +31,10 @@ func BuildJobsWithText(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 			jkBuild.ViewName = params[1]
 			jkBuild.JobName = params[2]
 			if params[3] == "更新" {
-				if webhook.Message.From.UserName == "David5886" || webhook.Message.From.UserName == "@zero666_777" || webhook.Message.From.UserName == "sweet" {
+				if webhook.Message.From.UserName == "David5886" || webhook.Message.From.UserName == "tank9999999" {
 					//log.Printf("触发的用户:%s", username)
-					task.JenkinsBuildJob(jkBuild.ViewName, jkBuild.JobName) // 包网
-					task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName)
+					//task.JenkinsBuildJob(jkBuild.ViewName, jkBuild.JobName)         // 包网 无参数构建
+					task.JenkinsBuildJobWithView(jkBuild.ViewName, jkBuild.JobName) // 有参数构建
 					replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "构建任务已触发:  "+jkBuild.ViewName+" "+jkBuild.JobName+" 正在构建中...30秒后获取构建状态")
 					replyText.ReplyToMessageID = webhook.Message.MessageID
 					_, _ = bot.Send(replyText)
@@ -111,11 +111,6 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 			}
 			if params[3] == "后台地址" {
 				go func() {
-					siteLink := selenium.GetLinkNoLogin(siteName)
-					message := siteName + "站点地址: " + siteLink
-					replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
-					replyText.ReplyToMessageID = webhook.Message.MessageID
-					_, _ = bot.Send(replyText)
 					defer func() {
 						if err := recover(); err != nil {
 							message := siteName + "异常"
@@ -124,6 +119,11 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 							_, _ = bot.Send(replyText)
 						}
 					}()
+					siteLink := selenium.GetLinkNoLogin(siteName)
+					message := siteName + "站点地址: " + siteLink
+					replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
+					replyText.ReplyToMessageID = webhook.Message.MessageID
+					_, _ = bot.Send(replyText)
 				}()
 			}
 		}

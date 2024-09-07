@@ -125,7 +125,7 @@ func GetExtName(ViewName string) string {
 	err = json.Unmarshal(body, &jenkinsView)
 	firstJob := jenkinsView.Jobs[0]
 	//params[firstJob.Name] = firstJob.Name
-	//fmt.Printf("%s", firstJob.Name)
+	fmt.Printf("%s", firstJob.Name)
 	extName := strings.SplitN(firstJob.Name, "_", 2)[0]
 	return extName
 }
