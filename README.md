@@ -52,10 +52,5 @@
 | `--timer` | timer | 定时器接口封装 |
 | `--upload`      | oss                  | oss接口封装        |
 
-### http client 库 
-go get github.com/go-resty/resty/v2 
-### 删除冲突库
-新增CGO_CFLAGS="" 环境变量参数
-111ff776c81fe02d30699a285676f3c30c
-修改 telegram webhook   先删除webhook 
-https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/setwebhook?url=https://f04e-87-200-210-97.ngrok-free.app/jenkins/telegram-webhook
+查看mysql 活动连接数
+SHOW STATUS WHERE `variable_name` = 'Threads_connected';

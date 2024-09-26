@@ -131,7 +131,7 @@ telegram:
   url: https://api.telegram.org/bot
   bot-token: 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4 #@CG33333_bot 机器人
   #chat-id: -4275796428 #测试群组 -4275796428   #CG游戏更新发布群 -1001534909056 #未使用
-  webhook-url: https://f04e-87-200-210-97.ngrok-free.app/jenkins/telegram-webhook
+  webhook-url: https://3f57-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook
 cloudflare:
   cf-api-login: djpt36@163.com
   global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0

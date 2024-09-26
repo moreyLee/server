@@ -4,6 +4,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	modelSystem "github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	system2 "github.com/flipped-aurora/gin-vue-admin/server/service/system"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/tebeka/selenium"
 	"image"
 	"image/png"
@@ -20,16 +23,24 @@ const (
 	cookiesUrl             = "https://api.3333c.vip/admin/site/config/site/login?siteId=2209" //https://web.3333c.vip/#/site/index" //"https://web.3333c.vip/#/dashboard"
 	username               = "yunwei"
 	password               = "IRbj2pY27Vm&eMAM"
-	captchaFile            = "/Users/david/Downloads/projects/server/captcha.png"
-	fullPageScreenshotFile = "/Users/david/Downloads/projects/server/full_page_screenshot.png"
+	captchaFile            = "./code.png"
+	fullPageScreenshotFile = "./full_page_screenshot.png"
 	ApiOCRUrl              = "http://localhost:8000/ocr"
-	cookiesFile            = "/Users/david/Downloads/projects/server/cookies.json"
+	chromedriver           = "/Users/david/tools/chromedriver"
 )
 
+// ReplyWithMessage 全局引用 用于小飞机发送消息
+func ReplyWithMessage(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, message string) {
+	replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
+	replyText.ReplyToMessageID = webhook.Message.MessageID
+	_, _ = bot.Send(replyText)
+}
+
+// GetAdminLinkTools 登录后获取链接地址
 func GetAdminLinkTools(siteName string) string {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
-	service, err := selenium.NewChromeDriverService("/Users/david/tools/chromedriver", 4444, opts...)
+	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
 	if err != nil {
 		log.Printf("ChromeDriver server启动错误: %v", err)
 	}
@@ -205,11 +216,11 @@ func GetCaptchaCode() (string, error) {
 	return "获取OCR验证码错误", nil
 }
 
-// GetLinkNoLogin 基于cookie 模式免登录 获取后台链接地址
-func GetLinkNoLogin(siteName string) string {
+// AdminLoginSaveToken 基于token 模式免登录 获取后台链接地址
+func AdminLoginSaveToken(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest) string {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
-	service, err := selenium.NewChromeDriverService("/Users/david/tools/chromedriver", 4444, opts...)
+	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
 	if err != nil {
 		log.Printf("ChromeDriver server启动错误: %v", err)
 	}
@@ -219,6 +230,7 @@ func GetLinkNoLogin(siteName string) string {
 		"browserName": "chrome"}
 	chromeOptions := []string{
 		"--disable-gpu", // 禁用GPU硬件加速
+		"--no-sandbox",
 		//"--headless",    // 开启无界面模式
 		//"--incognito", // 无痕模式
 		//"--windows-size=1920,1080,",
@@ -251,24 +263,121 @@ func GetLinkNoLogin(siteName string) string {
 	// 输入密码
 	passwordElem, _ := wd.FindElement(selenium.ByID, "password")
 	passwordElem.SendKeys(password)
-	// 等待60秒 输入验证码
-	time.Sleep(40 * time.Second)
+	// 等待60秒 手动输入验证码
+	time.Sleep(10 * time.Second)
 	// 登录
 	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
 	submitElem.Click()
-	time.Sleep(30 * time.Second)
-	// 获取登录后的所有cookies
-	cookies, _ := wd.GetCookies()
-	// 将cookies 序列化 JSON 并保存到文件
-	cookiesJSON, _ := json.Marshal(cookies)
-	os.WriteFile(cookiesFile, cookiesJSON, 0644)
-	// 打印获取的Cookies
-	if len(cookies) == 0 {
-		fmt.Println("没有cookies")
-	} else {
-		for _, cookie := range cookies {
-			fmt.Println(cookie.Name, cookie.Value)
-		}
+	time.Sleep(15 * time.Second)
+	// 登录成功后  检查当前url  确认是否成功
+	currentURL, _ := wd.CurrentURL()
+	fmt.Printf("当前页面URL:%s\n", currentURL)
+	// 使用 js 获取 local Storage 中的值
+	token, _ := wd.ExecuteScript("return window.localStorage.getItem('token');", nil)
+	fmt.Printf("token值%s\n", token)
+	//
+	// 将登录后的token 保存到数据库
+	tgService := system2.TgService{}
+	err = tgService.SaveAdminLoginToken(token.(string))
+	if err != nil {
+		ReplyWithMessage(bot, webhook, "写入数据库报错:\n"+err.Error())
 	}
-	return "cookies" + cookies[0].Name
+	// 打开一个新的标签页 并导航到新地址
+	newTitle := "window.open('https://web.3333c.vip/#/site/index', '_blank');"
+	wd.ExecuteScript(newTitle, nil)
+	// 切换到新打开的标签页
+	handles, _ := wd.WindowHandles()
+	// 切换到新打开的标签页
+	if len(handles) > 1 {
+		wd.SwitchWindow(handles[len(handles)-1])
+	}
+	time.Sleep(60 * time.Second)
+	return token.(string)
+}
+
+// GetLinkNoLogin 免登录 获取后台链接地址
+func GetLinkNoLogin() string {
+	var opts []selenium.ServiceOption
+	selenium.SetDebug(true)
+	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
+	if err != nil {
+		log.Printf("ChromeDriver server启动错误: %v", err)
+	}
+	defer service.Stop()
+	// 配置 Chrome 浏览器选项
+	chromeCaps := selenium.Capabilities{
+		"browserName": "chrome"}
+	chromeOptions := []string{
+		"--disable-gpu", // 禁用GPU硬件加速
+		"--no-sandbox",
+		//"--headless",    // 开启无界面模式
+		//"--incognito", // 无痕模式
+		//"--windows-size=1920,1080,",
+		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
+		//"--user-data-dir=/Users/david/Library/Application Support/Google/Chrome",
+	}
+
+	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
+		"args": chromeOptions,
+	}
+	//  最大化浏览器窗口
+	wd, _ := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
+	err = wd.MaximizeWindow("")
+	defer wd.Quit()
+	// 打开目标网页
+	wd.Get("https://web.3333c.vip/#/site/index")
+	time.Sleep(5 * time.Second)
+	wd.Refresh()
+
+	// 创建一个新的cookie
+	tokenstr := "ab60b1a668c8caeeef41f25691a79694"
+	cookie := &selenium.Cookie{Name: "HTTP_TOKEN", Value: tokenstr, Path: "/"}
+
+	// 将token 添加到cookies 中
+	if err := wd.AddCookie(cookie); err != nil {
+		panic(err)
+	}
+	// 刷新页面 让cookies 生效
+	time.Sleep(10 * time.Second)
+	if err := wd.Refresh(); err != nil {
+		panic(err)
+	}
+	// 查询数据库获取登录token
+	tgService := system2.TgService{}
+	token, err := tgService.GetAdminLoginToken() // 返回的类型为对象
+	fmt.Printf("获取数据库的token%v 报错信息:%v\n", token, err)
+	fmt.Printf("数据库httpToken值: %v\n", token.HttpToken)
+	// 使用 js 获取 local Storage 中的值
+	//nologintoken, _ := wd.ExecuteScript("return window.localStorage.getItem('token');", nil)
+	//fmt.Printf("登录前的token值%s\n", nologintoken)
+	// 将 Token 写入Local Storage
+	//script := fmt.Sprintf("window.localStorage.setItem('token', '%s');", token.HttpToken)
+	//fmt.Println("script执行情况:  ", script)
+	//_, err = wd.ExecuteScript(script, nil)
+	//if err != nil {
+	//	fmt.Println("设置local Storage 报错", err)
+	//}
+	//tokenstr, ok := token.HttpToken.(string)
+	//_, err = wd.ExecuteScript(`window.localStorage.setItem('token', arguments[0]);`, []interface{}{token.HttpToken})
+	//fmt.Printf("写入浏览器的token%v\n", []interface{}{token.HttpToken})
+	//if err != nil {
+	//	log.Fatalf("设置token 到localStorage 报错:%v", err)
+	//}
+	// 打开一个新的标签页 并导航到新地址
+	//newTitle := "window.open('https://web.3333c.vip/#/site/index', '_blank');"
+	//wd.ExecuteScript(newTitle, nil)
+	// 切换到新打开的标签页
+	//handles, _ := wd.WindowHandles()
+	// 切换到新打开的标签页
+	//if len(handles) > 1 {
+	//	wd.SwitchWindow(handles[len(handles)-1])
+	//}
+	//time.Sleep(15 * time.Second)
+	// 刷新页面 已使token生效 验证免登录
+	//wd.Refresh()
+	time.Sleep(900 * time.Second)
+	// 访问目标页面 验证免登录
+	//wd.Get("https://web.3333c.vip/#/site/index")
+	//time.Sleep(3600 * time.Second)
+	return token.HttpToken
 }

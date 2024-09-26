@@ -6,8 +6,9 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	modelSystem "github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	system2 "github.com/flipped-aurora/gin-vue-admin/server/service/system"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"go.uber.org/zap"
 	"io"
 	"log"
@@ -17,6 +18,13 @@ import (
 	"strings"
 	"time"
 )
+
+// ReplyWithMessage 全局引用 用于小飞机发送消息
+func ReplyWithMessage(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, message string) {
+	replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
+	replyText.ReplyToMessageID = webhook.Message.MessageID
+	_, _ = bot.Send(replyText)
+}
 
 // GetBuildJobParam 获取JobName构建参数  根据参数选择环境
 func GetBuildJobParam(JobName string, isProduction bool) map[interface{}]interface{} {
@@ -68,7 +76,7 @@ func parseJenkinsJobParams(body []byte) map[interface{}]interface{} {
 	// 定义一个 map 用于保存解析结果
 	params := make(map[interface{}]interface{})
 	// 解析 JSON 响应  结构体
-	var job system.JenkinsJob
+	var job modelSystem.JenkinsJob
 	err := json.Unmarshal(body, &job)
 	if err != nil {
 		global.GVA_LOG.Error("解析 JSON 失败:", zap.Error(err))
@@ -121,17 +129,23 @@ func GetExtName(ViewName string) string {
 	body, err := io.ReadAll(resp.Body)
 	//fmt.Printf(string(body)) // 输出响应体
 	// 解析json 响应
-	var jenkinsView system.JenkinsView
+	var jenkinsView modelSystem.JenkinsView
 	err = json.Unmarshal(body, &jenkinsView)
+	// 检查 Jobs 是否为空
+	if len(jenkinsView.Jobs) == 0 {
+		global.GVA_LOG.Error("Jenkins 视图中没有任何任务")
+		return ""
+	}
+	// 获取任务名前缀
 	firstJob := jenkinsView.Jobs[0]
-	//params[firstJob.Name] = firstJob.Name
-	fmt.Printf("%s", firstJob.Name)
+	fmt.Printf("拼接后的名字%s", firstJob.Name)
 	extName := strings.SplitN(firstJob.Name, "_", 2)[0]
+	fmt.Printf("后缀名%s", extName)
 	return extName
 }
 
 // GetBranch  获取jenkins git仓库和代码分支
-func GetBranch(ViewName string, JobName string) *system.JobConfig {
+func GetBranch(ViewName string, JobName string) *modelSystem.JobConfig {
 	if JobName == "" || ViewName == "" {
 		log.Printf("视图名和任务名不能为空")
 	}
@@ -169,7 +183,7 @@ func GetBranch(ViewName string, JobName string) *system.JobConfig {
 	bodyStr = strings.Replace(bodyStr, `<?xml version="1.1" encoding="UTF-8"?>`, `<?xml version="1.0" encoding="UTF-8"?>`, -1)
 
 	// 解析xml 响应
-	var jobConfig system.JobConfig
+	var jobConfig modelSystem.JobConfig
 	if err := xml.Unmarshal([]byte(bodyStr), &jobConfig); err != nil {
 		global.GVA_LOG.Error("解析xml响应失败:", zap.Error(err))
 	}
@@ -178,10 +192,33 @@ func GetBranch(ViewName string, JobName string) *system.JobConfig {
 }
 
 // JenkinsBuildJobWithView 有参数构建 根据视图名构建
-func JenkinsBuildJobWithView(ViewName string, JobName string) {
+func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string, done chan bool) {
+	defer func() {
+		close(done) // 确保协程结束后关闭通道
+	}()
 	if JobName == "" || ViewName == "" {
-		log.Printf("视图名和任务名不能为空")
+		ReplyWithMessage(bot, webhook, "视图名或任务名不能为空")
+		done <- false // 通知失败
+		return
 	}
+	// 获取Jenkins 的视图列表
+	views := GetJenkinsViews()
+	viewExists := false
+	for _, view := range views {
+		if view.Name == ViewName {
+			fmt.Printf("%s\n", view.Name)
+			viewExists = true
+			break
+		}
+	}
+	// 如果视图不存在，发送消息并退出
+	if !viewExists {
+		ReplyWithMessage(bot, webhook, ViewName+"站点不存在，构建失败，请检查站点名称")
+		log.Printf("视图名: %s Jenkins中不存在\n", ViewName)
+		done <- false // 管道通知任务失败
+		return
+	}
+	ReplyWithMessage(bot, webhook, ViewName+" "+JobName+" 已触发构建，请稍等... ")
 	var extensionMap = map[string]string{
 		"后台API": "_adminapi",
 		"前台API": "_api",
@@ -194,56 +231,65 @@ func JenkinsBuildJobWithView(ViewName string, JobName string) {
 	log.Printf("映射名称来源: " + JobName)
 	// 使用不区分大小写的映射Map
 	extName, exists := getCaseInsensitiveValue(caseInsensitiveMap, JobName)
-	if exists {
-		// 获取前缀名称
-		preName := GetExtName(ViewName)
-		// 映射完 合成jobName名称
-		Name := preName + extName
-		log.Printf("Name: %s", Name)
-		// 判断视图名和任务名是否存在
-		//views := GetJenkinsViews()
-		//for view := range views {
-		//	fmt.Printf("视图%s\n", views[view].Name)
-		//}
-		jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/buildWithParameters"
-		// 判断一下 jenkins URL 是否有效
-		_, err := url.ParseRequestURI(jenkinsUrl)
+	if !exists {
+		ReplyWithMessage(bot, webhook, "未找到构建任务名！")
+		done <- false
+		return
+	}
+	// 获取Job 前缀名称
+	preName := GetExtName(ViewName)
+	// 映射完 合成jobName名称
+	Name := preName + extName
+	log.Printf("映射后的任务名Name: %s", Name)
+
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/buildWithParameters"
+	// 判断一下 jenkins URL 是否有效
+	_, err := url.ParseRequestURI(jenkinsUrl)
+	if err != nil {
+		global.GVA_LOG.Error("无效的jenkins URL:\n", zap.Error(err))
+		done <- false
+		return
+	}
+	// 获取构建参数 params为map类型
+	params := GetBuildJobParam(Name, true)
+	if len(params) == 0 {
+		JenkinsBuildJob(ViewName, Name)
+		fmt.Printf("%s %s : 无参数Job任务已触发构建\n", ViewName, Name)
+		done <- true // 通知成功
+		return
+	}
+	// 表单数据 将获取的参数转换 表单数据    有参数构建
+	data := url.Values{}
+	for key, value := range params {
+		fmt.Printf("参数名称: %s, 默认值: %v\n", key, value)
+		req, err := http.NewRequest("POST", jenkinsUrl, bytes.NewBufferString(data.Encode()))
 		if err != nil {
-			global.GVA_LOG.Error("无效的jenkins URL:\n", zap.Error(err))
-		}
-		// 获取构建参数 params为map类型
-		params := GetBuildJobParam(Name, true)
-		if len(params) == 0 {
-			JenkinsBuildJob(ViewName, Name)
+			global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
+			done <- false // 通知失败
 			return
 		}
-		// 表单数据 将获取的参数转换 表单数据
-		data := url.Values{}
-		for key, value := range params {
-			fmt.Printf("参数名称: %s, 默认值: %v\n", key, value)
-			req, err := http.NewRequest("POST", jenkinsUrl, bytes.NewBufferString(data.Encode()))
-			if err != nil {
-				global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
-			}
-			// 设置Auth Basic Auth
-			req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
-			// 发送post请求并获取响应
-			client := http.Client{Timeout: 5 * time.Second}
-			resp, err := client.Do(req)
-			if err != nil {
-				global.GVA_LOG.Error("发送post请求失败:", zap.Error(err))
-			}
-			defer func(Body io.ReadCloser) {
-				err := Body.Close()
-				if err != nil {
-					global.GVA_LOG.Error("关闭响应体失败:", zap.Error(err))
-					return
-				}
-			}(resp.Body)
+		// 设置Auth Basic Auth
+		req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+		// 发送post请求并获取响应
+		client := http.Client{Timeout: 5 * time.Second}
+		resp, err := client.Do(req)
+		if err != nil {
+			global.GVA_LOG.Error("发送post请求失败:", zap.Error(err))
+			done <- false
+			return
 		}
-	} else {
-		log.Printf("未找到构建任务名")
-		return // 返回不在执行后续
+		defer resp.Body.Close()
+		switch resp.StatusCode {
+		case http.StatusOK, http.StatusCreated:
+			global.GVA_LOG.Info("构建请求成功，任务已启动 \n", zap.String("status", resp.Status))
+			done <- true
+			//case http.StatusNotFound:
+			//	global.GVA_LOG.Error("构建请求失败，资源未找到", zap.String("status", resp.Status))
+			//	done <- false
+			//default:
+			//	global.GVA_LOG.Error("构建请求失败", zap.String("status", resp.Status))
+			//	done <- false
+		}
 	}
 }
 
@@ -272,8 +318,8 @@ func JenkinsBuildJob(ViewName string, Name string) {
 	}(resp.Body)
 }
 
-// GetJenkinsViews 获取视图名和任务名 用于判断输入JobName 是否存在
-func GetJenkinsViews() []system.JenkinsView {
+// GetJenkinsViews 获取视图名和任务名 用于确定视图名是否存在
+func GetJenkinsViews() []modelSystem.JenkinsView {
 	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "/api/json"
 	req, err := http.NewRequest("GET", jenkinsUrl, nil)
 	if err != nil {
@@ -289,7 +335,7 @@ func GetJenkinsViews() []system.JenkinsView {
 	defer resp.Body.Close()
 	body, _ := io.ReadAll(resp.Body)
 	var data struct {
-		Views []system.JenkinsView `json:"views"`
+		Views []modelSystem.JenkinsView `json:"views"`
 	}
 	if err := json.Unmarshal(body, &data); err != nil {
 		global.GVA_LOG.Error("未解析到数据:", zap.Error(err))
@@ -298,7 +344,7 @@ func GetJenkinsViews() []system.JenkinsView {
 }
 
 // GetLastBuildStatus  获取jenkins Job 任务状态
-func GetLastBuildStatus(ViewName string, JobName string) (system.Build, error) {
+func GetLastBuildStatus(ViewName string, JobName string) (modelSystem.Build, error) {
 	var extensionMap = map[string]string{
 		"后台API": "_adminapi",
 		"前台API": "_api",
@@ -319,17 +365,17 @@ func GetLastBuildStatus(ViewName string, JobName string) (system.Build, error) {
 	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "/view/" + ViewName + "/job/" + Name + "/api/json"
 	body, err := GetJenkinsData(jenkinsUrl)
 	if err != nil {
-		return system.Build{}, err
+		return modelSystem.Build{}, err
 	}
 	//打印原始响应以进行调试
 	//fmt.Printf("API响应:%v", string(body))
-	var job system.JenkinsJob
+	var job modelSystem.JenkinsJob
 	if err := json.Unmarshal(body, &job); err != nil {
-		return system.Build{}, fmt.Errorf("解析响应失败: %v", err)
+		return modelSystem.Build{}, fmt.Errorf("解析响应失败: %v", err)
 	}
 
 	if len(job.Builds) == 0 {
-		return system.Build{}, fmt.Errorf("未找到任何构建")
+		return modelSystem.Build{}, fmt.Errorf("未找到任何构建")
 	}
 
 	// 获取到最近的构建号
@@ -337,11 +383,11 @@ func GetLastBuildStatus(ViewName string, JobName string) (system.Build, error) {
 	JobURL := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
 	body, err = GetJenkinsData(JobURL)
 	if err != nil {
-		return system.Build{}, err
+		return modelSystem.Build{}, err
 	}
-	var build system.Build
+	var build modelSystem.Build
 	if err := json.Unmarshal(body, &build); err != nil {
-		return system.Build{}, fmt.Errorf("解析响应失败: %v", err)
+		return modelSystem.Build{}, fmt.Errorf("解析响应失败: %v", err)
 	}
 	// 返回最近的构建
 	return build, nil
@@ -362,7 +408,7 @@ func ManageService(siteName string, EnvName string, command string) {
 	params := GetBuildJobParam(jobName, false)
 	fmt.Printf("jenkins 参数 parms: %v\n", params)
 	// 从数据库中获取站点信息 参数入参  站点名称 或 站点ID   返回值 站点名称对应的一条记录
-	var siteConfig system.YzSiteConfig
+	var siteConfig modelSystem.YzSiteConfig
 	siteConfig.SiteName = siteName
 	// 创建 TgService 实例
 	tgService := system2.TgService{}

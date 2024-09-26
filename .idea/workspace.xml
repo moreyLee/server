@@ -4,12 +4,22 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="待实现获取cookies。。。">
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="测试cookies">
+      <change afterPath="$PROJECT_DIR$/JenkinsFile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/opera.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captcha.png" beforeDir="false" afterPath="$PROJECT_DIR$/captcha.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cookies.json" beforeDir="false" afterPath="$PROJECT_DIR$/cookies.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/full_page_screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/telegramwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/telegramwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/selenium/selenium.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +92,7 @@
     &quot;Go Build.go build testTelegram.go.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build telegramwebhook.go.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
@@ -127,7 +138,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server">
+  <component name="RunManager" selected="Go 构建.go build telegramwebhook.go">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -146,18 +157,22 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build telegramwebhook.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/TestOcrCaptcha.go" />
+      <filePath value="$PROJECT_DIR$/test/telegramwebhook.go" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server" />
+      <item itemvalue="Go 构建.go build telegramwebhook.go" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
+        <item itemvalue="Go 构建.go build telegramwebhook.go" />
       </list>
     </recent_temporary>
   </component>
@@ -214,7 +229,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="新增域名" />
     <MESSAGE value="域名跳转" />
     <MESSAGE value="增加ElasticSearch模块" />
     <MESSAGE value="获取jenkins构建参数" />
@@ -239,7 +253,8 @@
     <MESSAGE value="验证码识别真是日了狗了" />
     <MESSAGE value="selenium实现总后台登录" />
     <MESSAGE value="待实现获取cookies。。。" />
-    <option name="LAST_COMMIT_MESSAGE" value="待实现获取cookies。。。" />
+    <MESSAGE value="测试cookies" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试cookies" />
   </component>
   <component name="VgoProject">
     <environment>

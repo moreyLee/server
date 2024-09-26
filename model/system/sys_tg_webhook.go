@@ -1,6 +1,9 @@
 package system
 
-import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+import (
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"time"
+)
 
 // ReceiveMessage struct
 type ReceiveMessage struct {
@@ -100,4 +103,13 @@ type JenkinsBuild struct {
 	ViewName string `json:"view_name"` // 视图名称
 	JobName  string `json:"job_name"`  // 项目名称
 
+}
+type AdminLoginToken struct {
+	ID        uint   `gorm:"primary_key;auto_increment" json:"id"`
+	HttpToken string `gorm:"type:text" json:"http_token"`
+	CreatedAt time.Time
+}
+
+func (AdminLoginToken) TableName() string {
+	return "tg_admin_token"
 }
