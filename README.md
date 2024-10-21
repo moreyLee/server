@@ -54,3 +54,5 @@
 
 查看mysql 活动连接数
 SHOW STATUS WHERE `variable_name` = 'Threads_connected';
+清理缓存 gin-vue-admin
+go clean -modcache

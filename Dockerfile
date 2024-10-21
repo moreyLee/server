@@ -8,11 +8,11 @@ RUN go env -w GO111MODULE=on \
     && go env -w CGO_ENABLED=0 \
     && go env \
     && go mod tidy \
-    && go build -o server .
+    && go build -o devops-api .
 
 FROM alpine:latest
 
-LABEL MAINTAINER="SliverHorn@sliver_horn@qq.com"
+LABEL MAINTAINER="David588@gmail.com"
 
 WORKDIR /go/src/github.com/flipped-aurora/gin-vue-admin/server
 
@@ -20,5 +20,5 @@ COPY --from=0 /go/src/github.com/flipped-aurora/gin-vue-admin/server/server ./
 COPY --from=0 /go/src/github.com/flipped-aurora/gin-vue-admin/server/resource ./resource/
 COPY --from=0 /go/src/github.com/flipped-aurora/gin-vue-admin/server/config.docker.yaml ./
 
-EXPOSE 8888
-ENTRYPOINT ./server -c config.docker.yaml
+EXPOSE 5888
+ENTRYPOINT ./devop-api -c config.docker.yaml

@@ -4,10 +4,12 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	modelSystem "github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	system2 "github.com/flipped-aurora/gin-vue-admin/server/service/system"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/tebeka/selenium"
+	"go.uber.org/zap"
 	"image"
 	"image/png"
 	"io"
@@ -15,7 +17,9 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"time"
+	"unicode"
 )
 
 const (
@@ -37,7 +41,7 @@ func ReplyWithMessage(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, 
 }
 
 // GetAdminLinkTools 登录后获取链接地址
-func GetAdminLinkTools(siteName string) string {
+func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, siteName string) string {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
 	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
@@ -52,29 +56,34 @@ func GetAdminLinkTools(siteName string) string {
 		"--disable-gpu", // 禁用GPU硬件加速
 		"--headless",    // 开启无界面模式
 		"--incognito",   // 无痕模式
-		//"--windows-size=1920,1080,",
+		"--windows-size=1920,1080,",
 		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
 	}
 	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
 		"args": chromeOptions,
 	}
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("获取当前执行路径失败: %v", err)
+	}
+	global.GVA_LOG.Info("当前程序执行路径:  " + dir)
 	//  最大化浏览器窗口
 	wd, err := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
 	if err != nil {
-		log.Printf("WebDriver 连接失败: %v", err)
+		global.GVA_LOG.Info("WebDriver 连接失败: %v", zap.Error(err))
 	}
-
-	err = wd.MaximizeWindow("")
 	defer wd.Quit()
 
 	// 打开管理后台
 	if err := wd.Get(adminURL); err != nil {
-		log.Printf("总后台登录首页打开失败:https://web.3333c.vip : %v", err)
+		global.GVA_LOG.Info("总后台登录首页打开失败:https://web.3333c.vip : %v", zap.Error(err))
 	}
 	time.Sleep(3 * time.Second)
+	ReplyWithMessage(bot, webhook, siteName+"后台链接正在获取中，请等待一分钟...")
 	// 刷新页面
 	if err := wd.Refresh(); err != nil {
-		panic(err)
+		global.GVA_LOG.Error("刷新页面报错", zap.Error(err))
+		return ""
 	}
 	time.Sleep(5 * time.Second)
 	// 输入用户名
@@ -101,22 +110,29 @@ func GetAdminLinkTools(siteName string) string {
 	// 获取整个页面截图
 	screenshot, err := wd.Screenshot()
 	if err != nil {
-		log.Fatalf("截图整个登录页面出错: %v", err)
+		global.GVA_LOG.Error("截图整个登录页面出错: %v", zap.Error(err))
+		return ""
 	}
+	global.GVA_LOG.Info("截图大小: ", zap.Int("字节", len(screenshot)))
 	// 保存整个页面截图到文件
-	if err := os.WriteFile(fullPageScreenshotFile, screenshot, 0644); err != nil {
-		log.Fatalf("Error saving the full page screenshot: %v", err)
+	if err := os.WriteFile(fullPageScreenshotFile, screenshot, 0755); err != nil {
+		global.GVA_LOG.Error("保存截图文件失败: %v\n", zap.Error(err))
 	}
 	// 打开保存的整个页面截图文件
 	file, err := os.Open(fullPageScreenshotFile)
 	if err != nil {
-		log.Fatalf("打开整个登录页面截图报错: %v", err)
+		global.GVA_LOG.Error("打开整个登录页面截图报错: %v\n", zap.Error(err))
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			global.GVA_LOG.Error("全局截图文件不存在或解析失败", zap.Error(err))
+		}
+	}(file)
 	// 解码整个页面截图
 	img, err := png.Decode(file)
 	if err != nil {
-		log.Fatalf("全页面登录页解码报错: %v", err)
+		global.GVA_LOG.Error("全页面登录页解码报错: %v\n", zap.Error(err))
 	}
 	// 裁剪出验证码区域
 	bounds := image.Rect(loc.X, loc.Y, loc.X+size.Width, loc.Y+size.Height)
@@ -132,7 +148,7 @@ func GetAdminLinkTools(siteName string) string {
 	if err := png.Encode(captchaOutputFile, captchaImg); err != nil {
 		log.Fatalf("验证码图像解码报错Error: %v", err)
 	}
-	fmt.Printf("验证码图像成功保存到文件:%s\n", captchaFile)
+	global.GVA_LOG.Info("验证码图像成功保存到文件:  " + captchaFile)
 	// 获取OCR 解析的 验证码
 	captchaCode, _ := GetCaptchaCode()
 	captchaElem, _ = wd.FindElement(selenium.ByID, "captcha")
@@ -160,7 +176,7 @@ func GetAdminLinkTools(siteName string) string {
 	// 点击 搜索按钮
 	searchElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[1]/div[7]/button")
 	searchElem.Click()
-	time.Sleep(2 * time.Second)
+	time.Sleep(1 * time.Second)
 	//进入站点  需要加载稍慢
 	enterSiteElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[12]/div/div[1]/button[1]")
 	enterSiteElem.Click()
@@ -183,7 +199,8 @@ func GetAdminLinkTools(siteName string) string {
 func GetCaptchaCode() (string, error) {
 	imageData, err := os.ReadFile(captchaFile)
 	if err != nil {
-		panic(err)
+		global.GVA_LOG.Error("读取验证码文件失败: %v", zap.Error(err))
+		return "", err
 	}
 	base64Image := base64.StdEncoding.EncodeToString(imageData)
 	data := url.Values{}
@@ -192,28 +209,40 @@ func GetCaptchaCode() (string, error) {
 	data.Set("png_fix", "false")
 	resp, err := http.PostForm(ApiOCRUrl, data)
 	if err != nil {
-		panic(err)
+		global.GVA_LOG.Error("发送OCR 请求失败: %v", zap.Error(err))
+		return "", err
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		global.GVA_LOG.Error("读取OCR 响应失败:  %v", zap.Error(err))
+		return "", err
 	}
 	fmt.Println("验证码json:  " + string(body))
 	// 定义一个结构体或map 来存储解析后的 JSON 数据
 	var result map[string]interface{}
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		panic(err)
+		global.GVA_LOG.Error("解析OCR 响应的 JSON 数据失败:  %v", zap.Error(err))
+		return "", err
 	}
 	// 提取验证码对应的data 字段的值
 	if data, ok := result["data"].(string); ok {
-		fmt.Println("验证码:", data)
-		return data, err
+		global.GVA_LOG.Info("\n 原始验证码: " + data)
+		// 过滤非数字字符，只保留数字
+		onlyDigits := strings.Map(func(r rune) rune {
+			if unicode.IsDigit(r) {
+				return r
+			}
+			return -1
+		}, data)
+		global.GVA_LOG.Info("\n 过滤后的验证码:  " + onlyDigits)
+		return onlyDigits, err
+		//
 	} else {
-		fmt.Println("OCR解析验证码错误")
+		global.GVA_LOG.Info("OCR 解析验证码失败: %v", zap.Any("response", result))
+		return "获取OCR验证码错误", nil
 	}
-	return "获取OCR验证码错误", nil
 }
 
 // AdminLoginSaveToken 基于token 模式免登录 获取后台链接地址

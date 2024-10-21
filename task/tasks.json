@@ -1,0 +1,37 @@
+{
+  "(gz)亿万-T1": [
+    {"job_name": "api.ywtest.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.ywtest.b777.vip", "task_type": "后台API"},
+    {"job_name": "ywtestadmin.w776.cc", "task_type": "前台H5"},
+    {"job_name": "ywtest.34566.vip", "task_type": "后台H5"},
+    {"job_name": "quartz.ywtest.b777.vip", "task_type": "定时任务"}
+  ],
+  "(gz)狗子-T2": [
+    {"job_name": "api.gztest.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.gztest.b777.vip", "task_type": "后台API"},
+    {"job_name": "gztest.34566.vip", "task_type": "前台H5"},
+    {"job_name": "gztestadmin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "quartz.gztest.b777.vip", "task_type": "定时任务"}
+  ],
+  "(gz)多多-T3": [
+    {"job_name": "api.ddtest.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.ddtest.b777.vip", "task_type": "后台API"},
+    {"job_name": "ddtest.34566.vip", "task_type": "前台H5"},
+    {"job_name": "ddtestadmin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "quartz.ddtest.b777.vip", "task_type": "定时任务"}
+  ],
+  "(gz)旺财-T4": [
+    {"job_name": "api.wctest.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.wctest.b777.vip", "task_type": "后台API"},
+    {"job_name": "wctest.34566.vip", "task_type": "前台H5"},
+    {"job_name": "wctestadmin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "quartz.wctest.b777.vip", "task_type": "定时任务"}
+  ],
+  "28国际": [
+    {"job_name": "api.28guoji.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.28guoji.b777.vip", "task_type": "后台API"},
+    {"job_name": "28guoji.34566.vip", "task_type": "前台H5"},
+    {"job_name": "28guojiadmin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "quartz.28guoji.b777.vip", "task_type": "定时任务"}
+  ]
+}

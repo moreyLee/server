@@ -69,8 +69,25 @@ type JobConfig struct {
 	} `xml:"scm"`
 }
 type Build struct {
-	Number    int    `json:"number"`
-	Result    string `json:"result"`
-	Timestamp int64  `json:"timestamp"`
-	URL       string `json:"url"`
+	Number    int       `json:"number"`
+	Result    string    `json:"result"`
+	Timestamp int64     `json:"timestamp"`
+	URL       string    `json:"url"`
+	ChangeSet ChangeSet `json:"changeSet"` // 包含变更集的信息
+}
+type ChangeSet struct {
+	Kind  string          `json:"kind"`  // 变更集类型，如 "git" 或 "svn"
+	Items []ChangeSetItem `json:"items"` // 变更项
+}
+
+type ChangeSetItem struct {
+	CommitID      string   `json:"commitId"`      // 提交 ID
+	Timestamp     int64    `json:"timestamp"`     // 提交时间
+	Author        Author   `json:"author"`        // 提交作者
+	Msg           string   `json:"msg"`           // 提交信息
+	AffectedPaths []string `json:"affectedPaths"` // 受影响的文件路径
+}
+type Author struct {
+	FullName string `json:"fullName"` // 作者全名
+	Email    string `json:"email"`    // 作者邮箱
 }

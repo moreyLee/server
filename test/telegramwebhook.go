@@ -10,37 +10,37 @@ import (
 )
 
 // Message struct
-//type Message struct {
-//	MessageID int        `json:"message_id"`
-//	From      From       `json:"from"`
-//	Chat      Chat       `json:"chat"`
-//	Date      int        `json:"date"`
-//	Text      string     `json:"text"`
-//	Entities  []Entities `json:"entities"`
-//}
+type Message struct {
+	MessageID int        `json:"message_id"`
+	From      From       `json:"from"`
+	Chat      Chat       `json:"chat"`
+	Date      int        `json:"date"`
+	Text      string     `json:"text"`
+	Entities  []Entities `json:"entities"`
+}
 
 // ChannelPost struct
-//type ChannelPost struct {
-//	MessageID int    `json:"message_id"`
-//	Chat      Chat   `json:"chat"`
-//	Date      int    `json:"date"`
-//	Text      string `json:"text"`
-//}
+type ChannelPost struct {
+	MessageID int    `json:"message_id"`
+	Chat      Chat   `json:"chat"`
+	Date      int    `json:"date"`
+	Text      string `json:"text"`
+}
 
 // SendMessage struct
-//type SendMessage struct {
-//	Ok     bool   `json:"ok"`
-//	Result Result `json:"result"`
-//}
+type SendMessage struct {
+	Ok     bool   `json:"ok"`
+	Result Result `json:"result"`
+}
 
 // Result struct
-//type Result struct {
-//	MessageID int    `json:"message_id"`
-//	Date      int    `json:"date"`
-//	Text      string `json:"text"`
-//	From      From   `json:"from"`
-//	Chat      Chat   `json:"chat"`
-//}
+type Result struct {
+	MessageID int    `json:"message_id"`
+	Date      int    `json:"date"`
+	Text      string `json:"text"`
+	From      From   `json:"from"`
+	Chat      Chat   `json:"chat"`
+}
 
 // From struct
 type From struct {
@@ -72,7 +72,7 @@ var (
 	URL  = "https://api.telegram.org/bot"
 	port = "5299"
 	//webhookURL = "https://devops.3333d.vip/telegram-webhook"
-	webhookUrl = "https://3f57-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook"
+	webhookUrl = "https://82f3-94-204-236-130.ngrok-free.app/jenkins/telegram-webhook"
 	token      = "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
 )
 
@@ -150,3 +150,5 @@ func main() {
 		}
 	}
 }
+
+// 用法     @CG88885_bot  测试信息

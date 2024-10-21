@@ -102,8 +102,9 @@ type WebhookRequest struct {
 type JenkinsBuild struct {
 	ViewName string `json:"view_name"` // 视图名称
 	JobName  string `json:"job_name"`  // 项目名称
-
+	TaskType string `json:"task_type"` // 任务类型  如 后台API 前台API
 }
+
 type AdminLoginToken struct {
 	ID        uint   `gorm:"primary_key;auto_increment" json:"id"`
 	HttpToken string `gorm:"type:text" json:"http_token"`
