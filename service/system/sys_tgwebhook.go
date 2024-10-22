@@ -1,9 +1,11 @@
 package system
 
 import (
+	"errors"
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -14,6 +16,17 @@ func (service *TgService) SelectBySiteName(config *system.YzSiteConfig) (err err
 	//err = global.GVA_DB.Where("site_id=? OR site_name=?", config.SiteID, config.SiteName).First(&config).Error
 	err = global.GVA_DB.Where("site_name=?", config.SiteName).First(&config).Error
 	return
+}
+func (service *TgService) CheckJenView(viewName string, tableName string, columnName string) (bool, error) {
+	query := fmt.Sprintf("%s = ?", columnName)
+	err := global.GVA_DB.Table(tableName).Where(query, viewName).First(&system.JenkinsBuild{}).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return false, err
+		}
+		return false, err
+	}
+	return true, err
 }
 func (service *TgService) SaveAdminLoginToken(token string) (err error) {
 	adminLoginToken := &system.AdminLoginToken{

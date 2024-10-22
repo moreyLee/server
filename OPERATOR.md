@@ -3,7 +3,7 @@ go get github.com/go-resty/resty/v2
 ### 删除冲突库
 新增CGO_CFLAGS="" 环境变量参数
 111ff776c81fe02d30699a285676f3c30c
-获取TG webhook 状态
+获取TG webhook 状态 @CG33333_bot
 https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/getWebhookInfo
 先删除webhook @CG33333_bot
 https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/deleteWebhook

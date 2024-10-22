@@ -213,7 +213,6 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 		done <- false // 管道通知任务失败
 		return
 	}
-	ReplyWithMessage(bot, webhook, ViewName+" "+JobName+" 已触发构建....，30秒后获取构建状态")
 	// 引入不区分大小写的映射
 	caseInsensitiveMap := createCaseInsensitiveMap(ExtensionMap)
 	log.Printf("映射名称来源: " + JobName)
@@ -285,8 +284,8 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 	}
 	var jenkinsUrl string
 	if isProduction {
-		// 拼接生产环境 URL
-		jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/build"
+		// 拼接生产环境 URL    变量屏蔽问题 :=  无法赋值给外层url
+		jenkinsUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/build"
 		fmt.Printf("生产环境URL: %s\n", jenkinsUrl)
 	} else {
 		// 拼接测试环境 URL
@@ -323,7 +322,7 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 		ReplyWithMessage(bot, webhook, fmt.Sprintf("Jenkins 构建请求失败，状态码: %d\n 视图名: %s\n 任务名: %s\n", resp.StatusCode, ViewName, Name))
 	} else {
 		fmt.Println("Jenkins 构建任务成功触发")
-		ReplyWithMessage(bot, webhook, ViewName+": "+"已成功触发构建任务...")
+		ReplyWithMessage(bot, webhook, ViewName+": "+"已成功触发构建"+Name+"任务...")
 	}
 }
 

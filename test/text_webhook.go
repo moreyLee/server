@@ -109,7 +109,7 @@ func main() {
 	webhook, err := tgbotapi.NewWebhook(WebhookURL)
 	// 对webhook实例发起请求
 	_, err = bot.Request(webhook)
-	if err := r.Run(":" + "8888"); err != nil {
+	if err := r.Run(":" + "5888"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 }
