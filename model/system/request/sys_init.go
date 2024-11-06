@@ -87,24 +87,6 @@ func (i *InitDB) ToPgsqlConfig() config.Pgsql {
 	}
 }
 
-// ToSqliteConfig 转换 config.Sqlite
-// Author [Kafumio](https://github.com/Kafumio)
-func (i *InitDB) ToSqliteConfig() config.Sqlite {
-	return config.Sqlite{
-		GeneralDB: config.GeneralDB{
-			Path:         i.DBPath,
-			Port:         i.Port,
-			Dbname:       i.DBName,
-			Username:     i.UserName,
-			Password:     i.Password,
-			MaxIdleConns: 10,
-			MaxOpenConns: 100,
-			LogMode:      "error",
-			Config:       "",
-		},
-	}
-}
-
 func (i *InitDB) ToMssqlConfig() config.Mssql {
 	return config.Mssql{
 		GeneralDB: config.GeneralDB{

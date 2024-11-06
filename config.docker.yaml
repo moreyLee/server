@@ -20,7 +20,7 @@ zap:
 # redis configuration
 redis:
   db: 0
-  addr: 177.7.0.14:6379
+  addr: 127.0.0.1:6379
   password: ""
 
 # mongo configuration
@@ -52,7 +52,7 @@ email:
 # system configuration
 system:
   env: public  # Change to "develop" to skip authentication for development mode
-  addr: 8888
+  addr: 5888
   db-type: mysql
   oss-type: local    # 控制oss选择走本地还是 七牛等其他仓 自行增加其他oss仓可以在 server/utils/upload/upload.go 中 NewOss函数配置
   use-redis: false     # 使用redis
@@ -74,30 +74,17 @@ captcha:
 # mysql connect configuration
 # 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://gin-vue-admin.com/docs/first_master）
 mysql:
-  path: ""
-  port: ""
-  config: ""
-  db-name: ""
-  username: ""
-  password: ""
+  path: "localhost"
+  port: "3306"
+  config: "charset=utf8mb4&parseTime=True&loc=Local"
+  db-name: "cg_devops"
+  username: "root"
+  password: "Devops%588"
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: ""
   log-zap: false
 
-# pgsql connect configuration
-# 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://gin-vue-admin.com/docs/first_master）
-pgsql:
-  path: ""
-  port: ""
-  config: ""
-  db-name: ""
-  username: ""
-  password: ""
-  max-idle-conns: 10
-  max-open-conns: 100
-  log-mode: ""
-  log-zap: false
 
 db-list:
   - disable: true # 是否禁用
@@ -139,53 +126,6 @@ autocode:
   web-form: /view
   web-table: /view
 
-# qiniu configuration (请自行七牛申请对应的 公钥 私钥 bucket 和 域名地址)
-qiniu:
-  zone: ZoneHuaDong
-  bucket: ""
-  img-path: ""
-  use-https: false
-  access-key: ""
-  secret-key: ""
-  use-cdn-domains: false
-
-# aliyun oss configuration
-aliyun-oss:
-  endpoint: yourEndpoint
-  access-key-id: yourAccessKeyId
-  access-key-secret: yourAccessKeySecret
-  bucket-name: yourBucketName
-  bucket-url: yourBucketUrl
-  base-path: yourBasePath
-
-# tencent cos configuration
-tencent-cos:
-  bucket: xxxxx-10005608
-  region: ap-shanghai
-  secret-id: your-secret-id
-  secret-key: your-secret-key
-  base-url: https://gin.vue.admin
-  path-prefix: github.com/flipped-aurora/gin-vue-admin/server
-
-# aws s3 configuration (minio compatible)
-aws-s3:
-  bucket: xxxxx-10005608
-  region: ap-shanghai
-  endpoint: ""
-  s3-force-path-style: false
-  disable-ssl: false
-  secret-id: your-secret-id
-  secret-key: your-secret-key
-  base-url: https://gin.vue.admin
-  path-prefix: github.com/flipped-aurora/gin-vue-admin/server
-
-# huawei obs configuration
-hua-wei-obs:
-  path: you-path
-  bucket: you-bucket
-  endpoint: you-endpoint
-  access-key: you-access-key
-  secret-key: you-secret-key
 
 # excel configuration
 excel:
@@ -218,3 +158,31 @@ cors:
       allow-methods: GET, POST
       expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
       allow-credentials: true # 布尔值
+jenkins:
+  testUrl: https://jenkins.qiyinyun.com/    #测试环境
+  testUser: root
+  testToken: 117a9f29e2793cb262426c8fbbb39b27cd
+  url: http://jenkins1.3333d.vip/
+  user: admin
+  api-token: 11d2d3cd4784aa28379905bf13988ad50e
+telegram:
+  url: https://api.telegram.org/bot
+  bot-name: '@CG33333_bot'   #不支持特殊字符
+  bot-token: 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4 #@CG33333_bot 机器人
+  #chat-id: -4275796428 #测试群组 -4275796428   #CG游戏更新发布群 -1001534909056 #未使用
+  webhook-url: https://a904-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook
+  authorized_users:
+    - David5886
+    - MAX8852
+    - Mac_Archie
+    - liamintl
+    - grass9966
+    - ahsheng
+    - tank9873
+    - wolf_18802
+cloudflare:
+  cf-api-login: djpt36@163.com
+  global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0
+  api-url: https://api.cloudflare.com/client/v4/zones
+admin-link:
+  url: https://api.3333c.vip/admin/site/config/site

@@ -135,6 +135,13 @@ telegram:
   webhook-url: https://a904-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook
   authorized_users:
     - David5886
+    - MAX8852
+    - Mac_Archie
+    - liamintl
+    - grass9966
+    - ahsheng
+    - tank9873
+    - wolf_18802
 cloudflare:
   cf-api-login: djpt36@163.com
   global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0

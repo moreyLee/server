@@ -1,13 +1,12 @@
-version: "3"
-
 services:
   devops-api:
     image: centos:7
     working_dir: /opt
     container_name: devops-api    #自定义
-    command: "./devops-api "
+    command: "./devops-api -c config.yaml"
+    network_mode: "host"      # 共享宿主机网络配置 容器中程序可访问其他容器端口服务
     ports:
-      - "8888:8888"
+      - "5888:5888"      #
     volumes:
       - ./:/opt
     environment:

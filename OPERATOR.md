@@ -19,4 +19,5 @@ go build  生成 server 二进制
 ### 打包成指定的包名称
 go build -o devops-api
 ## 镜像部署 基于dockerfile 
-
+go build -t devops-api:v1 . 
+go clean -modcache

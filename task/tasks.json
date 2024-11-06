@@ -33,5 +33,89 @@
     {"job_name": "28guoji.34566.vip", "task_type": "前台H5"},
     {"job_name": "28guojiadmin.w776.cc", "task_type": "后台H5"},
     {"job_name": "quartz.28guoji.b777.vip", "task_type": "定时任务"}
+  ],
+  "圆梦娱乐2": [
+    {"job_name": "yuanmengyl2api.b777.vip", "task_type": "前台API"},
+    {"job_name": "yuanmengyl2adminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "yuanmengyl2h5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "yuanmengyl2h5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "yuanmengyl2quartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "大满贯": [
+    {"job_name": "dmgapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "dmgadminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "dmgh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "dmgh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "dmgquartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "88娱乐": [
+    {"job_name": "88ylapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "88yladminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "88ylh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "88ylh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "88ylquartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "ABC28": [
+    {"job_name": "abc28api.b777.vip", "task_type": "前台API"},
+    {"job_name": "abc28adminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "abc28h5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "abc28h5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "abc28quartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "AK国际": [
+    {"job_name": "akgjapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "akgjadminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "akgjh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "akgjh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "akgjquartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "CF游戏": [
+    {"job_name": "api.cfyouxi.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.cfyouxi.b777.vip", "task_type": "后台API"},
+    {"job_name": "cfyouxi.34566.vip", "task_type": "前台H5"},
+    {"job_name": "cfyouxiadmin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "quartz.cfyouxi.b777.vip", "task_type": "定时任务"}
+  ],
+  "DT28": [
+    {"job_name": "dt28api.b777.vip", "task_type": "前台API"},
+    {"job_name": "dt28adminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "dt28h5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "dt28h5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "dt28quartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "三禾": [
+    {"job_name": "", "task_type": "前台API"},
+    {"job_name": "", "task_type": "后台API"},
+    {"job_name": "", "task_type": "前台H5"},
+    {"job_name": "", "task_type": "后台H5"},
+    {"job_name": "", "task_type": "定时任务"}
+  ],
+  "蓝悦娱乐": [
+    {"job_name": "lanyueylapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "lanyueyladminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "lanyueylh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "lanyueyh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "lanyueylquartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "东升国际": [
+    {"job_name": "dongshenggjapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "dongshenggjadminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "dongshenggjh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "dongshenggjh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "dongshenggjquartz.b777.vip", "task_type": "定时任务"}
+  ],
+  "大利集团": [
+    {"job_name": "api.dalijt.b777.vip", "task_type": "前台API"},
+    {"job_name": "admin.dalijt.b777.vip", "task_type": "后台API"},
+    {"job_name": "dalijt.34566.vip", "task_type": "前台H5"},
+    {"job_name": "dalijtadmin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "quartz.dalijt.b777.vip", "task_type": "定时任务"}
+  ],
+  "新直属模板": [
+    {"job_name": "xzsapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "xzsaminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "xzsh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "xzsh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "xzsquartz.b777.vip", "task_type": "定时任务"}
   ]
 }

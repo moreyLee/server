@@ -11,8 +11,15 @@ import (
 	"time"
 )
 
-type JenkinsView struct {
+type JenkinsJob struct {
 	Name string `json:"name"`
+}
+type JenkinsView struct {
+	Name string       `json:"name"`
+	Jobs []JenkinsJob `json:"jobs"`
+}
+type JenkinsResponse struct {
+	Views []JenkinsView `json:"views"`
 }
 
 func ProdView(jenkinsUrl string, user string, token string) ([]JenkinsView, error) {
@@ -25,7 +32,11 @@ func ProdView(jenkinsUrl string, user string, token string) ([]JenkinsView, erro
 		log.Fatalf("Failed to get Jenkins views: %v", err)
 	}
 	defer resp.Body.Close()
-
+	// 检查响应的状态码是否为 200
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body) // 读取响应内容
+		return nil, fmt.Errorf("request failed with status code %d, response body: %s", resp.StatusCode, body)
+	}
 	// 读取并解析 JSON 数据
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -36,35 +47,64 @@ func ProdView(jenkinsUrl string, user string, token string) ([]JenkinsView, erro
 	}
 	err = json.Unmarshal(body, &viewNames)
 	if err != nil {
-		log.Fatalf("Failed to parse JSON: %v", err)
+		log.Fatalf("JSON body 解析失败: %v", err)
 	}
 	return viewNames.Views, nil
 }
-func TestView(url string, user string, token string) ([]JenkinsView, error) {
-	// 获取 Jenkins 视图名
+
+// FetchJenkinsData 解析 Jenkins API 返回的数据
+func FetchJenkinsData(url, user, token string) ([]JenkinsView, error) {
 	req, err := http.NewRequest("GET", url, nil)
-	req.SetBasicAuth(user, token)
-	client := http.Client{Timeout: 5 * time.Second}
-	resp, err := client.Do(req)
-	//resp, err := http.Get(jenkinsURL)
 	if err != nil {
-		log.Fatalf("Failed to get Jenkins views: %v", err)
+		return nil, fmt.Errorf("failed to create request: %v", err)
+	}
+	req.SetBasicAuth(user, token)
+	client := &http.Client{Timeout: 10 * time.Second}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to make request: %v", err)
 	}
 	defer resp.Body.Close()
 
-	// 读取并解析 JSON 数据
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalf("Failed to read response body: %v", err)
+		return nil, fmt.Errorf("failed to read response body: %v", err)
 	}
-	var viewNames struct {
-		Views []JenkinsView `json:"views"`
-	}
-	err = json.Unmarshal(body, &viewNames)
+
+	var data JenkinsResponse
+	err = json.Unmarshal(body, &data)
 	if err != nil {
-		log.Fatalf("Failed to parse JSON: %v", err)
+		return nil, fmt.Errorf("failed to parse JSON: %v", err)
 	}
-	return viewNames.Views, nil
+
+	return data.Views, nil
+}
+
+// InsertDataToDB 测试环境 将视图和任务名 插入到数据库
+func InsertDataToDB(db *sql.DB, views []JenkinsView, tableName string) error {
+	_, err := db.Exec(fmt.Sprintf("TRUNCATE TABLE %s", tableName))
+	if err != nil {
+		return fmt.Errorf("failed to truncate table %s: %v", tableName, err)
+	}
+	fmt.Printf("表 %s 已成功清空 truncated successfully！！！\n", tableName)
+	// 插入视图名和任务名
+	insertSQL := fmt.Sprintf("INSERT INTO %s (site_name, task_name) VALUES (?, ?)", tableName)
+	stmt, err := db.Prepare(insertSQL)
+	if err != nil {
+		return fmt.Errorf("failed to prepare SQL statement: %v", err)
+	}
+	defer stmt.Close()
+	fmt.Printf("Retrieved views: %+v\n", views)
+	for _, view := range views {
+		for _, job := range view.Jobs {
+			_, err := stmt.Exec(view.Name, job.Name)
+			if err != nil {
+				return fmt.Errorf("failed to insert data: %v", err)
+			}
+			fmt.Printf("jenins_env_test Inserted view_name : %s, job: %s\n", view.Name, job.Name)
+		}
+	}
+	return nil
 }
 
 func InsertViewsIntoDB(db *sql.DB, views []JenkinsView, tableName string, columnName string) error {
@@ -88,14 +128,13 @@ func main() {
 	jenkinsURL := "http://jenkins1.3333d.vip/api/json?tree=views[name]"
 	user := "admin"
 	tokenApi := "11d2d3cd4784aa28379905bf13988ad50e"
-	jkTestURL := "https://jenkins.qiyinyun.com/api/json?tree=views[name]"
+	jkTestURL := "https://jenkins.qiyinyun.com/api/json?tree=views[name,jobs[name]]"
 	TestUser := "root"
 	TestToken := "117a9f29e2793cb262426c8fbbb39b27cd"
 	prodViews, _ := ProdView(jenkinsURL, user, tokenApi)
-
-	testViews, _ := TestView(jkTestURL, TestUser, TestToken)
+	views, err := FetchJenkinsData(jkTestURL, TestUser, TestToken)
 	// 数据库连接
-	db, err := sql.Open("mysql", "root:rOYkHEc#jOesowLL@tcp(47.243.51.88:3306)/cg_devops")
+	db, err := sql.Open("mysql", "root:Devops%588@tcp(localhost:3306)/cg_devops")
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
@@ -105,9 +144,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error inserting production views into database: %v", err)
 	}
-
 	// 插入测试视图名到数据库
-	err = InsertViewsIntoDB(db, testViews, "jenkins_env_test", "test_site_name")
+	//err = InsertViewsIntoDB(db, testViews, "jenkins_env_test", "test_site_name")
+	//if err != nil {
+	//	log.Fatalf("Error inserting test views into database: %v", err)
+	//}
+	//
+	err = InsertDataToDB(db, views, "jenkins_env_test")
 	if err != nil {
 		log.Fatalf("Error inserting test views into database: %v", err)
 	}

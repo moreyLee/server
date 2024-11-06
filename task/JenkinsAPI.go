@@ -145,22 +145,29 @@ func GetExtName(ViewName string) string {
 }
 
 // GetBranch  获取jenkins git仓库和代码分支
-func GetBranch(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string) *modelSystem.JobConfig {
-	if JobName == "" || ViewName == "" {
+func GetBranch(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, typeName string) *modelSystem.JobConfig {
+	if typeName == "" || ViewName == "" {
 		log.Printf("视图名和任务名不能为空")
 		ReplyWithMessage(bot, webhook, "视图名，或任务名不能为空")
 		return nil
 	}
-	log.Printf("映射名称来源: " + JobName)
-	extName := ExtensionMap[JobName]
-	log.Printf("后缀: %s", extName)
+	global.GVA_LOG.Info("映射名称来源: " + typeName)
+	caseInsensitiveMap := createCaseInsensitiveMap(ExtensionMap)
+	log.Printf("映射名称来源: " + typeName)
+	// 使用不区分大小写的映射Map
+	extName, exists := getCaseInsensitiveValue(caseInsensitiveMap, typeName)
+	if !exists {
+		ReplyWithMessage(bot, webhook, "未找到构建任务名！类型名: "+typeName+"视图名"+ViewName)
+		return nil
+	}
+	global.GVA_LOG.Info("后缀: " + extName)
 	preName := GetExtName(ViewName)
-	log.Printf("前缀: %s ", preName)
-	Name := preName + extName
-	log.Printf("Name: %s", Name)
+	global.GVA_LOG.Info("前缀: " + preName)
+	fullName := preName + extName
+	global.GVA_LOG.Info("拼接后任务名: %s: " + fullName)
 
-	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/config.xml"
-	log.Printf("jenkins URL: " + jenkinsUrl)
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + fullName + "/config.xml"
+	global.GVA_LOG.Info("jenkins URL: " + jenkinsUrl)
 	// 创建http 请求
 	req, _ := http.NewRequest("GET", jenkinsUrl, nil)
 	// 设置Auth Basic Auth  user &token 认证信息
@@ -180,21 +187,20 @@ func GetBranch(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewNam
 	// 解析xml 响应
 	var jobConfig modelSystem.JobConfig
 	if err := xml.Unmarshal([]byte(bodyStr), &jobConfig); err != nil {
-		global.GVA_LOG.Error("解析xml响应失败:", zap.Error(err))
-		ReplyWithMessage(bot, webhook, "站点名称不存在")
+		global.GVA_LOG.Error("解析xml响应失败, :", zap.Error(err))
 	}
 
 	return &jobConfig
 }
 
 // JenkinsBuildJobWithView 有参数构建 根据视图名构建
-func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string, done chan bool) {
+func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string, done chan modelSystem.JenkinsBuild) {
 	defer func() {
 		close(done) // 确保协程结束后关闭通道
 	}()
 	if JobName == "" || ViewName == "" {
 		ReplyWithMessage(bot, webhook, "视图名或任务名不能为空")
-		done <- false // 通知失败
+		done <- modelSystem.JenkinsBuild{Success: false} // 通知失败
 		return
 	}
 	// 获取Jenkins 的视图列表
@@ -210,7 +216,7 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 	// 如果视图不存在，发送消息并退出
 	if !viewExists {
 		global.GVA_LOG.Info("视图名: %s 生产Jenkins中不存在\n" + ViewName)
-		done <- false // 管道通知任务失败
+		done <- modelSystem.JenkinsBuild{Success: false} // 管道通知任务失败
 		return
 	}
 	// 引入不区分大小写的映射
@@ -220,29 +226,29 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 	extName, exists := getCaseInsensitiveValue(caseInsensitiveMap, JobName)
 	if !exists {
 		ReplyWithMessage(bot, webhook, "未找到构建任务名！")
-		done <- false
+		done <- modelSystem.JenkinsBuild{Success: false}
 		return
 	}
 	// 获取Job 前缀名称
 	preName := GetExtName(ViewName)
 	// 映射完 合成jobName名称
-	Name := preName + extName
-	log.Printf("映射后的任务名Name: %s", Name)
+	fullJobName := preName + extName
+	log.Printf("映射后的任务名Name: %s", fullJobName)
 
-	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/buildWithParameters"
+	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + fullJobName + "/buildWithParameters"
 	// 判断一下 jenkins URL 是否有效
 	_, err := url.ParseRequestURI(jenkinsUrl)
 	if err != nil {
 		global.GVA_LOG.Error("无效的jenkins URL:\n", zap.Error(err))
-		done <- false
+		done <- modelSystem.JenkinsBuild{Success: false}
 		return
 	}
 	// 获取构建参数 params为map类型
-	params := GetBuildJobParam(bot, webhook, Name, true)
+	params := GetBuildJobParam(bot, webhook, fullJobName, true)
 	if len(params) == 0 {
-		JenkinsBuildJob(bot, webhook, ViewName, Name, true) //  无参数构建jenkins
-		fmt.Printf("%s %s : 无参数Job任务已触发构建\n", ViewName, Name)
-		done <- true // 通知成功
+		JenkinsBuildJob(bot, webhook, ViewName, fullJobName, true) //  无参数构建jenkins
+		fmt.Printf("%s %s : 无参数Job任务已触发构建\n", ViewName, fullJobName)
+		done <- modelSystem.JenkinsBuild{Success: true} // 通知成功
 		return
 	}
 	// 表单数据 将获取的参数转换 表单数据    有参数构建
@@ -252,7 +258,7 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 		req, err := http.NewRequest("POST", jenkinsUrl, bytes.NewBufferString(data.Encode()))
 		if err != nil {
 			global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
-			done <- false // 通知失败
+			done <- modelSystem.JenkinsBuild{Success: false} // 通知失败
 			return
 		}
 		// 设置Auth Basic Auth
@@ -262,14 +268,15 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 		resp, err := client.Do(req)
 		if err != nil {
 			global.GVA_LOG.Error("发送post请求失败:", zap.Error(err))
-			done <- false
+			done <- modelSystem.JenkinsBuild{Success: false}
 			return
 		}
 		defer resp.Body.Close()
-		switch resp.StatusCode {
-		case http.StatusOK, http.StatusCreated:
+		if resp.StatusCode == http.StatusOK || resp.StatusCode == http.StatusCreated {
 			global.GVA_LOG.Info("构建请求成功，任务已启动 \n", zap.String("status", resp.Status))
-			done <- true
+			ReplyWithMessage(bot, webhook, ViewName+": 已成功触发构建 "+fullJobName+" 任务，30秒后获取构建状态")
+			done <- modelSystem.JenkinsBuild{Success: true, FullJobName: fullJobName}
+			return
 		}
 	}
 }
@@ -322,7 +329,7 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 		ReplyWithMessage(bot, webhook, fmt.Sprintf("Jenkins 构建请求失败，状态码: %d\n 视图名: %s\n 任务名: %s\n", resp.StatusCode, ViewName, Name))
 	} else {
 		fmt.Println("Jenkins 构建任务成功触发")
-		ReplyWithMessage(bot, webhook, ViewName+": "+"已成功触发构建"+Name+"任务...")
+		ReplyWithMessage(bot, webhook, ViewName+": "+"已成功触发构建"+Name+"任务... 30秒后获取更新状态")
 	}
 }
 
@@ -351,32 +358,19 @@ func GetJenkinsViews() []modelSystem.JenkinsView {
 	return data.Views
 }
 
-// GetLastBuildStatus  获取jenkins Job 任务状态
-func GetLastBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string, isProduction bool) (modelSystem.Build, error) {
+// GetJobBuildStatus  获取jenkins Job 任务状态
+func GetJobBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string, isProduction bool) (modelSystem.Build, error) {
+	global.GVA_LOG.Info("视图名: " + ViewName + "任务名: " + JobName)
 	// 引入的结构体
 	var build modelSystem.Build
 	var job modelSystem.JenkinsJob
-	// 引入不区分大小写的映射
-	caseInsensitiveMap := createCaseInsensitiveMap(ExtensionMap)
-	// 使用不区分大小写的映射Map
-	extName, _ := getCaseInsensitiveValue(caseInsensitiveMap, JobName)
-	var Name, jenkinsUrl string
+	var jenkinsUrl string
 	var body []byte //定义为 byte 类型  需要的时候进行类型转换
 	var err error
+
 	if isProduction {
 		// 生产环境
-		// 获取视图 前缀名称
-		preName := GetExtName(ViewName)
-		// 映射完 合成新的 jobName名称
-		Name := preName + extName
-		fmt.Printf("生产环境 拼接后原始 jenkins Job 名称: %s\n", Name)
-	} else {
-		// 测试环境
-		global.GVA_LOG.Info("测试环境  视图名，任务名" + ViewName + " " + JobName)
-	}
-	if isProduction {
-		// 生产环境
-		jenkinsUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/api/json"
+		jenkinsUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + JobName + "/api/json"
 		global.GVA_LOG.Info("生产环境URL: " + jenkinsUrl)
 
 		body, err = GetRequestJkBody(jenkinsUrl, isProduction)
@@ -396,10 +390,7 @@ func GetLastBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest
 		}
 	}
 	global.GVA_LOG.Info("实际的URL: \n" + jenkinsUrl)
-	if jenkinsUrl == "" {
-		global.GVA_LOG.Error("没有获取到Jenkins Url \n") // 记录错误日志
-		return modelSystem.Build{}, fmt.Errorf("")  // 返回错误信息
-	}
+
 	// 解析 Jenkins job 信息
 	if err := json.Unmarshal(body, &job); err != nil {
 		global.GVA_LOG.Error("解析失败 \n") // 记录错误日志
@@ -415,7 +406,7 @@ func GetLastBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest
 	var JobUrl string
 	if isProduction {
 		// 生产环境 构建号
-		JobUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
+		JobUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + JobName + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
 		global.GVA_LOG.Info("生产环境 构建号URL: \n" + JobUrl)
 
 	} else {

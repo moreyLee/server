@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	modelSystem "github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	system2 "github.com/flipped-aurora/gin-vue-admin/server/service/system"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/tebeka/selenium"
 	"go.uber.org/zap"
@@ -30,7 +29,8 @@ const (
 	captchaFile            = "./code.png"
 	fullPageScreenshotFile = "./full_page_screenshot.png"
 	ApiOCRUrl              = "http://localhost:8000/ocr"
-	chromedriver           = "/Users/david/tools/chromedriver"
+	chromedriver           = "/Users/david/tools/chromedriver/chromedriver"
+	port                   = 5555
 )
 
 // ReplyWithMessage 全局引用 用于小飞机发送消息
@@ -44,7 +44,7 @@ func ReplyWithMessage(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, 
 func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, siteName string) string {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
-	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
+	service, err := selenium.NewChromeDriverService(chromedriver, port, opts...)
 	if err != nil {
 		log.Printf("ChromeDriver server启动错误: %v", err)
 	}
@@ -68,9 +68,11 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	}
 	global.GVA_LOG.Info("当前程序执行路径:  " + dir)
 	//  最大化浏览器窗口
-	wd, err := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
+	wd, err := selenium.NewRemote(chromeCaps, "http://localhost:5555/wd/hub")
 	if err != nil {
-		global.GVA_LOG.Info("WebDriver 连接失败: %v", zap.Error(err))
+		global.GVA_LOG.Error("WebDriver 连接失败: %v", zap.Error(err))
+		errorMessage := fmt.Sprintf("WebDriver 连接失败: %v", zap.Error(err))
+		ReplyWithMessage(bot, webhook, errorMessage)
 	}
 	defer wd.Quit()
 
@@ -150,8 +152,24 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	}
 	global.GVA_LOG.Info("验证码图像成功保存到文件:  " + captchaFile)
 	// 获取OCR 解析的 验证码
-	captchaCode, _ := GetCaptchaCode()
-	captchaElem, _ = wd.FindElement(selenium.ByID, "captcha")
+	captchaCode, err := GetCaptchaCode(bot, webhook)
+	if err != nil {
+		global.GVA_LOG.Error("OCR解析验证码失败: \n ", zap.Error(err))
+		ReplyWithMessage(bot, webhook, fmt.Sprintf("OCR验证码验证失败，请稍后再试: %v", err))
+		return ""
+	}
+	captchaElem, err = wd.FindElement(selenium.ByID, "captcha")
+	if err != nil {
+		global.GVA_LOG.Error("找不到验证码输入框:", zap.Error(err))
+		ReplyWithMessage(bot, webhook, "找不到验证码输入框，请刷新页面")
+		return ""
+	}
+	//defer func() {
+	//	if r := recover(); r != nil {
+	//		global.GVA_LOG.Error("发送验证码输入失败:", zap.Any("error", r))
+	//		ReplyWithMessage(bot, webhook, fmt.Sprintf("发送验证码失败，请稍后再试: %v", r))
+	//	}
+	//}()
 	captchaElem.SendKeys(captchaCode)
 	// 点击登录按钮
 	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
@@ -178,7 +196,11 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	searchElem.Click()
 	time.Sleep(1 * time.Second)
 	//进入站点  需要加载稍慢
-	enterSiteElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[12]/div/div[1]/button[1]")
+	enterSiteElem, err := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[12]/div/div[1]/button[1]")
+	if err != nil {
+		ReplyWithMessage(bot, webhook, "站名名不存在: "+siteName+",请检查站点名称")
+		return ""
+	}
 	enterSiteElem.Click()
 	time.Sleep(10 * time.Second)
 	// 获取站点地址链接
@@ -191,12 +213,12 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	// 获取 新打开页面的站点url
 	siteLink, _ := wd.CurrentURL()
 	fmt.Println(siteName+"站点地址: ", siteLink)
-	fmt.Println()
+	ReplyWithMessage(bot, webhook, siteName+"站点地址:\n"+siteLink)
 	return siteLink
 }
 
 // GetCaptchaCode  获取OCR 解析的验证码
-func GetCaptchaCode() (string, error) {
+func GetCaptchaCode(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest) (string, error) {
 	imageData, err := os.ReadFile(captchaFile)
 	if err != nil {
 		global.GVA_LOG.Error("读取验证码文件失败: %v", zap.Error(err))
@@ -210,6 +232,7 @@ func GetCaptchaCode() (string, error) {
 	resp, err := http.PostForm(ApiOCRUrl, data)
 	if err != nil {
 		global.GVA_LOG.Error("发送OCR 请求失败: %v", zap.Error(err))
+		ReplyWithMessage(bot, webhook, "OCR 8000 端口请求失败，请检查服务是否正常！\n"+err.Error())
 		return "", err
 	}
 	defer resp.Body.Close()
@@ -243,170 +266,4 @@ func GetCaptchaCode() (string, error) {
 		global.GVA_LOG.Info("OCR 解析验证码失败: %v", zap.Any("response", result))
 		return "获取OCR验证码错误", nil
 	}
-}
-
-// AdminLoginSaveToken 基于token 模式免登录 获取后台链接地址
-func AdminLoginSaveToken(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest) string {
-	var opts []selenium.ServiceOption
-	selenium.SetDebug(true)
-	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
-	if err != nil {
-		log.Printf("ChromeDriver server启动错误: %v", err)
-	}
-	defer service.Stop()
-	// 配置 Chrome 浏览器选项以无痕模式启动
-	chromeCaps := selenium.Capabilities{
-		"browserName": "chrome"}
-	chromeOptions := []string{
-		"--disable-gpu", // 禁用GPU硬件加速
-		"--no-sandbox",
-		//"--headless",    // 开启无界面模式
-		//"--incognito", // 无痕模式
-		//"--windows-size=1920,1080,",
-		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
-	}
-	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
-		"args": chromeOptions,
-	}
-	//  最大化浏览器窗口
-	wd, err := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
-	if err != nil {
-		log.Printf("WebDriver 连接失败: %v", err)
-	}
-
-	err = wd.MaximizeWindow("")
-	defer wd.Quit()
-
-	// 打开管理后台
-	if err := wd.Get(adminURL); err != nil {
-		log.Printf("总后台登录首页打开失败:https://web.3333c.vip : %v", err)
-	}
-	// 刷新页面
-	if err := wd.Refresh(); err != nil {
-		panic(err)
-	}
-	time.Sleep(5 * time.Second)
-	// 输入用户名
-	usernameElem, _ := wd.FindElement(selenium.ByID, "username")
-	usernameElem.SendKeys(username)
-	// 输入密码
-	passwordElem, _ := wd.FindElement(selenium.ByID, "password")
-	passwordElem.SendKeys(password)
-	// 等待60秒 手动输入验证码
-	time.Sleep(10 * time.Second)
-	// 登录
-	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
-	submitElem.Click()
-	time.Sleep(15 * time.Second)
-	// 登录成功后  检查当前url  确认是否成功
-	currentURL, _ := wd.CurrentURL()
-	fmt.Printf("当前页面URL:%s\n", currentURL)
-	// 使用 js 获取 local Storage 中的值
-	token, _ := wd.ExecuteScript("return window.localStorage.getItem('token');", nil)
-	fmt.Printf("token值%s\n", token)
-	//
-	// 将登录后的token 保存到数据库
-	tgService := system2.TgService{}
-	err = tgService.SaveAdminLoginToken(token.(string))
-	if err != nil {
-		ReplyWithMessage(bot, webhook, "写入数据库报错:\n"+err.Error())
-	}
-	// 打开一个新的标签页 并导航到新地址
-	newTitle := "window.open('https://web.3333c.vip/#/site/index', '_blank');"
-	wd.ExecuteScript(newTitle, nil)
-	// 切换到新打开的标签页
-	handles, _ := wd.WindowHandles()
-	// 切换到新打开的标签页
-	if len(handles) > 1 {
-		wd.SwitchWindow(handles[len(handles)-1])
-	}
-	time.Sleep(60 * time.Second)
-	return token.(string)
-}
-
-// GetLinkNoLogin 免登录 获取后台链接地址
-func GetLinkNoLogin() string {
-	var opts []selenium.ServiceOption
-	selenium.SetDebug(true)
-	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)
-	if err != nil {
-		log.Printf("ChromeDriver server启动错误: %v", err)
-	}
-	defer service.Stop()
-	// 配置 Chrome 浏览器选项
-	chromeCaps := selenium.Capabilities{
-		"browserName": "chrome"}
-	chromeOptions := []string{
-		"--disable-gpu", // 禁用GPU硬件加速
-		"--no-sandbox",
-		//"--headless",    // 开启无界面模式
-		//"--incognito", // 无痕模式
-		//"--windows-size=1920,1080,",
-		"--disable-dev-shm-usage", // 禁用/dev/shm的使用，防止内存共享问题
-		//"--user-data-dir=/Users/david/Library/Application Support/Google/Chrome",
-	}
-
-	chromeCaps["goog:chromeOptions"] = map[string]interface{}{
-		"args": chromeOptions,
-	}
-	//  最大化浏览器窗口
-	wd, _ := selenium.NewRemote(chromeCaps, "http://localhost:4444/wd/hub")
-	err = wd.MaximizeWindow("")
-	defer wd.Quit()
-	// 打开目标网页
-	wd.Get("https://web.3333c.vip/#/site/index")
-	time.Sleep(5 * time.Second)
-	wd.Refresh()
-
-	// 创建一个新的cookie
-	tokenstr := "ab60b1a668c8caeeef41f25691a79694"
-	cookie := &selenium.Cookie{Name: "HTTP_TOKEN", Value: tokenstr, Path: "/"}
-
-	// 将token 添加到cookies 中
-	if err := wd.AddCookie(cookie); err != nil {
-		panic(err)
-	}
-	// 刷新页面 让cookies 生效
-	time.Sleep(10 * time.Second)
-	if err := wd.Refresh(); err != nil {
-		panic(err)
-	}
-	// 查询数据库获取登录token
-	tgService := system2.TgService{}
-	token, err := tgService.GetAdminLoginToken() // 返回的类型为对象
-	fmt.Printf("获取数据库的token%v 报错信息:%v\n", token, err)
-	fmt.Printf("数据库httpToken值: %v\n", token.HttpToken)
-	// 使用 js 获取 local Storage 中的值
-	//nologintoken, _ := wd.ExecuteScript("return window.localStorage.getItem('token');", nil)
-	//fmt.Printf("登录前的token值%s\n", nologintoken)
-	// 将 Token 写入Local Storage
-	//script := fmt.Sprintf("window.localStorage.setItem('token', '%s');", token.HttpToken)
-	//fmt.Println("script执行情况:  ", script)
-	//_, err = wd.ExecuteScript(script, nil)
-	//if err != nil {
-	//	fmt.Println("设置local Storage 报错", err)
-	//}
-	//tokenstr, ok := token.HttpToken.(string)
-	//_, err = wd.ExecuteScript(`window.localStorage.setItem('token', arguments[0]);`, []interface{}{token.HttpToken})
-	//fmt.Printf("写入浏览器的token%v\n", []interface{}{token.HttpToken})
-	//if err != nil {
-	//	log.Fatalf("设置token 到localStorage 报错:%v", err)
-	//}
-	// 打开一个新的标签页 并导航到新地址
-	//newTitle := "window.open('https://web.3333c.vip/#/site/index', '_blank');"
-	//wd.ExecuteScript(newTitle, nil)
-	// 切换到新打开的标签页
-	//handles, _ := wd.WindowHandles()
-	// 切换到新打开的标签页
-	//if len(handles) > 1 {
-	//	wd.SwitchWindow(handles[len(handles)-1])
-	//}
-	//time.Sleep(15 * time.Second)
-	// 刷新页面 已使token生效 验证免登录
-	//wd.Refresh()
-	time.Sleep(900 * time.Second)
-	// 访问目标页面 验证免登录
-	//wd.Get("https://web.3333c.vip/#/site/index")
-	//time.Sleep(3600 * time.Second)
-	return token.HttpToken
 }

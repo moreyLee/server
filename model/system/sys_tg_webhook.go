@@ -100,9 +100,11 @@ type WebhookRequest struct {
 
 // JenkinsBuild struct 构建项目时的视图名和项目名
 type JenkinsBuild struct {
-	ViewName string `json:"view_name" gorm:"column:prod_site_name"` // 视图名称
-	JobName  string `json:"job_name"`                               // 项目名称
-	TaskType string `json:"task_type"`                              // 任务类型  如 后台API 前台API
+	ViewName    string `json:"view_name" gorm:"column:prod_site_name"` // 视图名称
+	JobName     string `json:"job_name"`                               // 项目名称
+	TaskType    string `json:"task_type"`                              // 任务类型  如 后台API 前台API
+	Success     bool   `json:"success"`                                // 生产 成功状态
+	FullJobName string `json:"full_job_name"`                          // 生产 拼接后的任务名
 }
 
 type AdminLoginToken struct {

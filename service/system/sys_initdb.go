@@ -104,9 +104,9 @@ func (initDBService *InitDBService) InitDB(conf request.InitDB) (err error) {
 	case "pgsql":
 		initHandler = NewPgsqlInitHandler()
 		ctx = context.WithValue(ctx, "dbtype", "pgsql")
-	case "sqlite":
-		initHandler = NewSqliteInitHandler()
-		ctx = context.WithValue(ctx, "dbtype", "sqlite")
+	//case "sqlite":
+	//	initHandler = NewSqliteInitHandler()
+	//	ctx = context.WithValue(ctx, "dbtype", "sqlite")
 	case "mssql":
 		initHandler = NewMssqlInitHandler()
 		ctx = context.WithValue(ctx, "dbtype", "mssql")

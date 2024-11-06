@@ -1,0 +1,15 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="GoDfaErrorMayBeNotNil" enabled="true" level="WARNING" enabled_by_default="true">
+      <functions>
+        <function importPath="github.com/flipped-aurora/gin-vue-admin/server/task" name="GetLastBuildStatus" />
+        <function importPath="net/http" name="NewRequest" />
+      </functions>
+      <methods>
+        <method importPath="github.com/go-telegram-bot-api/telegram-bot-api/v5" receiver="*BotAPI" name="GetWebhookInfo" />
+        <method importPath="github.com/tebeka/selenium" receiver="WebDriver" name="FindElement" />
+      </methods>
+    </inspection_tool>
+  </profile>
+</component>

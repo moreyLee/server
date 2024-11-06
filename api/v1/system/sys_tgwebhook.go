@@ -28,64 +28,69 @@ func BuildJenkins(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) ([]string
 	// 获取外部参数
 	params := strings.Fields(msg)
 	log.Printf("参数数量: %d, 参数内容: %v", len(params), params)
-	// 引入标志变量 确保只输出一次
-	// 检查参数数量
-	if len(params) < 5 { // 不要改 容易数组内存越界
-		// 只返回是否有效 不做消息返回 又调用者输出消息
+	switch {
+	case len(params) == 2:
+		usage := params[1]
+		if usage == "用法" {
+			Help(bot, webhook)
+			return nil, true
+		} else {
+			return nil, false
+		}
+	case len(params) == 4: //@CG33333_bot 正式 速8娱乐  后台链接
+		envName := params[1]
+		validEnvs := []string{"正式", "正式环境", "生产", "生产环境"}
+		if !validateEnv(envName, validEnvs, bot, webhook) {
+			expectedEnvs := strings.Join(validEnvs, " | ")
+			global.GVA_LOG.Info("第一个参数 环境参数无效，请任选其一输入 '" + expectedEnvs + "'")
+			ReplyWithMessage(bot, webhook, "第一个参数 环境参数无效，请任选其一输入 '"+expectedEnvs+"'")
+			return nil, false
+		}
+		linkEnvs := []string{"正式", "正式环境", "生产", "生产环境"}
+		if validateEnv(envName, linkEnvs, bot, webhook) {
+			GetAdminLink(bot, webhook)
+		}
+		return nil, true
+	case len(params) == 5: // @CG33333_bot 正式 AK国际  后台API 更新
+		envName := params[1]
+		validEnvs := []string{"正式", "正式环境", "生产", "生产环境", "测试", "测试环境"}
+		if !validateEnv(envName, validEnvs, bot, webhook) {
+			expectedEnvs := strings.Join(validEnvs, " | ")
+			global.GVA_LOG.Info("第一个参数 环境参数无效，请任选其一输入 '" + expectedEnvs + "'")
+			ReplyWithMessage(bot, webhook, "第一个参数 环境参数无效，请任选其一输入 '"+expectedEnvs+"'")
+			return nil, false
+		}
+		prodEnvs := []string{"正式", "正式环境", "生产", "生产环境"}
+		if validateEnv(envName, prodEnvs, bot, webhook) {
+			BuildJobsWithProd(bot, webhook)
+			GetBranch(bot, webhook) // 待优化
+		}
+		testEnvs := []string{"测试", "测试环境"}
+		if validateEnv(envName, testEnvs, bot, webhook) {
+			BuildJobsWithEnvTest(bot, webhook)
+			RestartService(bot, webhook)
+			ExecShell(bot, webhook)
+		}
+	case len(params) < 5:
 		global.GVA_LOG.Error("输入参数不足，请参考用法:  @机器人 用法")
 		ReplyWithMessage(bot, webhook, "输入参数不足，请参考用法:  @机器人 用法 ")
 		return nil, false
+	default:
+		//global.GVA_LOG.Error("不满足触发条件")
 	}
-	// 检查环境参数  第一个参数  参数内容
-	envName := params[1]
-	validEnvs := []string{"正式", "正式环境", "生产", "生产环境", "测试", "测试环境"}
-	if !validateEnv(envName, validEnvs, bot, webhook) {
-		expectedEnvs := strings.Join(validEnvs, " | ")
-		global.GVA_LOG.Info("第一个参数 环境参数无效，请任选其一输入 '" + expectedEnvs + "'")
-		ReplyWithMessage(bot, webhook, "第一个参数 环境参数无效，请任选其一输入 '"+expectedEnvs+"'")
-		return nil, false
-	}
-	prodEnvs := []string{"正式", "正式环境", "生产", "生产环境"}
-	if validateEnv(envName, prodEnvs, bot, webhook) {
-		BuildJobsWithProd(bot, webhook)
-
-	}
-	testEnvs := []string{"测试", "测试环境"}
-	if validateEnv(envName, testEnvs, bot, webhook) {
-		BuildJobsWithEnvTest(bot, webhook)
-
-	}
-
-	//if validateEnv()
 	return params, true
 }
 
-// BuildJobsWithText 基于文本消息构建jenkins 任务   生产环境
+// BuildJobsWithProd 基于文本消息构建jenkins 任务   生产环境
 func BuildJobsWithProd(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	msg := webhook.Message.Text
 	params := strings.Fields(msg)
 	// 通道done 确保任务状态反馈
-	done := make(chan bool)
+	done := make(chan system.JenkinsBuild)
 	if params == nil || len(params) == 0 {
 		return
 	}
 	fmt.Printf("生产params: %v, valid: %v", params)
-	//// 验证生产环境参数 第一个参数内容
-	//envName := params[1]
-	//validEnvs := []string{"正式", "正式环境", "生产", "生产环境"}
-	//// 检查生产环境参数是否有效
-	//isValidEnv := false
-	//for _, env := range validEnvs {
-	//	if env == envName {
-	//		isValidEnv = true
-	//		break
-	//	}
-	//}
-	//if !isValidEnv {
-	//	global.GVA_LOG.Error("生产环境 参数不正确")
-	//	ReplyWithMessage(bot, webhook, "生产环境 参数不正确")
-	//	return
-	//}
 	// 验证站点参数  第二个参数 检查生产站点名称是否存在
 	SiteName := params[2]
 	tgService := system2.TgService{}
@@ -96,7 +101,7 @@ func BuildJobsWithProd(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	exists, err := tgService.CheckJenView(jkBuild.ViewName, "jenkins_env_prod", "prod_site_name")
 	if err != nil {
 		global.GVA_LOG.Error(" 数据库错误: ", zap.Error(err))
-		ReplyWithMessage(bot, webhook, "站点名称未找到")
+		ReplyWithMessage(bot, webhook, "数据库中未找到站点名称")
 		return
 	}
 	if !exists {
@@ -114,7 +119,7 @@ func BuildJobsWithProd(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 		return
 	}
 	if action != "更新" {
-		global.GVA_LOG.Error("构建参数必须为 更新！！")
+		global.GVA_LOG.Info("构建参数必须为 更新！！")
 		return
 	}
 
@@ -127,22 +132,23 @@ func BuildJobsWithProd(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 			}
 		}()
 		// 检查用户权限
-		if isUserAuthorized(webhook.Message.From.UserName) {
+		if isUserAuthorized(bot, webhook, webhook.Message.From.UserName) {
 			task.JenkinsBuildJobWithView(bot, webhook, jkBuild.ViewName, jkBuild.TaskType, done)
 		} else {
 			global.GVA_LOG.Error("该用户无权限执行构建任务！！")
+			done <- system.JenkinsBuild{Success: false}
 		}
 	}()
 	// 主协程 也要等待任务完成并获取构建状态
 	// select 语句监听 done 通道
 	select {
-	case success := <-done:
-		if success {
+	case result := <-done:
+		if result.Success {
 			// 加业务逻辑容易导致死循环
 			global.GVA_LOG.Info("协程返回成功，进入构建状态发送\n")
 			go func() {
 				time.Sleep(30 * time.Second)
-				//sendBuildStatus(bot, webhook)
+				task.GetJobBuildStatus(bot, webhook, jkBuild.ViewName, result.FullJobName, true)
 			}()
 		} else {
 			global.GVA_LOG.Error("主协程通知 视图: " + jkBuild.ViewName + " 不存在构建任务失败，无法获取构建任务状态\n") // 别删
@@ -162,22 +168,6 @@ func BuildJobsWithEnvTest(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 		return
 	}
 	fmt.Printf("测试params: %v, valid: %v", params)
-	// 验证生产环境参数 第一个参数内容
-	//envName := params[1]
-	//validEnvs := []string{"测试", "测试环境"}
-	//// 检查生产环境参数是否有效
-	//isValidEnv := false
-	//for _, env := range validEnvs {
-	//	if env == envName {
-	//		isValidEnv = true
-	//		break
-	//	}
-	//}
-	//if !isValidEnv {
-	//	global.GVA_LOG.Error("测试环境 参数不正确")
-	//	ReplyWithMessage(bot, webhook, "测试环境 参数不正确")
-	//	return
-	//}
 	// 验证站点信息 第二个参数
 
 	// 验证任务类型
@@ -188,7 +178,9 @@ func BuildJobsWithEnvTest(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	}
 	// 验证触发动作
 	action := params[4] // 指令
-	if !validateAction(action, bot, webhook) {
+
+	if action != "更新" {
+		ReplyWithMessage(bot, webhook, "测试环境  触发构建参数 更新 ")
 		return
 	}
 
@@ -200,7 +192,7 @@ func BuildJobsWithEnvTest(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 				global.GVA_LOG.Error("构建任务中出现异常错误: %v", zap.Any("error", err))
 			}
 		}()
-		if isUserAuthorized(webhook.Message.From.UserName) {
+		if isUserAuthorized(bot, webhook, webhook.Message.From.UserName) {
 			task.JenkinsJobsWithTest(bot, webhook, jkBuild.ViewName, jkBuild.TaskType)
 		}
 	}()
@@ -223,9 +215,7 @@ func BuildJobsWithEnvTest(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 }
 
 // isUserAuthorized 检查用户是否被授权
-func isUserAuthorized(username string) bool {
-	bot := &tgbotapi.BotAPI{}
-	webhook := system.WebhookRequest{}
+func isUserAuthorized(bot *tgbotapi.BotAPI, webhook system.WebhookRequest, username string) bool {
 	//authorizedUsers := []string{"David5886", "nikon_aaa", "tank9999999"}
 	authorizedUsers := global.GVA_CONFIG.Telegram.AuthorizedUser
 	for _, user := range authorizedUsers {
@@ -233,7 +223,7 @@ func isUserAuthorized(username string) bool {
 			return true
 		}
 	}
-	ReplyWithMessage(bot, webhook, "用户未授权 请联系运维 @David5886")
+	ReplyWithMessage(bot, webhook, "用户 @"+username+" 未授权 请联系夜班运维 @David5886")
 	return false
 }
 
@@ -245,8 +235,6 @@ func validateEnv(envName string, validEnvs []string, bot *tgbotapi.BotAPI, webho
 			return true
 		}
 	}
-	//expectedEnvs := strings.Join(validEnvs, "或")
-	//global.GVA_LOG.Info("第一个参数 环境参数无效，请任选其一输入 '" + expectedEnvs + "'")
 	return false
 }
 
@@ -258,7 +246,7 @@ func validateType(taskType string, bot *tgbotapi.BotAPI, webhook system.WebhookR
 			return true
 		}
 	}
-	expectedEnvs := strings.Join(validTypes, "或")
+	expectedEnvs := strings.Join(validTypes, " | ")
 	ReplyWithMessage(bot, webhook, "第三个参数 类型参数无效，请任选其一输入 '"+expectedEnvs+"'")
 	return false
 }
@@ -270,18 +258,9 @@ func validateAction(actionName string, bot *tgbotapi.BotAPI, webhook system.Webh
 			return true
 		}
 	}
-	expectedEnvs := strings.Join(validActions, "或")
-	ReplyWithMessage(bot, webhook, "第五个构建动作参数无效，请任选其一输入 '"+expectedEnvs+"'")
+	expectedEnvs := strings.Join(validActions, " | ")
+	ReplyWithMessage(bot, webhook, "第五个参数 构建参数无效，请任选其一输入 '"+expectedEnvs+"'")
 	return false
-}
-
-// sendBuildStatus 异步发送构建状态信息 避免阻塞主协程的其他操作  主协程不需要等待构建状态发送函数的执行 可以更快响应其他操作
-func sendBuildStatus(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
-	go func() {
-		if jkBuild.ViewName != "" && jkBuild.JobName != "" {
-			task.GetLastBuildStatus(bot, webhook, jkBuild.ViewName, jkBuild.JobName, false)
-		}
-	}()
 }
 
 // GetBranch 获取构建任务 git 分支
@@ -305,17 +284,19 @@ func GetBranch(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	if !validateAction(breachName, bot, webhook) {
 		return
 	}
+	if breachName != "查分支" {
+		return
+	}
 	jkBuild.ViewName = params[2] // 参数2  视图名
 	jkBuild.JobName = params[3]  //
-	if breachName == "查分支" {
-		jobConfig := task.GetBranch(bot, webhook, jkBuild.ViewName, jkBuild.JobName)
-		if len(jobConfig.SCM.UserRemoteConfigs.URLs) > 0 && len(jobConfig.SCM.Branches) > 0 && len(jobConfig.SCM.UserRemoteConfigs.URLs) > 0 {
-			replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "生产环境\n"+jkBuild.ViewName+" "+jkBuild.JobName+"git分支:  "+jobConfig.SCM.Branches[0]+"\n"+
-				jkBuild.ViewName+" "+jkBuild.JobName+"仓库地址:  "+jobConfig.SCM.UserRemoteConfigs.URLs[0])
-			replyText.ReplyToMessageID = webhook.Message.MessageID
-			_, _ = bot.Send(replyText)
-		}
+	jobConfig := task.GetBranch(bot, webhook, jkBuild.ViewName, jkBuild.JobName)
+	if len(jobConfig.SCM.UserRemoteConfigs.URLs) > 0 && len(jobConfig.SCM.Branches) > 0 && len(jobConfig.SCM.UserRemoteConfigs.URLs) > 0 {
+		replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "生产环境\n"+jkBuild.ViewName+" "+jkBuild.JobName+"git分支:  "+jobConfig.SCM.Branches[0]+"\n"+
+			jkBuild.ViewName+" "+jkBuild.JobName+"仓库地址:  "+jobConfig.SCM.UserRemoteConfigs.URLs[0])
+		replyText.ReplyToMessageID = webhook.Message.MessageID
+		_, _ = bot.Send(replyText)
 	}
+
 }
 
 // GetAdminLink 获取管理后台地址
@@ -326,26 +307,19 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 		// 获取外部参数
 		params := strings.Fields(msg)
 		if len(params) > 3 {
-			siteName := params[1]
-			envName := params[2]
-			log.Printf("参数一：%s", siteName)
-			log.Printf("参数2：%s", envName)
+			siteName := params[2]
 			if params[3] == "后台链接" {
 				go func() {
 					defer func() {
 						if err := recover(); err != nil {
-							code, _ := selenium.GetCaptchaCode()
+							code, _ := selenium.GetCaptchaCode(bot, webhook)
 							message := siteName + "解析验证码错误:   " + code + "\n有效验证码为4位数字，请@机器人重试！"
 							replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
 							replyText.ReplyToMessageID = webhook.Message.MessageID
 							_, _ = bot.Send(replyText)
 						}
 					}()
-					siteLink := selenium.GetAdminLinkTools(bot, webhook, siteName)
-					message := siteName + "站点地址: " + siteLink
-					replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
-					replyText.ReplyToMessageID = webhook.Message.MessageID
-					_, _ = bot.Send(replyText)
+					selenium.GetAdminLinkTools(bot, webhook, siteName)
 				}()
 			}
 			if params[3] == "后台图片" {
@@ -372,21 +346,24 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 func RestartService(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	msg := webhook.Message.Text
 	botUsername := bot.Self.UserName
-	if strings.Contains(msg, "@"+botUsername) {
-		params := strings.Fields(msg)
-		if len(params) > 3 {
-			// 测试环境
-			siteName := params[1]
-			EnvName := params[2]
-			command := params[3]
-			switch EnvName {
-			case "测试":
-				ReplyWithMessage(bot, webhook, "这是测试环境"+siteName+EnvName+command)
-				//task.ManageService(siteName, EnvName, command)
-			}
-
-		}
+	if !strings.Contains(msg, "@"+botUsername) {
+		return
 	}
+	params := strings.Fields(msg)
+	log.Printf("分支参数: %d, 参数内容: %v", len(params), params)
+
+	//siteName := params[2] // 测试环境 站点名称
+
+	Optype := params[3]                      // 执行类型
+	if !validateType(Optype, bot, webhook) { // 验证执行类型参数
+		return
+	}
+
+}
+
+// ExecShell  测试环境 执行脚本
+func ExecShell(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
+
 }
 
 // Help 打印帮助信息
@@ -399,11 +376,12 @@ func Help(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	params := strings.Fields(msg)
 	if len(params) > 1 && params[0] == global.GVA_CONFIG.Telegram.BotName && params[1] == "用法" {
 		ReplyWithMessage(bot, webhook, "使用说明:\n"+
-			"@机器人 <视图名> <任务名> 更新 - 指定视图名和任务名触发构建\n"+
-			"示例: @机器人  28国际 生产环境 后台API 更新\n"+
-			"@机器人 AK国际 生产环境 后台API 查分支 \n"+
-			"@CG33333_bot 28国际 生产 后台地址 更新 \n"+
-			"@CG33333_bot 28国际 测试  亿万-T1(自营) 更新")
+			"示例: @机器人  环境 站点 任务类型  触发动作\n"+
+			"构建Jenkins 需授权用户"+
+			"@机器人  生产环境 28国际 后台API 查分支 \n"+
+			"@CG33333_bot 生产环境 28国际 后台API 更新 \n"+
+			"@CG33333_bot 测试环境 T1 定时任务 更新 \n"+
+			"@CG33333_bot 测试环境 T1 定时任务 查分支")
 	}
 
 }
@@ -450,11 +428,4 @@ func (b *BaseApi) TelegramWebhook(c *gin.Context) {
 		return
 	}
 	BuildJenkins(bot, update)
-	GetAdminLink(bot, update) // 获取总后台站点链接
-	//BuildJobsWithText(bot, update)    // 生产环境  更新jenkins代码
-	//BuildJobsWithEnvTest(bot, update) // 测试环境 更新jenkins代码
-	//GetBranch(bot, update)            //  生产环境  获取项目分支与仓库
-	//RestartService(bot, update)
-	//Help(bot, update)
-	//sendBuildStatus(bot, update)
 }

@@ -4,16 +4,38 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="正式测试视图插入数据库">
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="根据关键字 进入对应生产测试函数">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/CheckBotGroup.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPERATOR.md" beforeDir="false" afterPath="$PROJECT_DIR$/OPERATOR.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code.png" beforeDir="false" afterPath="$PROJECT_DIR$/code.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.docker.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.docker.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/gorm_sqlite.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/oss_tencent.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/full_page_screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initialize/gorm.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/gorm.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initialize/gorm_sqlite.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/gorm_sqlite.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/system/request/sys_init.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/request/sys_init.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opera.md" beforeDir="false" afterPath="$PROJECT_DIR$/OPERATOR.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/system/sys_tgwebhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/system/sys_initdb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/system/sys_initdb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/system/sys_initdb_sqlite.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/system/sys_initdb_sqlite.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/text_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/text_webhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/JenkinsCommon.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsCommon.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/JenkinsEnvTestAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsEnvTestAPI.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/task/tasks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/selenium/selenium.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/upload/aws_s3.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/upload/tencent_cos.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/upload/upload.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/upload/upload.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,58 +88,58 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build TestOCR.go (1).executor": "Run",
-    "Go Build.go build TestOCR.go.executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server.executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1).executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2).executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor": "Run",
-    "Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cgmanageTest.executor": "Run",
-    "Go Build.go build qingstor_func.go.executor": "Run",
-    "Go Build.go build selenium.go.executor": "Run",
-    "Go Build.go build sendMessage.go (1).executor": "Run",
-    "Go Build.go build sendMessage.go.executor": "Run",
-    "Go Build.go build telegram.go.executor": "Run",
-    "Go Build.go build telegram_polling.go.executor": "Run",
-    "Go Build.go build telegramwebhook.go.executor": "Run",
-    "Go Build.go build testTelegram.go.executor": "Run",
-    "Go 构建.go build InsertJK_view_Mysql.go.executor": "Run",
-    "Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server.executor": "Run",
-    "Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor": "Run",
-    "Go 构建.go build telegramwebhook.go.executor": "Run",
-    "Go 构建.go build text_webhook.go.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/david/Downloads/projects/server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "",
-    "nodejs_package_manager_path": "npm",
-    "service.view.auto.scroll.to.source": "true",
-    "settings.editor.selected.configurable": "Console",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build TestOCR.go (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build TestOCR.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test (2).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cgmanageTest.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build qingstor_func.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build selenium.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build sendMessage.go (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build sendMessage.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build telegram.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build telegram_polling.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build telegramwebhook.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build testTelegram.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build InsertJK_view_Mysql.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build telegramwebhook.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build text_webhook.go.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/david/Downloads/projects/server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Console&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\projects\server\task" />
@@ -138,7 +160,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Go 构建.go build text_webhook.go">
+  <component name="RunManager" selected="Go 构建.go build InsertJK_view_Mysql.go">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -166,6 +188,15 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/CheckBotGroup.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build text_webhook.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -177,13 +208,15 @@
     </configuration>
     <list>
       <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server" />
+      <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
       <item itemvalue="Go 构建.go build InsertJK_view_Mysql.go" />
       <item itemvalue="Go 构建.go build text_webhook.go" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go 构建.go build text_webhook.go" />
         <item itemvalue="Go 构建.go build InsertJK_view_Mysql.go" />
+        <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
+        <item itemvalue="Go 构建.go build text_webhook.go" />
       </list>
     </recent_temporary>
   </component>
@@ -257,7 +290,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="获取jenkins构建参数" />
     <MESSAGE value="通过jenkinsAPI 构建项目 &#10;TG发送消息" />
     <MESSAGE value="TG 消息单实例" />
     <MESSAGE value="测试群组" />
@@ -282,7 +314,8 @@
     <MESSAGE value="测试cookies" />
     <MESSAGE value="基于协程效验视图名，异步发送构建消息" />
     <MESSAGE value="正式测试视图插入数据库" />
-    <option name="LAST_COMMIT_MESSAGE" value="正式测试视图插入数据库" />
+    <MESSAGE value="根据关键字 进入对应生产测试函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="根据关键字 进入对应生产测试函数" />
   </component>
   <component name="VgoProject">
     <environment>

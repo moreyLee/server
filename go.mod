@@ -5,16 +5,13 @@ go 1.22
 toolchain go1.22.5
 
 require (
-	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
-	github.com/aws/aws-sdk-go v1.44.307
 	github.com/bndr/gojenkins v1.1.0
-	github.com/casbin/casbin/v2 v2.71.1
-	github.com/casbin/gorm-adapter/v3 v3.18.0
+	github.com/casbin/casbin/v2 v2.77.1
+	github.com/casbin/gorm-adapter/v3 v3.29.0
 	github.com/flipped-aurora/ws v1.0.2
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6
 	github.com/gin-gonic/gin v1.9.1
-	github.com/glebarez/sqlite v1.8.0
 	github.com/go-resty/resty/v2 v2.13.1
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
@@ -26,7 +23,6 @@ require (
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/olivere/elastic v6.2.37+incompatible
 	github.com/otiai10/copy v1.7.0
-	github.com/otiai10/gosseract/v2 v2.4.1
 	github.com/pkg/errors v0.9.1
 	github.com/qingstor/qingstor-sdk-go/v4 v4.4.0
 	github.com/qiniu/api.v7/v7 v7.4.1
@@ -41,7 +37,6 @@ require (
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.2
 	github.com/tebeka/selenium v0.9.9
-	github.com/tencentyun/cos-go-sdk-v5 v0.7.42
 	github.com/unrolled/secure v1.13.0
 	github.com/xuri/excelize/v2 v2.8.0
 	go.mongodb.org/mongo-driver v1.12.1
@@ -51,15 +46,24 @@ require (
 	golang.org/x/sync v0.5.0
 	golang.org/x/text v0.15.0
 	gorm.io/driver/mysql v1.5.6
-	gorm.io/driver/postgres v1.5.7
-	gorm.io/driver/sqlserver v1.5.1
-	gorm.io/gorm v1.25.9
+	gorm.io/driver/postgres v1.5.9
+	gorm.io/driver/sqlserver v1.5.3
+	gorm.io/gorm v1.25.10
 	nhooyr.io/websocket v1.8.7
 )
 
 require (
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.48 // indirect
+	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible // indirect
+	github.com/glebarez/go-sqlite v1.20.3 // indirect
+	github.com/glebarez/sqlite v1.7.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
+	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
+	github.com/tidwall/gjson v1.14.4 // indirect
+	github.com/tidwall/match v1.1.1 // indirect
+	github.com/tidwall/pretty v1.2.0 // indirect
 	gocv.io/x/gocv v0.37.0 // indirect
+	modernc.org/sqlite v1.20.3 // indirect
 )
 
 require (
@@ -76,7 +80,6 @@ require (
 	github.com/fortytw2/leaktest v1.2.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/glebarez/go-sqlite v1.21.1 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/go-openapi/jsonpointer v0.20.2 // indirect
 	github.com/go-openapi/jsonreference v0.20.3 // indirect
@@ -108,7 +111,7 @@ require (
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
-	github.com/microsoft/go-mssqldb v1.1.0 // indirect
+	github.com/microsoft/go-mssqldb v1.6.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -156,5 +159,4 @@ require (
 	modernc.org/libc v1.24.1 // indirect
 	modernc.org/mathutil v1.5.0 // indirect
 	modernc.org/memory v1.6.0 // indirect
-	modernc.org/sqlite v1.23.0 // indirect
 )

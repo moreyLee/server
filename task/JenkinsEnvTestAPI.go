@@ -13,6 +13,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // JenkinsJobsWithTest  测试环境 触发构建Jenkins 任务   基于 tasks.json 文件获取任务
@@ -39,7 +40,7 @@ func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookReques
 	// 根据视图名和任务类型查找任务
 	for taskViewName, taskList := range tasks {
 		// 输出 TaskViewName 便于调试
-		fmt.Printf("当前的视图名: %s\n", taskViewName)
+		global.GVA_LOG.Info("当前的视图名: " + taskViewName)
 		// 检查 taskViewName 是否包含输入的 viewName 关键词
 		if strings.EqualFold(strings.TrimSpace(taskViewName), strings.TrimSpace(viewName)) {
 			fmt.Printf("已匹配的视图名: %s, 任务类型: %s\n", viewName, taskType)
@@ -50,7 +51,9 @@ func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookReques
 					fmt.Printf("匹配到任务名: jobName: %v\n", task.JobName)
 					// 构建测试环境
 					JenkinsBuildJob(bot, webhook, viewName, task.JobName, false) // 构建测试环境
-
+					time.Sleep(30 * time.Second)
+					// 调用函数轮询获取任务状态
+					go GetJobBuildStatus(bot, webhook, viewName, task.JobName, false)
 					return &task
 				}
 			}
@@ -58,7 +61,9 @@ func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookReques
 			return nil
 		}
 	}
-	global.GVA_LOG.Error("未找到匹配的视图名: %s\n", zap.Any("站点:", viewName))
+	global.GVA_LOG.Error("未找到匹配的视图名: ", zap.Any("站点:", viewName))
+	ReplyWithMessage(bot, webhook, "测试环境 未找到匹配的站点: "+viewName)
+
 	return nil
 }
 
