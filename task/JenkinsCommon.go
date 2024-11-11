@@ -31,6 +31,7 @@ var ExtensionMap = map[string]string{
 	"CF游戏":  "CF游戏",
 	"DT28":  "DT28",
 	"新直属":   "新直属模版",
+	"恒旺28":  "恒旺28",
 }
 
 // createCaseInsensitiveMap 创建一个不区分大小写的映射

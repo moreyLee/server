@@ -17,7 +17,7 @@ import (
 )
 
 // JenkinsJobsWithTest  测试环境 触发构建Jenkins 任务   基于 tasks.json 文件获取任务
-func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, MapName string, taskType string) *modelSystem.JenkinsBuild {
+func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, MapName string, taskType string, done chan modelSystem.JenkinsBuild) *modelSystem.JenkinsBuild {
 	// 引入不区分大小写的映射
 	caseInsensitiveMap := createCaseInsensitiveMap(ExtensionMap)
 	// 使用不区分大小写的映射Map
@@ -50,7 +50,7 @@ func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookReques
 					fmt.Printf("输入的任务类型: %s, 任务中的任务类型: %s\n", taskType, task.TaskType)
 					fmt.Printf("匹配到任务名: jobName: %v\n", task.JobName)
 					// 构建测试环境
-					JenkinsBuildJob(bot, webhook, viewName, task.JobName, false) // 构建测试环境
+					go JenkinsBuildJob(bot, webhook, viewName, task.JobName, false, done) // 构建测试环境
 					time.Sleep(30 * time.Second)
 					// 调用函数轮询获取任务状态
 					go GetJobBuildStatus(bot, webhook, viewName, task.JobName, false)

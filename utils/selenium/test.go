@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func GetAdminLinkTool(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, siteName string) error {
+func GetAdminLinkPhoto(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, siteName string) error {
 	var opts []selenium.ServiceOption
 	selenium.SetDebug(true)
 	service, err := selenium.NewChromeDriverService(chromedriver, 4444, opts...)

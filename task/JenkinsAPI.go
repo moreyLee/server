@@ -246,8 +246,8 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 	// 获取构建参数 params为map类型
 	params := GetBuildJobParam(bot, webhook, fullJobName, true)
 	if len(params) == 0 {
-		JenkinsBuildJob(bot, webhook, ViewName, fullJobName, true) //  无参数构建jenkins
-		fmt.Printf("%s %s : 无参数Job任务已触发构建\n", ViewName, fullJobName)
+		JenkinsBuildJob(bot, webhook, ViewName, fullJobName, true, done) //  无参数构建jenkins
+		global.GVA_LOG.Info(fmt.Sprintf("%s %s : 无参数Job任务已触发构建\n", ViewName, fullJobName))
 		done <- modelSystem.JenkinsBuild{Success: true} // 通知成功
 		return
 	}
@@ -282,7 +282,7 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 }
 
 // JenkinsBuildJob  无参数构建 支持生产环境和测试环境
-func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, Name string, isProduction bool) {
+func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, Name string, isProduction bool, done chan modelSystem.JenkinsBuild) {
 	// 输入视图名和任务名  只接受两个参数
 	if Name == "" || ViewName == "" {
 		fmt.Printf("错误: 需要传入视图名或任务名 至少一个参数！！")
@@ -317,20 +317,15 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 		global.GVA_LOG.Error("发送post请求失败:", zap.Error(err))
 		return
 	}
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
-			global.GVA_LOG.Error("关闭响应体失败:", zap.Error(err))
-		}
-	}(resp.Body)
-	// 检查响应状态
-	if resp.StatusCode != http.StatusCreated {
-		global.GVA_LOG.Error(fmt.Sprintf("构建请求失败，状态码: %d", resp.StatusCode))
-		ReplyWithMessage(bot, webhook, fmt.Sprintf("Jenkins 构建请求失败，状态码: %d\n 视图名: %s\n 任务名: %s\n", resp.StatusCode, ViewName, Name))
-	} else {
-		fmt.Println("Jenkins 构建任务成功触发")
-		ReplyWithMessage(bot, webhook, ViewName+": "+"已成功触发构建"+Name+"任务... 30秒后获取更新状态")
+	defer resp.Body.Close()
+	if resp.StatusCode == http.StatusOK || resp.StatusCode == http.StatusCreated {
+		global.GVA_LOG.Info("构建请求成功，任务已启动 \n", zap.String("status", resp.Status))
+		ReplyWithMessage(bot, webhook, ViewName+": 已成功触发构建 "+Name+" 无参任务，30秒后获取构建状态")
+		done <- modelSystem.JenkinsBuild{Success: true, FullJobName: Name}
+		return
 	}
+	global.GVA_LOG.Error("构建请求失败， 状态码:\n", zap.String("status", resp.Status))
+	done <- modelSystem.JenkinsBuild{Success: false, FullJobName: Name}
 }
 
 // GetJenkinsViews 获取视图名和任务名 用于确定视图名是否存在
@@ -348,6 +343,10 @@ func GetJenkinsViews() []modelSystem.JenkinsView {
 		global.GVA_LOG.Error("发送post请求失败:", zap.Error(err))
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body) // 读取响应内容
+		global.GVA_LOG.Error(fmt.Sprintf("请求失败状态码: %d,  response body: %s ", resp.StatusCode, string(body)))
+	}
 	body, _ := io.ReadAll(resp.Body)
 	var data struct {
 		Views []modelSystem.JenkinsView `json:"views"`

@@ -4,38 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="根据关键字 进入对应生产测试函数">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/CheckBotGroup.go" afterDir="false" />
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="v1小版本更新">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPERATOR.md" beforeDir="false" afterPath="$PROJECT_DIR$/OPERATOR.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code.png" beforeDir="false" afterPath="$PROJECT_DIR$/code.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.docker.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.docker.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/gorm_sqlite.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/oss_tencent.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/full_page_screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initialize/gorm.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/gorm.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initialize/gorm_sqlite.go" beforeDir="false" afterPath="$PROJECT_DIR$/initialize/gorm_sqlite.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/system/request/sys_init.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/request/sys_init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/system/sys_tg_webhook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/system/sys_initdb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/system/sys_initdb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/system/sys_initdb_sqlite.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/system/sys_initdb_sqlite.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsCommon.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsCommon.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsEnvTestAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsEnvTestAPI.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/task/tasks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/selenium/selenium.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/upload/aws_s3.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/upload/tencent_cos.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/upload/upload.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/upload/upload.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/selenium/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,7 +270,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="通过jenkinsAPI 构建项目 &#10;TG发送消息" />
     <MESSAGE value="TG 消息单实例" />
     <MESSAGE value="测试群组" />
     <MESSAGE value="测试webhook" />
@@ -315,7 +294,8 @@
     <MESSAGE value="基于协程效验视图名，异步发送构建消息" />
     <MESSAGE value="正式测试视图插入数据库" />
     <MESSAGE value="根据关键字 进入对应生产测试函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="根据关键字 进入对应生产测试函数" />
+    <MESSAGE value="v1小版本更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1小版本更新" />
   </component>
   <component name="VgoProject">
     <environment>

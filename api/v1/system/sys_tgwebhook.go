@@ -90,7 +90,7 @@ func BuildJobsWithProd(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	if params == nil || len(params) == 0 {
 		return
 	}
-	fmt.Printf("生产params: %v, valid: %v", params)
+	global.GVA_LOG.Info(fmt.Sprintf("生产params: %v, valid: %v", params))
 	// 验证站点参数  第二个参数 检查生产站点名称是否存在
 	SiteName := params[2]
 	tgService := system2.TgService{}
@@ -162,6 +162,7 @@ func BuildJobsWithProd(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 func BuildJobsWithEnvTest(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	msg := webhook.Message.Text
 	params := strings.Fields(msg)
+	status := make(chan system.JenkinsBuild)
 	// 通道done 确保任务状态反馈
 	done := make(chan bool)
 	if params == nil || len(params) == 0 {
@@ -193,7 +194,7 @@ func BuildJobsWithEnvTest(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 			}
 		}()
 		if isUserAuthorized(bot, webhook, webhook.Message.From.UserName) {
-			task.JenkinsJobsWithTest(bot, webhook, jkBuild.ViewName, jkBuild.TaskType)
+			task.JenkinsJobsWithTest(bot, webhook, jkBuild.ViewName, jkBuild.TaskType, status)
 		}
 	}()
 	// 主协程 也要等待任务完成并获取构建状态
@@ -313,10 +314,8 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 					defer func() {
 						if err := recover(); err != nil {
 							code, _ := selenium.GetCaptchaCode(bot, webhook)
-							message := siteName + "解析验证码错误:   " + code + "\n有效验证码为4位数字，请@机器人重试！"
-							replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, message)
-							replyText.ReplyToMessageID = webhook.Message.MessageID
-							_, _ = bot.Send(replyText)
+							global.GVA_LOG.Error("获取后台链接异常", zap.Any("err", err))
+							ReplyWithMessage(bot, webhook, "有效验证码 4位数字"+code)
 						}
 					}()
 					selenium.GetAdminLinkTools(bot, webhook, siteName)
@@ -326,12 +325,10 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 				go func() {
 					defer func() {
 						if err := recover(); err != nil {
-							replyText := tgbotapi.NewMessage(webhook.Message.Chat.ID, "后台登录异常！！")
-							replyText.ReplyToMessageID = webhook.Message.MessageID
-							_, _ = bot.Send(replyText)
+							ReplyWithMessage(bot, webhook, "后台登录")
 						}
 					}()
-					err := selenium.GetAdminLinkTool(bot, webhook, siteName)
+					err := selenium.GetAdminLinkPhoto(bot, webhook, siteName)
 					if err != nil {
 						global.GVA_LOG.Error("获取后台链接图片失败", zap.Any("err", err))
 					}

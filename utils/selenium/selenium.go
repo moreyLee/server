@@ -87,7 +87,7 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 		global.GVA_LOG.Error("刷新页面报错", zap.Error(err))
 		return ""
 	}
-	time.Sleep(5 * time.Second)
+	time.Sleep(3 * time.Second)
 	// 输入用户名
 	usernameElem, _ := wd.FindElement(selenium.ByID, "username")
 	usernameElem.SendKeys(username)
@@ -164,20 +164,24 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 		ReplyWithMessage(bot, webhook, "找不到验证码输入框，请刷新页面")
 		return ""
 	}
-	//defer func() {
-	//	if r := recover(); r != nil {
-	//		global.GVA_LOG.Error("发送验证码输入失败:", zap.Any("error", r))
-	//		ReplyWithMessage(bot, webhook, fmt.Sprintf("发送验证码失败，请稍后再试: %v", r))
-	//	}
-	//}()
+
 	captchaElem.SendKeys(captchaCode)
 	// 点击登录按钮
-	submitElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
+	submitElem, err := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/main/section/main/div/div/form/div[4]/div/div/span/button")
 	submitElem.Click()
-	time.Sleep(5 * time.Second)
+	if err != nil {
+		code, _ := GetCaptchaCode(bot, webhook)
+		ReplyWithMessage(bot, webhook, "登录失败 验证识别错误:"+code+"\n"+err.Error())
+		return ""
+	}
+	time.Sleep(3 * time.Second)
 
 	//  点击 租户管理
 	rentAdminElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/aside[1]/div/div/ul/li[1]/div")
+	//if err != nil {
+	//	global.GVA_LOG.Error("点击租户管理失败"+err.Error(), zap.Error(err))
+	//	return ""
+	//}
 	rentAdminElem.Click()
 	time.Sleep(1 * time.Second)
 	// 点击 站点管理

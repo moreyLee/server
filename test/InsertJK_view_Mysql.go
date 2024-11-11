@@ -35,7 +35,7 @@ func ProdView(jenkinsUrl string, user string, token string) ([]JenkinsView, erro
 	// 检查响应的状态码是否为 200
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body) // 读取响应内容
-		return nil, fmt.Errorf("request failed with status code %d, response body: %s", resp.StatusCode, body)
+		return nil, fmt.Errorf("请求失败状态码:  %d, response body: %s", resp.StatusCode, body)
 	}
 	// 读取并解析 JSON 数据
 	body, err := io.ReadAll(resp.Body)
@@ -47,7 +47,7 @@ func ProdView(jenkinsUrl string, user string, token string) ([]JenkinsView, erro
 	}
 	err = json.Unmarshal(body, &viewNames)
 	if err != nil {
-		log.Fatalf("JSON body 解析失败: %v", err)
+		fmt.Printf("JSON body 解析失败: %v", err)
 	}
 	return viewNames.Views, nil
 }
@@ -134,7 +134,7 @@ func main() {
 	prodViews, _ := ProdView(jenkinsURL, user, tokenApi)
 	views, err := FetchJenkinsData(jkTestURL, TestUser, TestToken)
 	// 数据库连接
-	db, err := sql.Open("mysql", "root:Devops%588@tcp(localhost:3306)/cg_devops")
+	db, err := sql.Open("mysql", "root:rOYkHEc#jOesowLL@tcp(localhost:3306)/cg_devops")
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
