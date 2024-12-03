@@ -6,6 +6,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	system2 "github.com/flipped-aurora/gin-vue-admin/server/service/system"
 	"github.com/flipped-aurora/gin-vue-admin/server/task"
+	"github.com/flipped-aurora/gin-vue-admin/server/utils/cg"
 	"github.com/flipped-aurora/gin-vue-admin/server/utils/selenium"
 	"github.com/gin-gonic/gin"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -76,7 +77,7 @@ func BuildJenkins(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) ([]string
 		ReplyWithMessage(bot, webhook, "输入参数不足，请参考用法:  @机器人 用法 ")
 		return nil, false
 	default:
-		//global.GVA_LOG.Error("不满足触发条件")
+		global.GVA_LOG.Info("不满足触发条件")
 	}
 	return params, true
 }
@@ -314,7 +315,7 @@ func GetAdminLink(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 					defer func() {
 						if err := recover(); err != nil {
 							code, _ := selenium.GetCaptchaCode(bot, webhook)
-							global.GVA_LOG.Error("获取后台链接异常", zap.Any("err", err))
+							global.GVA_LOG.Warn("获取后台链接异常", zap.Any("err", err))
 							ReplyWithMessage(bot, webhook, "有效验证码 4位数字"+code)
 						}
 					}()
@@ -363,6 +364,14 @@ func ExecShell(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 
 }
 
+// ValidActiveTime 构建jenkins 迪拜时间 19点-2点
+func ValidActiveTime() bool {
+	now := time.Now()
+	startTime := time.Date(now.Year(), now.Month(), now.Day(), 7, 0, 0, 0, now.Location())
+	endTime := time.Date(now.Year(), now.Month(), now.Day(), 2, 0, 0, 0, now.Location())
+	return now.After(startTime) && now.Before(endTime)
+}
+
 // Help 打印帮助信息
 func Help(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 	msg := webhook.Message.Text
@@ -371,11 +380,13 @@ func Help(bot *tgbotapi.BotAPI, webhook system.WebhookRequest) {
 		return
 	}
 	params := strings.Fields(msg)
-	if len(params) > 1 && params[0] == global.GVA_CONFIG.Telegram.BotName && params[1] == "用法" {
+	// 解密 bot Username
+	decryptedBotName, _ := cg.Decrypt(global.GVA_CONFIG.Telegram.BotName, global.GVA_CONFIG.Telegram.AesKey)
+	global.GVA_LOG.Info("解密后的bot username " + decryptedBotName)
+	if len(params) > 1 && params[0] == decryptedBotName && params[1] == "用法" {
 		ReplyWithMessage(bot, webhook, "使用说明:\n"+
 			"示例: @机器人  环境 站点 任务类型  触发动作\n"+
-			"构建Jenkins 需授权用户"+
-			"@机器人  生产环境 28国际 后台API 查分支 \n"+
+			"构建Jenkins 需管理员授权 \n"+
 			"@CG33333_bot 生产环境 28国际 后台API 更新 \n"+
 			"@CG33333_bot 测试环境 T1 定时任务 更新 \n"+
 			"@CG33333_bot 测试环境 T1 定时任务 查分支")
@@ -390,15 +401,20 @@ func ReplyWithMessage(bot *tgbotapi.BotAPI, webhook system.WebhookRequest, messa
 	_, _ = bot.Send(replyText)
 }
 func (b *BaseApi) TelegramWebhook(c *gin.Context) {
+	// 解密token
+	decryptedToken, _ := cg.Decrypt(global.GVA_CONFIG.Telegram.BotToken, global.GVA_CONFIG.Telegram.AesKey)
+	//global.GVA_LOG.Info(fmt.Sprintf("解密后的BotToken %s\n", decryptedToken))
 	// 初始化 bot 实例
-	bot, err := tgbotapi.NewBotAPI(global.GVA_CONFIG.Telegram.BotToken)
+	bot, err := tgbotapi.NewBotAPI(decryptedToken)
 	if err != nil {
 		log.Fatal(err)
 	}
 	// 开启debug 模式
 	bot.Debug = true
 	// 创建一个webhook 网络钩子
-	webhook, err := tgbotapi.NewWebhook(global.GVA_CONFIG.Telegram.WebhookUrl)
+	decryptedWebhook, _ := cg.Decrypt(global.GVA_CONFIG.Telegram.WebhookUrl, global.GVA_CONFIG.Telegram.AesKey)
+	global.GVA_LOG.Info(fmt.Sprintf("解密后的webhook %s\n", decryptedWebhook))
+	webhook, err := tgbotapi.NewWebhook(decryptedWebhook)
 	// 对webhook实例发起请求
 	_, err = bot.Request(webhook)
 	// 获取webhookInfo 返回的请求状态

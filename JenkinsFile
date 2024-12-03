@@ -1,76 +1,93 @@
-def Version(){
-    return new Date().format('yyyy-MM-dd HH:mm')
-}
 pipeline {
     agent any
     environment {
-        _version = Version()
+        _version = ''
+        build_file = "devops-api-${BUILD_NUMBER}.tar.gz" // 打包文件名称
+        remote_path = '/home/wwwroot/devops'  // 测试环境远程路径
+        ansible_host = 'csapi'
     }
     stages {
-        stage('打印环境变量'){
-                steps{
-                    script {
-                        sh 'printenv'
+        stage('当前版本号') {
+            steps {
+                script {
+                    def Version = { -> new Date().format('yyyy-MM-dd HH:mm') }
+                    env._version = Version()
+                    echo "当前版本号：${env._version}"
+                    sh 'printenv'
+                }
+            }
+        }
+        stage('清理项目目录代码环境') {
+                    steps {
+                        script {
+                           echo "确保本地拉取的为最新代码"
+                               sh """
+                                   rm -r -f ./* || true
+                               """
+                               echo "本地环境清理完成"
+                        }
                     }
                 }
-        }
         stage('拉取代码') {
             steps {
-               checkout scmGit(branches: [[name: '*/master']], browser: github('https://github.com/moreyLee/game-api.git'), extensions: [], userRemoteConfigs: [[credentialsId: '5edb9434-b237-4bd7-a166-5d2c91d0ec8f', url: 'https://github.com/moreyLee/game-api.git']])
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                        url: 'http://43.199.1.126:9099/david/devops-api.git',
+                        credentialsId: 'f8424330-6e14-4f9b-bbe5-5726b6e97a88'
+                    ]]
+                ])
             }
         }
-        stage('config.yaml配置文件替换为测试环境'){
-            steps{
-               configFileProvider([configFile(fileId: '41906e5e-6fcb-4825-b174-d855f0a900ab', targetLocation: 'conf/config.yaml')]) {
-                    echo 'config.yaml 配置文件替换成功'
+       stage('打包代码') {
+             steps {
+                   script{
+                       sh """
+                       tar --warning=no-file-changed  -zcf ${build_file}  ./  || true
+                       """
+                       echo "代码已打包为: ${build_file}"
+                    }
+             }
+       }
+       stage('验证打包') {
+             steps {
+               script{
+                       def fileExists = sh(script: "test -f ${build_file}", returnStatus: true) == 0
+                         if (!fileExists) {
+                           error "打包失败：未找到文件 ${build_file}"
+                       } else {
+                           echo "打包成功：已打包文件 ${build_file} 存在"
+                       }
+                   }
+             }
+       }
+       stage('上传到测试环境') {
+            steps {
+                  script{
+                        echo "清理远程测试环境并上传新代码"
+                          sh """
+                              ansible-playbook -i /etc/ansible/hosts ./upload_code.yml \
+                              --extra-vars 'src_path=./${build_file} dest_path=${remote_path} target_host=${ansible_host}'
+                          """
+                          echo "新代码文件上传完成"
+                  }
+            }
+       }
+
+       stage('远程构建镜像') {
+           steps {
+               script {
+                       sh """
+                           ansible-playbook -i /etc/ansible/hosts ./build_docker.yml \
+                           --extra-vars 'target_host=${ansible_host} dest_path=${remote_path}'
+                       """
+                       echo "远程镜像构建完成"
                }
             }
-        }
-        stage('dockerfile替换为测试环境'){
-            steps{
-              configFileProvider([configFile(fileId: 'ed3935e4-2fb5-4c34-87ea-74bef589d946', targetLocation: 'dockerfile')]) {
-                    echo 'dockerfile 配置文件替换成功'
-              }
-            }
-        }
-        stage('构建代码'){
-            steps{
-                sh '''
-                docker version
-                echo "脚本日志解析器"
-                ls -lh /bin/sh
-                echo "容器中环境变量是否生效"
-                source /etc/profile
-                go version
-                export GO111MODULE=on
-                go build -o k8-game-api
-                '''
-            }
-        }
-        stage('构建镜像'){
-            steps{
-                sh '''
-                docker build -t k8-game-api .
-                '''
-            }
-        }
-        stage('推送镜像'){
-            steps{
-                echo "时间戳\n+${_version}"
-                echo "推送镜像到镜像仓库-登录"
-                sh 'docker login -uadmin -pDevops%8 https://harbor.dev.com/'
-                echo "镜像打标签 这步是必须的 推送至harbor "
-                sh 'docker tag k8-game-api:latest harbor.dev.com/k8s/k8-game-api:latest'
-                echo "推送到harbor"
-                sh 'docker push harbor.dev.com/k8s/k8-game-api:latest'
-                echo '清除镜像标签'
-                sh 'docker rmi -f harbor.dev.com/k8s/k8-game-api:latest'
-                echo '删除应用镜像'
-                sh 'docker rmi -f k8-game-api:latest'
-                echo '清理none 镜像'
-//                 sh "docker images -a | grep none | awk '{ print $3}' | xargs docker rmi"
-
-            }
-        }
+       }
     }
 }

@@ -18,11 +18,22 @@ import (
 
 // JenkinsJobsWithTest  测试环境 触发构建Jenkins 任务   基于 tasks.json 文件获取任务
 func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, MapName string, taskType string, done chan modelSystem.JenkinsBuild) *modelSystem.JenkinsBuild {
-	// 引入不区分大小写的映射
-	caseInsensitiveMap := createCaseInsensitiveMap(ExtensionMap)
-	// 使用不区分大小写的映射Map
-	viewName, _ := getCaseInsensitiveValue(caseInsensitiveMap, MapName)
-	global.GVA_LOG.Info("真实视图名: \n" + viewName)
+	var viewName string
+	// 如果输入视图名是 T 开头的 则进行映射
+	if strings.HasPrefix(strings.TrimSpace(MapName), "T") {
+		// 引入不区分大小写的映射
+		caseInsensitiveMap := createCaseInsensitiveMap(ExtensionMap)
+		global.GVA_LOG.Info(fmt.Sprintf("caseInsensitiveMap 内容: %+v", caseInsensitiveMap))
+		// 使用不区分大小写的映射Map
+		viewName, _ = getCaseInsensitiveValue(caseInsensitiveMap, MapName)
+
+		global.GVA_LOG.Info("映射后的视图名: " + viewName + "\n")
+	} else {
+		// 如果不是以 T 开头， 直接使用MapName 作为视图名
+		viewName = MapName
+		global.GVA_LOG.Info("直接使用视图名: " + viewName)
+	}
+
 	var tasks map[string][]modelSystem.JenkinsBuild
 	jenkinsTasks, err := os.ReadFile("./task/tasks.json")
 	if err != nil {
@@ -36,7 +47,7 @@ func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookReques
 		return nil
 	}
 	// 输出task 便于调试
-	fmt.Printf("解析后的任务配置 %+v\n", tasks)
+	//fmt.Printf("解析后的task.json文件内容: %+v\n", tasks)
 	// 根据视图名和任务类型查找任务
 	for taskViewName, taskList := range tasks {
 		// 输出 TaskViewName 便于调试
@@ -63,7 +74,6 @@ func JenkinsJobsWithTest(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookReques
 	}
 	global.GVA_LOG.Error("未找到匹配的视图名: ", zap.Any("站点:", viewName))
 	ReplyWithMessage(bot, webhook, "测试环境 未找到匹配的站点: "+viewName)
-
 	return nil
 }
 

@@ -14,10 +14,31 @@ https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/setwe
 https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/setWebhook?url=https://e498-217-165-23-20.ngrok-free.app/telegram-webhook
 https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/getWebhookInfo
 https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/deleteWebhook
-### 打包部署
+### 程序打包
 go build  生成 server 二进制
+go clean -modcache
+
 ### 打包成指定的包名称
 go build -o devops-api
-## 镜像部署 基于dockerfile 
-go build -t devops-api:v1 . 
-go clean -modcache
+GOOS=linux GOARCH=amd64 go build -o devops-api main.go   # linux 平台
+## dockerfile 镜像部署
+docker  build -t devops-api:v1 . 
+# dockerfile 清理构建缓存
+
+
+# 建立远程分支仓库
+git remote add origin http://43.199.1.126:9099/david/devops-api.git
+# 查看分支 
+git branch 
+# 查看远程分支 
+git remote -v 
+# 记得先切换分支   git push 到公司gitlab
+git checkout prod  
+#  提交代码  --force 强制推送  覆盖远程仓库   
+git push origin prod 
+git push origin prod --force 
+# 取消缓存中所有文件
+git status 
+
+# 查看mysql 活动连接数
+SHOW STATUS WHERE `variable_name` = 'Threads_connected';

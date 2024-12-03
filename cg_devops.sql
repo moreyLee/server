@@ -1330,3 +1330,25 @@ INSERT INTO `sys_users` VALUES (4, '2024-05-25 19:34:41.664', '2024-05-25 19:34:
 INSERT INTO `sys_users` VALUES (5, '2024-05-28 23:22:33.925', '2024-05-28 23:22:33.925', NULL, 'f9e25372-d47f-44da-bcec-4572bea26a76', 'rm0023', '$2a$10$ZasivoDiGTHK7.jjqWHl7u7/DlpQcjKsnGu3q6ly1WGWbIaE84czq', '删除admin', 'dark', 'https://qmplusimg.henrongyi.top/gva_header.jpg', '#fff', '#1890ff', 888, '', '', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+DROP TABLE IF EXISTS `server_groups`;
+CREATE TABLE server_groups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_name VARCHAR(100) NOT NULL,
+    group_nickname VARCHAR(100) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS `servers`;
+CREATE TABLE servers (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     group_id INT NOT NULL,
+     site_name VARCHAR(100) NOT NULL,
+     site_code INT NOT NULL,
+     status ENUM('active', 'inactive') DEFAULT 'active',
+     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     FOREIGN KEY (group_id) REFERENCES server_groups(id) ON DELETE CASCADE
+);

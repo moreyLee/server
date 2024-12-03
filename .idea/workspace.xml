@@ -4,18 +4,37 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="v1小版本更新">
+    <list default="true" id="7082d34d-43f0-45e9-8831-71bf703edcef" name="Changes" comment="构建jenkins 稳定版 测试 正式 无参 有参">
+      <change afterPath="$PROJECT_DIR$/JenkinsFile_k8s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_docker.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/InsertSiteName_mysql.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/ces.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/upload_code.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/cg/encryption.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JenkinsFile" beforeDir="false" afterPath="$PROJECT_DIR$/JenkinsFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPERATOR.md" beforeDir="false" afterPath="$PROJECT_DIR$/OPERATOR.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/system/sys_tgwebhook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cg_devops.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cg_devops.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code.png" beforeDir="false" afterPath="$PROJECT_DIR$/code.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/telegram.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/telegram.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cookies.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/full_page_screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsAPI.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsCommon.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsCommon.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/JenkinsEnvTestAPI.go" beforeDir="false" afterPath="$PROJECT_DIR$/task/JenkinsEnvTestAPI.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/task/tasks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/cgmanageTest/sendMessage.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/cgmanageTest/testJenkins.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/cgmanageTest/testTelegram.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/cg/testTelegram.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/selenium/selenium.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/selenium.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/selenium/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/selenium/test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tgwebhook/sendfile.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +49,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///usr/local/go" />
+  <component name="GOROOT" url="file://$USER_HOME$/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.23.3.darwin-arm64" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -90,8 +109,12 @@
     &quot;Go Build.go build telegramwebhook.go.executor&quot;: &quot;Run&quot;,
     &quot;Go Build.go build testTelegram.go.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build InsertJK_view_Mysql.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build InsertSiteName_mysql.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build ces.go.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build telegramwebhook.go.executor&quot;: &quot;Run&quot;,
     &quot;Go 构建.go build text_webhook.go.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -111,25 +134,29 @@
     &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Console&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
       &quot;mysql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/新建临时文件&quot;: [
+      &quot;yaml&quot;
     ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="D:\projects\server\task" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="D:\projects\server\test" />
       <recent name="D:\projects\server" />
       <recent name="D:\projects\server\service\system" />
       <recent name="D:\projects\server\router\system" />
-      <recent name="D:\projects\server\task" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -140,7 +167,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Go 构建.go build InsertJK_view_Mysql.go">
+  <component name="RunManager" selected="Go 构建.go build InsertSiteName_mysql.go">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -159,6 +186,24 @@
       <filePath value="$PROJECT_DIR$/test/InsertJK_view_Mysql.go" />
       <method v="2" />
     </configuration>
+    <configuration name="go build InsertSiteName_mysql.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/InsertSiteName_mysql.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build ces.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/test/ces.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -168,35 +213,39 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/test" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server/utils/cg" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/CheckBotGroup.go" />
+      <filePath value="$PROJECT_DIR$/utils/cg/encryption.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build text_webhook.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <package value="github.com/flipped-aurora/gin-vue-admin/server" />
+      <package value="github.com/flipped-aurora/gin-vue-admin/server/utils/cg" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/test/text_webhook.go" />
+      <filePath value="$PROJECT_DIR$/utils/cg/aes.go" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server" />
-      <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
+      <item itemvalue="Go 构建.go build InsertSiteName_mysql.go" />
+      <item itemvalue="Go 构建.go build ces.go" />
+      <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg" />
+      <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg (1)" />
       <item itemvalue="Go 构建.go build InsertJK_view_Mysql.go" />
-      <item itemvalue="Go 构建.go build text_webhook.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go 构建.go build InsertSiteName_mysql.go" />
         <item itemvalue="Go 构建.go build InsertJK_view_Mysql.go" />
-        <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/test" />
-        <item itemvalue="Go 构建.go build text_webhook.go" />
+        <item itemvalue="Go 构建.go build ces.go" />
+        <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg (1)" />
+        <item itemvalue="Go 构建.go build github.com/flipped-aurora/gin-vue-admin/server/utils/cg" />
       </list>
     </recent_temporary>
   </component>
@@ -270,7 +319,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="TG 消息单实例" />
     <MESSAGE value="测试群组" />
     <MESSAGE value="测试webhook" />
     <MESSAGE value="上传" />
@@ -295,7 +343,8 @@
     <MESSAGE value="正式测试视图插入数据库" />
     <MESSAGE value="根据关键字 进入对应生产测试函数" />
     <MESSAGE value="v1小版本更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1小版本更新" />
+    <MESSAGE value="构建jenkins 稳定版 测试 正式 无参 有参" />
+    <option name="LAST_COMMIT_MESSAGE" value="构建jenkins 稳定版 测试 正式 无参 有参" />
   </component>
   <component name="VgoProject">
     <environment>

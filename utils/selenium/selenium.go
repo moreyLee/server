@@ -150,7 +150,7 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	if err := png.Encode(captchaOutputFile, captchaImg); err != nil {
 		log.Fatalf("验证码图像解码报错Error: %v", err)
 	}
-	global.GVA_LOG.Info("验证码图像成功保存到文件:  " + captchaFile)
+	global.GVA_LOG.Info("验证码图像成功保存到文件:  ")
 	// 获取OCR 解析的 验证码
 	captchaCode, err := GetCaptchaCode(bot, webhook)
 	if err != nil {
@@ -174,31 +174,41 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 		ReplyWithMessage(bot, webhook, "登录失败 验证识别错误:"+code+"\n"+err.Error())
 		return ""
 	}
-	time.Sleep(3 * time.Second)
+	time.Sleep(3 * time.Second) // 登录完成
+
+	//弹窗 商户首页数据异常
+	//excepElem, err := wd.FindElement(selenium.ByCSSSelector, ".ant-modal-confirm-btns")
+	//excepElem.Click()
 
 	//  点击 租户管理
 	rentAdminElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/aside[1]/div/div/ul/li[1]/div")
-	//if err != nil {
-	//	global.GVA_LOG.Error("点击租户管理失败"+err.Error(), zap.Error(err))
-	//	return ""
-	//}
 	rentAdminElem.Click()
 	time.Sleep(1 * time.Second)
+	global.GVA_LOG.Info(fmt.Sprintf("点击租户管理 %s\n 等待1秒", rentAdminElem))
+
 	// 点击 站点管理
 	siteAdminElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"/merchants$Menu\"]/li[1]/a")
 	siteAdminElem.Click()
 	time.Sleep(10 * time.Second)
+	global.GVA_LOG.Info(fmt.Sprintf("点击站点管理 %s\n 等待10秒", siteAdminElem))
+
 	// 点击 没有权限 弹窗
 	IknowElem, _ := wd.FindElement(selenium.ByCSSSelector, ".ant-modal-confirm-btns")
 	IknowElem.Click()
+	global.GVA_LOG.Info(fmt.Sprintf("点击没权限弹窗 %s\n ", IknowElem))
+
 	// 输入 站点名称
 	siteNameElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[1]/div[1]/div/span/span/span[2]/input")
 	siteNameElem.SendKeys(siteName)
 	time.Sleep(1 * time.Second)
+	global.GVA_LOG.Info(fmt.Sprintf("点击 站点名称 等待1秒 %s\n ", siteNameElem))
+
 	// 点击 搜索按钮
 	searchElem, _ := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[1]/div[7]/button")
 	searchElem.Click()
 	time.Sleep(1 * time.Second)
+	global.GVA_LOG.Info(fmt.Sprintf("点击 搜索按钮 等待1秒 %s\n ", searchElem))
+
 	//进入站点  需要加载稍慢
 	enterSiteElem, err := wd.FindElement(selenium.ByXPATH, "//*[@id=\"root\"]/section/section/main/section/main/div/div[3]/div[2]/section/main/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[12]/div/div[1]/button[1]")
 	if err != nil {
@@ -207,6 +217,8 @@ func GetAdminLinkTools(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	}
 	enterSiteElem.Click()
 	time.Sleep(10 * time.Second)
+	global.GVA_LOG.Info(fmt.Sprintf("点击 进入站点 等待10秒 %s\n ", enterSiteElem))
+
 	// 获取站点地址链接
 	handles, _ := wd.WindowHandles() // 获取当前所有窗口句柄
 	// 点击打开一个新窗口 切换到新窗口
@@ -245,7 +257,7 @@ func GetCaptchaCode(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest) (s
 		global.GVA_LOG.Error("读取OCR 响应失败:  %v", zap.Error(err))
 		return "", err
 	}
-	fmt.Println("验证码json:  " + string(body))
+	//fmt.Println("验证码json:  " + string(body))
 	// 定义一个结构体或map 来存储解析后的 JSON 数据
 	var result map[string]interface{}
 	err = json.Unmarshal(body, &result)

@@ -1,0 +1,48 @@
+- name: 上传代码压缩包到远程服务器
+  hosts: "{{ target_host }}"  # 动态传入目标主机
+  tasks:
+    - name: 检查目标主机联通性
+      ansible.builtin.ping:
+    - name: 清理远程测试环境旧代码和压缩包
+      ansible.builtin.shell:
+        cmd: "rm -r -f {{ dest_path }}/* || true"
+      changed_when: false  # 防止因无文件删除报错
+    - name: 检查目标路径是否存在
+      ansible.builtin.shell:
+        cmd: "test -d {{ dest_path }} || mkdir -p {{ dest_path }}"
+      register: path_check
+      changed_when: path_check.stdout != ""  # 标记为更改条件
+      failed_when: path_check.rc != 0  # 失败条件
+    - name: 确认路径存在
+      ansible.builtin.debug:
+          msg: "目标路径 {{ dest_path }} 已准备好，开始上传代码压缩包。"
+    - name: 上传代码压缩包文件
+      ansible.builtin.copy:
+        src: "{{ src_path }}"  # 本地路径
+        dest: "{{ dest_path }}"  # 远程路径
+    - name: 验证文件是否上传成功
+      ansible.builtin.stat:
+          path: "{{ dest_path }}/{{ src_path | basename }}"
+      register: file_check
+    - name: 显示上传结果
+      ansible.builtin.debug:
+          msg: >
+            文件上传状态: 
+            - 存在: {{ file_check.stat.exists }}
+            - 大小: {{ "%.2f" | format(file_check.stat.size | default(0) / 1048576) }} MB
+            - 路径: {{ file_check.stat.path }}
+    - name: 解压远程压缩包
+      ansible.builtin.unarchive:
+        src: "{{ dest_path }}/{{ src_path | basename }}"
+        dest: "{{ dest_path }}"
+        remote_src: yes  # 指定解压文件在远程服务器上
+    - name: 验证远程文件解压成功 DockerFile
+      ansible.builtin.stat:
+        path: "{{ dest_path }}/Dockerfile"
+      register: dockerfile_check
+    - name: 显示解压结果
+      ansible.builtin.debug:
+          msg: >
+            解压成功:
+            - Dockerfile 是否存在: {{ dockerfile_check.stat.exists }}
+            - 目标路径: {{ dest_path }}

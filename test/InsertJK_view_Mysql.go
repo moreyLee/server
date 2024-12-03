@@ -94,7 +94,7 @@ func InsertDataToDB(db *sql.DB, views []JenkinsView, tableName string) error {
 		return fmt.Errorf("failed to prepare SQL statement: %v", err)
 	}
 	defer stmt.Close()
-	fmt.Printf("Retrieved views: %+v\n", views)
+	//fmt.Printf("Retrieved views: %+v\n", views)
 	for _, view := range views {
 		for _, job := range view.Jobs {
 			_, err := stmt.Exec(view.Name, job.Name)
@@ -127,14 +127,17 @@ func InsertViewsIntoDB(db *sql.DB, views []JenkinsView, tableName string, column
 func main() {
 	jenkinsURL := "http://jenkins1.3333d.vip/api/json?tree=views[name]"
 	user := "admin"
-	tokenApi := "11d2d3cd4784aa28379905bf13988ad50e"
+	tokenApi := "115202b0a72dadd4f89878e7d352aa8552"
 	jkTestURL := "https://jenkins.qiyinyun.com/api/json?tree=views[name,jobs[name]]"
 	TestUser := "root"
-	TestToken := "117a9f29e2793cb262426c8fbbb39b27cd"
+	TestToken := "11700ee17be3621da8bb4443e073763a69"
 	prodViews, _ := ProdView(jenkinsURL, user, tokenApi)
 	views, err := FetchJenkinsData(jkTestURL, TestUser, TestToken)
 	// 数据库连接
-	db, err := sql.Open("mysql", "root:rOYkHEc#jOesowLL@tcp(localhost:3306)/cg_devops")
+	//db, err := sql.Open("mysql", "root:Devops%588@tcp(localhost:3306)/cg_devops")
+	// 测试环境
+	db, err := sql.Open("mysql", "root:rOYkHEc#jOesowLL@tcp(47.243.51.88:3306)/cg_devops")
+
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
@@ -145,11 +148,7 @@ func main() {
 		log.Fatalf("Error inserting production views into database: %v", err)
 	}
 	// 插入测试视图名到数据库
-	//err = InsertViewsIntoDB(db, testViews, "jenkins_env_test", "test_site_name")
-	//if err != nil {
-	//	log.Fatalf("Error inserting test views into database: %v", err)
-	//}
-	//
+
 	err = InsertDataToDB(db, views, "jenkins_env_test")
 	if err != nil {
 		log.Fatalf("Error inserting test views into database: %v", err)

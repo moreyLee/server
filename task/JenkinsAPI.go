@@ -5,8 +5,10 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"github.com/flipped-aurora/gin-vue-admin/server/config"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	modelSystem "github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	"github.com/flipped-aurora/gin-vue-admin/server/utils/cg"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"go.uber.org/zap"
 	"io"
@@ -30,15 +32,21 @@ func ReplyWithMessage(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, 
 func GetBuildJobParam(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, JobName string, isProduction bool) map[interface{}]interface{} {
 	// 根据 isProduction 参数选择URL
 	var baseUrl, user, token string
+	// 调用解密函数获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return nil
+	}
 	if isProduction {
-		baseUrl = global.GVA_CONFIG.Jenkins.Url
-		user = global.GVA_CONFIG.Jenkins.User
-		token = global.GVA_CONFIG.Jenkins.ApiToken
+		baseUrl = jenkinsConfig.Url
+		user = jenkinsConfig.User
+		token = jenkinsConfig.ApiToken
 		fmt.Printf("生产url: " + baseUrl)
 	} else {
-		baseUrl = global.GVA_CONFIG.Jenkins.TestUrl
-		user = global.GVA_CONFIG.Jenkins.TestUser
-		token = global.GVA_CONFIG.Jenkins.TestToken
+		baseUrl = jenkinsConfig.TestUrl
+		user = jenkinsConfig.TestUser
+		token = jenkinsConfig.TestToken
 		ReplyWithMessage(bot, webhook, "测试URL"+baseUrl)
 		fmt.Printf("测试url " + baseUrl)
 	}
@@ -103,7 +111,13 @@ func parseJenkinsJobParams(body []byte) map[interface{}]interface{} {
 
 // GetExtName 获取JobName构建参数 获取jenkins job 的前缀名
 func GetExtName(ViewName string) string {
-	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/api/json"
+	// 调用解密函数获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return ""
+	}
+	jenkinsUrl := jenkinsConfig.Url + "view/" + ViewName + "/api/json"
 	// 定义一个map  用于保存获取的构建参数
 	//params := make(map[interface{}]interface{})
 	req, err := http.NewRequest("GET", jenkinsUrl, nil)
@@ -111,7 +125,7 @@ func GetExtName(ViewName string) string {
 		global.GVA_LOG.Error("创建post请求失败:", zap.Error(err))
 	}
 	// 设置Auth Basic Auth  user &token
-	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+	req.SetBasicAuth(jenkinsConfig.User, jenkinsConfig.ApiToken)
 	// 创建GET请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
@@ -234,10 +248,15 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 	// 映射完 合成jobName名称
 	fullJobName := preName + extName
 	log.Printf("映射后的任务名Name: %s", fullJobName)
-
-	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + fullJobName + "/buildWithParameters"
+	//调用解密函数获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return
+	}
+	jenkinsUrl := jenkinsConfig.Url + "view/" + ViewName + "/job/" + fullJobName + "/buildWithParameters"
 	// 判断一下 jenkins URL 是否有效
-	_, err := url.ParseRequestURI(jenkinsUrl)
+	_, err = url.ParseRequestURI(jenkinsUrl)
 	if err != nil {
 		global.GVA_LOG.Error("无效的jenkins URL:\n", zap.Error(err))
 		done <- modelSystem.JenkinsBuild{Success: false}
@@ -262,7 +281,7 @@ func JenkinsBuildJobWithView(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRe
 			return
 		}
 		// 设置Auth Basic Auth
-		req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+		req.SetBasicAuth(jenkinsConfig.User, jenkinsConfig.ApiToken)
 		// 发送post请求并获取响应
 		client := http.Client{Timeout: 5 * time.Second}
 		resp, err := client.Do(req)
@@ -286,18 +305,23 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 	// 输入视图名和任务名  只接受两个参数
 	if Name == "" || ViewName == "" {
 		fmt.Printf("错误: 需要传入视图名或任务名 至少一个参数！！")
-		//ReplyWithMessage(bot,webhook,"错误: 需要传入视图名或任务名 至少一个参数！！")
 		return
 	}
 	var jenkinsUrl string
+	// 调用解密函数获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return
+	}
 	if isProduction {
 		// 拼接生产环境 URL    变量屏蔽问题 :=  无法赋值给外层url
-		jenkinsUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + Name + "/build"
-		fmt.Printf("生产环境URL: %s\n", jenkinsUrl)
+		jenkinsUrl = jenkinsConfig.Url + "view/" + ViewName + "/job/" + Name + "/build"
+		global.GVA_LOG.Info(fmt.Sprintf("生产环境URL: %s\n", jenkinsUrl))
 	} else {
 		// 拼接测试环境 URL
-		jenkinsUrl = global.GVA_CONFIG.Jenkins.TestUrl + "view/" + ViewName + "/job/" + Name + "/build"
-		fmt.Printf("测试环境URL: %s\n", jenkinsUrl)
+		jenkinsUrl = jenkinsConfig.TestUrl + "view/" + ViewName + "/job/" + Name + "/build"
+		global.GVA_LOG.Info(fmt.Sprintf("测试环境URL: %s\n", jenkinsUrl))
 	}
 	req, err := http.NewRequest("POST", jenkinsUrl, nil)
 	if err != nil {
@@ -306,9 +330,9 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 	}
 	// 设置Auth Basic Auth 生产环境 测试环境
 	if isProduction {
-		req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+		req.SetBasicAuth(jenkinsConfig.User, jenkinsConfig.ApiToken)
 	} else {
-		req.SetBasicAuth(global.GVA_CONFIG.Jenkins.TestUser, global.GVA_CONFIG.Jenkins.TestToken)
+		req.SetBasicAuth(jenkinsConfig.TestUser, jenkinsConfig.TestToken)
 	}
 	// 发送post请求并获取响应
 	client := http.Client{Timeout: 5 * time.Second}
@@ -330,13 +354,19 @@ func JenkinsBuildJob(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, V
 
 // GetJenkinsViews 获取视图名和任务名 用于确定视图名是否存在
 func GetJenkinsViews() []modelSystem.JenkinsView {
-	jenkinsUrl := global.GVA_CONFIG.Jenkins.Url + "/api/json"
+	// 调用解密函数 获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return nil
+	}
+	jenkinsUrl := jenkinsConfig.Url + "/api/json"
 	req, err := http.NewRequest("GET", jenkinsUrl, nil)
 	if err != nil {
 		global.GVA_LOG.Error("创建GET请求失败:", zap.Error(err))
 	}
 	// 设置Auth Basic Auth
-	req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+	req.SetBasicAuth(jenkinsConfig.User, jenkinsConfig.ApiToken)
 	client := http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -357,6 +387,52 @@ func GetJenkinsViews() []modelSystem.JenkinsView {
 	return data.Views
 }
 
+// GetDecryptedJenkinsConfig 解密 Jenkins 配置
+func GetDecryptedJenkinsConfig() (*config.Jenkins, error) {
+	decryptedUrl, err := cg.Decrypt(global.GVA_CONFIG.Jenkins.Url, global.GVA_CONFIG.Telegram.AesKey)
+	if err != nil {
+		global.GVA_LOG.Error("解密 Jenkins URL 失败:", zap.Error(err))
+		return nil, err
+	}
+
+	decryptedUser, err := cg.Decrypt(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Telegram.AesKey)
+	if err != nil {
+		global.GVA_LOG.Error("解密 Jenkins 用户名失败:", zap.Error(err))
+		return nil, err
+	}
+
+	decryptedApiToken, err := cg.Decrypt(global.GVA_CONFIG.Jenkins.ApiToken, global.GVA_CONFIG.Telegram.AesKey)
+	if err != nil {
+		global.GVA_LOG.Error("解密 Jenkins API Token 失败:", zap.Error(err))
+		return nil, err
+	}
+	decryptedTestUrl, err := cg.Decrypt(global.GVA_CONFIG.Jenkins.TestUrl, global.GVA_CONFIG.Telegram.AesKey)
+	if err != nil {
+		global.GVA_LOG.Error("解密 Jenkins URL 失败:", zap.Error(err))
+		return nil, err
+	}
+
+	decryptedTestUser, err := cg.Decrypt(global.GVA_CONFIG.Jenkins.TestUser, global.GVA_CONFIG.Telegram.AesKey)
+	if err != nil {
+		global.GVA_LOG.Error("解密 Jenkins 用户名失败:", zap.Error(err))
+		return nil, err
+	}
+
+	decryptedTestToken, err := cg.Decrypt(global.GVA_CONFIG.Jenkins.TestToken, global.GVA_CONFIG.Telegram.AesKey)
+	if err != nil {
+		global.GVA_LOG.Error("解密 Jenkins API Token 失败:", zap.Error(err))
+		return nil, err
+	}
+	return &config.Jenkins{
+		Url:       decryptedUrl,
+		User:      decryptedUser,
+		ApiToken:  decryptedApiToken,
+		TestUrl:   decryptedTestUrl,
+		TestUser:  decryptedTestUser,
+		TestToken: decryptedTestToken,
+	}, nil
+}
+
 // GetJobBuildStatus  获取jenkins Job 任务状态
 func GetJobBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest, ViewName string, JobName string, isProduction bool) (modelSystem.Build, error) {
 	global.GVA_LOG.Info("视图名: " + ViewName + "任务名: " + JobName)
@@ -366,10 +442,15 @@ func GetJobBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	var jenkinsUrl string
 	var body []byte //定义为 byte 类型  需要的时候进行类型转换
 	var err error
-
+	// 调用解密函数获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return modelSystem.Build{}, nil
+	}
 	if isProduction {
 		// 生产环境
-		jenkinsUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + JobName + "/api/json"
+		jenkinsUrl = jenkinsConfig.Url + "view/" + ViewName + "/job/" + JobName + "/api/json"
 		global.GVA_LOG.Info("生产环境URL: " + jenkinsUrl)
 
 		body, err = GetRequestJkBody(jenkinsUrl, isProduction)
@@ -380,7 +461,7 @@ func GetJobBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	} else {
 		// 测试环境
 		global.GVA_LOG.Info("测试环境视图名%s,%v\n")
-		jenkinsUrl = global.GVA_CONFIG.Jenkins.TestUrl + "view/" + ViewName + "/job/" + JobName + "/api/json"
+		jenkinsUrl = jenkinsConfig.TestUrl + "view/" + ViewName + "/job/" + JobName + "/api/json"
 		global.GVA_LOG.Info("测试环境URL: " + jenkinsUrl)
 		body, err = GetRequestJkBody(jenkinsUrl, isProduction)
 		global.GVA_LOG.Info("测试环境参数Body" + string(body))
@@ -405,12 +486,12 @@ func GetJobBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	var JobUrl string
 	if isProduction {
 		// 生产环境 构建号
-		JobUrl = global.GVA_CONFIG.Jenkins.Url + "view/" + ViewName + "/job/" + JobName + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
+		JobUrl = jenkinsConfig.Url + "view/" + ViewName + "/job/" + JobName + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
 		global.GVA_LOG.Info("生产环境 构建号URL: \n" + JobUrl)
 
 	} else {
 		// 测试环境 构建号
-		JobUrl = global.GVA_CONFIG.Jenkins.TestUrl + "view/" + ViewName + "/job/" + JobName + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
+		JobUrl = jenkinsConfig.TestUrl + "view/" + ViewName + "/job/" + JobName + "/" + strconv.Itoa(recentlyNumber) + "/api/json"
 		global.GVA_LOG.Info("测试环境 构建号URL: " + JobUrl + "\n")
 	}
 	global.GVA_LOG.Info("实际构建号URL: " + JobUrl + "\n")

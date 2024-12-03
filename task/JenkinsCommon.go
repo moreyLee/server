@@ -3,6 +3,7 @@ package task
 import (
 	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"go.uber.org/zap"
 	"io"
 	"net/http"
 	"strings"
@@ -19,19 +20,6 @@ var ExtensionMap = map[string]string{
 	"T2":    "(gz)狗子-T2",
 	"T3":    "(gz)多多-T3",
 	"T4":    "(gz)旺财-T4",
-	"28国际":  "28国际",
-	"鼎尚国际":  "鼎尚国际",
-	"圆梦娱乐2": "圆梦娱乐2",
-	"东升国际":  "东升国际",
-	"大利集团":  "大利集团",
-	"大满贯":   "大满贯",
-	"88娱乐":  "88娱乐",
-	"ABC28": "ABC28",
-	"AK国际":  "AK国际",
-	"CF游戏":  "CF游戏",
-	"DT28":  "DT28",
-	"新直属":   "新直属模版",
-	"恒旺28":  "恒旺28",
 }
 
 // createCaseInsensitiveMap 创建一个不区分大小写的映射
@@ -58,12 +46,18 @@ func GetRequestJkBody(url string, isProduction bool) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("创建请求失败: %v", err)
 	}
+	// 调用解密函数获取 Jenkins 配置
+	jenkinsConfig, err := GetDecryptedJenkinsConfig()
+	if err != nil {
+		global.GVA_LOG.Error("获取 Jenkins 配置失败:", zap.Error(err))
+		return nil, err
+	}
 	if isProduction {
 		// 生产环境
-		req.SetBasicAuth(global.GVA_CONFIG.Jenkins.User, global.GVA_CONFIG.Jenkins.ApiToken)
+		req.SetBasicAuth(jenkinsConfig.User, jenkinsConfig.ApiToken)
 	} else {
 		// 测试环境
-		req.SetBasicAuth(global.GVA_CONFIG.Jenkins.TestUser, global.GVA_CONFIG.Jenkins.TestToken)
+		req.SetBasicAuth(jenkinsConfig.TestUser, jenkinsConfig.TestToken)
 	}
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
