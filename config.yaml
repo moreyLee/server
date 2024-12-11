@@ -140,9 +140,9 @@ telegram:
   authorized_users:
     - David5886
     - grass9966
-    - ahsheng
     - nikon_aaa
     - tank9873
+    - pitter88
 cloudflare:
   cf-api-login: djpt36@163.com
   global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0

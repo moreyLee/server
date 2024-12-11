@@ -134,9 +134,9 @@ func main() {
 	prodViews, _ := ProdView(jenkinsURL, user, tokenApi)
 	views, err := FetchJenkinsData(jkTestURL, TestUser, TestToken)
 	// 数据库连接
-	//db, err := sql.Open("mysql", "root:Devops%588@tcp(localhost:3306)/cg_devops")
+	db, err := sql.Open("mysql", "root:Devops%588@tcp(localhost:3306)/cg_devops")
 	// 测试环境
-	db, err := sql.Open("mysql", "root:rOYkHEc#jOesowLL@tcp(47.243.51.88:3306)/cg_devops")
+	//db, err := sql.Open("mysql", "root:rOYkHEc#jOesowLL@tcp(47.243.51.88:3306)/cg_devops")
 
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)

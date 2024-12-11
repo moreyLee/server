@@ -1,0 +1,96 @@
+- name: 检查并构建 测试环境 OCR 镜像服务
+  hosts: "{{ target_host }}"
+  tasks:
+    - name: 初始验证 OCR 服务是否正常
+      shell: curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/docs
+      register: service_check
+      ignore_errors: true  # 忽略错误，继续执行后续任务
+      changed_when: false
+
+    - name: 显示服务检查结果
+      debug:
+        msg: >
+          OCR 服务检查结果:
+          - HTTP 响应码: {{ service_check.stdout }}
+          - 错误代码: {{ service_check.rc }}
+          - 错误详情: {{ service_check.stderr | default('无错误输出') }}
+    # 如果服务已正常运行，跳过后续任务
+    - name: 服务已正常运行，跳过后续任务
+      debug:
+        msg: "OCR 服务已正常运行，跳过后续构建和启动步骤"
+      when: service_check.stdout == "200"
+      tags: skip_tasks
+    # 检查镜像是否存在
+    - name: 检查 OCR 镜像是否存在
+      shell: "docker images -q ddddocr-api"
+      register: image_check
+      changed_when: false   # 避免将任务标记为更改
+    # 检查容器是否存在
+    - name: 检查 OCR 容器是否存在 ？
+      shell: "docker ps -a -q -f name=ddddocr-api"
+      register: container_exists
+      changed_when: false
+    # 检查容器是否正在运行
+    - name: 检查  OCR 容器是否正在运行
+      shell: "docker ps -q -f name=ddddocr-api"
+      register: container_running
+      changed_when: false
+    # 调试容器状态
+    - name: 检查容器状态调试输出
+      debug:
+        msg: >
+          镜像是否存在: {{ image_check.stdout != "" }}
+          容器是否存在: {{ container_exists.stdout != "" }}
+          容器是否运行中: {{ container_running.stdout != "" }}
+
+    - name: 验证 OCR git 仓库的可用性
+      shell: |
+        timeout 10s git ls-remote https://github.com/sml2h3/ddddocr-fastapi.git
+      register: git_check
+      failed_when: git_check.rc != 0
+      changed_when: false
+    # 构建镜像
+    - name: 远程测试环境构建 OCR 镜像
+      shell: |
+        git clone https://github.com/sml2h3/ddddocr-fastapi.git dddocr-fastapi || true
+        cd dddocr-fastapi
+        docker build -t ddddocr-api .
+      when: image_check.stdout == ""  # 仅在镜像不存在时运行
+
+    # 更新镜像检查状态（防止后续任务跳过）
+    - name: 更新 OCR 镜像检查状态
+      shell: "docker images -q ddddocr-api"
+      register: image_check  # 更新为最新状态
+      changed_when: false
+    # 检查镜像是否成功存在（构建后验证）
+    - name: 最后确认 OCR 镜像是否存在 ?
+      shell: "docker images -q ddddocr-api"
+      register: final_check
+      failed_when: final_check.stdout == ""  # 如果最终镜像不存在，则报错
+      changed_when: false
+
+    # 创建并启动容器（如果容器不存在）
+    - name: 创建并启动 OCR 容器（如果容器不存在）
+      shell: |
+        docker run -d -p 8000:8000 --name ddddocr-api ddddocr-api
+      when: container_exists.stdout == "" and image_check.stdout != ""
+    # 启动容器（如果存在但未运行）
+    - name: 启动 OCR 容器（存在且未运行）
+      shell: docker start ddddocr-api
+      when: container_exists.stdout != "" and container_running.stdout == ""
+      #ignore_errors: true  # 容器启动失败时继续后续任务
+
+    - name: 等待服务启动（需要延时 10 秒）
+      wait_for:
+        timeout: 10
+        delay: 5
+      when: service_check.stdout != "200"  # 仅在服务需要重新启动时执行延时
+
+    - name: 验证 OCR 服务是否正常（最终验证）
+      shell: curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/docs
+      register: service_check_final
+      failed_when: service_check_final.stdout != "200"
+      changed_when: false
+    - name: 确认服务正常启动
+      debug:
+        msg: "ddddOCR 服务已正常启动，HTTP 响应码: {{ service_check_final.stdout }}"

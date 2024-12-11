@@ -49,13 +49,13 @@ func main() {
 	//key, _ := generateAESKey(32) // 256 位密钥
 	key := "61afa6ddca1285f640b03c8c64d02c31"
 	//fmt.Printf("Generated AES key: %s\n", hex.EncodeToString(key))
-	encryptedString := "11700ee17be3621da8bb4443e073763a69"
+	//encryptedString := "11700ee17be3621da8bb4443e073763a69"
 	//botToken := "7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4"
 	//webhook := "https://a904-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook"
 	//url := "http://jenkins1.3333d.vip/"
-	//webhook := "https://2156-8-218-67-135.ngrok-free.app/jenkins/telegram-webhook"
+	webhook := "https://orca-awaited-ibex.ngrok-free.app/jenkins/telegram-webhook"
 	// 加密
-	encrypted, err := encrypt(encryptedString, key)
+	encrypted, err := encrypt(webhook, key)
 	if err != nil {
 		fmt.Println("加密失败:", err)
 		return
