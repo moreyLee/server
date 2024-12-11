@@ -84,11 +84,11 @@
     {"job_name": "dt28quartz.b777.vip", "task_type": "定时任务"}
   ],
   "三禾": [
-    {"job_name": "", "task_type": "前台API"},
-    {"job_name": "", "task_type": "后台API"},
-    {"job_name": "", "task_type": "前台H5"},
-    {"job_name": "", "task_type": "后台H5"},
-    {"job_name": "", "task_type": "定时任务"}
+    {"job_name": "sanheapi.b777.vip", "task_type": "前台API"},
+    {"job_name": "sanheadminapi.b777.vip", "task_type": "后台API"},
+    {"job_name": "sanheh5.34566.vip", "task_type": "前台H5"},
+    {"job_name": "sanheh5admin.w776.cc", "task_type": "后台H5"},
+    {"job_name": "sanhequartz.b777.vip", "task_type": "定时任务"}
   ],
   "蓝悦娱乐": [
     {"job_name": "lanyueylapi.b777.vip", "task_type": "前台API"},

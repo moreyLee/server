@@ -1,0 +1,48 @@
+- name: 在远程测试环境构建 devops-api 镜像
+  hosts: "{{ target_host }}"
+  tasks:
+    - name: 检查 ngrok 镜像是否存在
+      shell: |
+        docker images --format '{% raw %}{{.Repository}}:{{.Tag}}{% endraw %}' | grep -w 'ngrok/ngrok:latest'
+      register: check_image
+      failed_when: false
+      become: yes
+
+    - name: 拉取 ngrok 镜像（如果镜像不存在拉取，存在跳过）
+      shell: |
+          docker pull ngrok/ngrok:latest
+      become: yes
+      when: check_image.rc != 0
+
+    - name: 检查 ngrok 容器是否运行
+      shell: |
+        docker ps --format '{% raw %}{{.Names}}{% endraw %}' | grep -w 'ngrok'
+      register: ngrok_container_status
+      failed_when: false
+      become: yes
+
+    - name: 启动 ngrok 容器(如果容器未启动)
+      shell: |
+        docker run -d --net=host -it \
+        --name ngrok \
+        -e NGROK_AUTHTOKEN={{ ngrok_token }} \
+        ngrok/ngrok:latest http --url={{ ngrok_url }} 5888
+      become: yes
+      when: ngrok_container_status.rc != 0
+
+    - name: 检查 ngrok 容器是否正在运行
+      shell: |
+        docker ps --format '{% raw %}{{.Names}} {{.Status}}{% endraw %}' | grep -w 'ngrok' | grep 'Up'
+      register: ngrok_running_status
+      failed_when: false
+      become: yes
+
+    - name: 启动或重启 ngrok 容器（如果未运行）
+      shell: |
+        docker restart ngrok
+      become: yes
+      when: ngrok_running_status.rc != 0
+    - name: 显示 ngrok 容器运行状态
+      debug:
+        msg: "ngrok 容器状态: {{ ngrok_running_status.stdout }}"
+      when: ngrok_running_status.rc == 0

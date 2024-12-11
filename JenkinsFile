@@ -1,19 +1,20 @@
 pipeline {
     agent any
     environment {
-        _version = ''
         build_file = "devops-api-${BUILD_NUMBER}.tar.gz" // 打包文件名称
         remote_path = '/home/wwwroot/devops'  // 测试环境远程路径
         ansible_host = 'csapi'
+        timestamp = new Date().format("yyyyMMddHHmmss") // 使用当前时间戳
+        NGROK_AUTHTOKEN = '2mTSsZEtshngMyg1VCvx6MGDrmo_64FmTnQ85nxbwWV2cmcLH'
+        NGROK_URL = "orca-awaited-ibex.ngrok-free.app"
     }
     stages {
         stage('当前版本号') {
             steps {
                 script {
-                    def Version = { -> new Date().format('yyyy-MM-dd HH:mm') }
-                    env._version = Version()
-                    echo "当前版本号：${env._version}"
-                    sh 'printenv'
+                    echo "当前版本号：${build_file}"
+                    echo "Jenkins 构建号: ${BUILD_NUMBER}"
+                    echo "时间戳: ${timestamp}"
                 }
             }
         }
@@ -78,16 +79,52 @@ pipeline {
             }
        }
 
-       stage('远程构建镜像') {
+       stage('构建项目依赖的 ocr 镜像') {
            steps {
-               script {
-                       sh """
-                           ansible-playbook -i /etc/ansible/hosts ./build_docker.yml \
-                           --extra-vars 'target_host=${ansible_host} dest_path=${remote_path}'
-                       """
-                       echo "远程镜像构建完成"
-               }
-            }
+              script {
+                      echo "检查远程测试环境 OCR 镜像和容器状态"
+                      sh """
+                        ansible-playbook -i /etc/ansible/hosts ./build_ocr.yml \
+                        --extra-vars 'target_host=${ansible_host}'
+                      """
+                      echo "远程测试环境 OCR 服务检查完成"
+              }
+           }
        }
+       stage('构建项目依赖的 selenium-chrome 镜像') {
+          steps {
+             script {
+                     echo "检查远程测试环境 selenium-chrome 镜像和容器状态"
+                     sh """
+                       ansible-playbook -i /etc/ansible/hosts ./build_selenium_chrome.yml \
+                       --extra-vars 'target_host=${ansible_host}'
+                     """
+                     echo "远程测试环境 selenium-chrome 服务检查完成"
+             }
+          }
+       }
+       stage('构建项目依赖的 ngrok 镜像') {
+         steps {
+            script {
+                    echo "检查远程测试环境 ngrok 镜像和容器状态"
+                    sh """
+                      ansible-playbook -i /etc/ansible/hosts ./build_ngrok.yml \
+                      --extra-vars 'target_host=${ansible_host} ngrok_token=${NGROK_AUTHTOKEN} ngrok_url=${NGROK_URL}'
+                    """
+                    echo "远程测试环境 ngrok 服务检查完成"
+            }
+         }
+       }
+       stage('远程构建镜像') {
+          steps {
+              script {
+                      sh """
+                          ansible-playbook -i /etc/ansible/hosts ./build_docker.yml \
+                          --extra-vars 'target_host=${ansible_host} dest_path=${remote_path} version=${BUILD_NUMBER} timestamp=${timestamp}'
+                      """
+                      echo "远程镜像构建完成"
+              }
+          }
+      }
     }
 }
