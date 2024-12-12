@@ -23,7 +23,7 @@
 
     - name: 启动 ngrok 容器(如果容器未启动)
       shell: |
-        docker run -d --net=host -it \
+        docker run  --net=selenium-network -d --net=host -it \
         --name ngrok \
         -e NGROK_AUTHTOKEN={{ ngrok_token }} \
         ngrok/ngrok:latest http --url={{ ngrok_url }} 5888

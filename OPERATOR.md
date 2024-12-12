@@ -23,8 +23,11 @@ go clean -modcache
 ## dockerfile 镜像部署
 docker  build -t devops-api:v1 . 
 # dockerfile 清理构建缓存
+# 验证docker 镜像服务可用性
+docker  exec selenium-chrome_david curl http://selenium-chrome_david:4444
 
-
+# 启动devops-api 容器 
+docker run --net=selenium-network -p 5888:5888 --name devops-api   devops-api:v117-20241212193246
 # 建立远程分支仓库
 git remote add origin http://43.199.1.126:9099/david/devops-api.git
 # 查看分支 

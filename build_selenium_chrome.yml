@@ -1,81 +1,90 @@
 - name: 检查并构建 selenium/chrome 镜像服务
   hosts: "{{ target_host }}"
   tasks:
-    - name: 检查 selenium/chrome 镜像是否存在
+    - name: 1 检查 selenium/chrome 镜像是否存在
       shell: "docker images -q selenium/standalone-chrome:4.27.0-20241204"
       register: selenium_image_check
       failed_when: "selenium_image_check.rc != 0"
       changed_when: false
 
-    - name: 显示镜像检查结果
+    - name: 2 显示镜像检查结果
       debug:
         msg: >
           selenium/chrome 镜像检查结果:
           - 镜像是否存在: "{{ selenium_image_check.stdout != '' }}"
           - 镜像 ID: "{{ selenium_image_check.stdout | default('无镜像') }}"
 
-    - name: 拉取并构建 selenium/chrome 镜像（存在跳过 不存在拉取）
+    - name: 3 拉取并构建 selenium/chrome 镜像（存在跳过 不存在拉取）
       shell: |
         docker pull selenium/standalone-chrome:4.27.0-20241204
-      when: selenium_image_check.stdout == ""
+      when: selenium_image_check.stdout == "" | trim == ""
 
-    - name: 确认 selenium/chrome 镜像构建完成
+    - name: 4 确认 selenium/chrome 镜像构建完成
       shell: "docker images selenium/standalone-chrome:4.27.0-20241204 -q"
       register: selenium_image_final_check
-      failed_when: selenium_image_final_check.stdout == ""
+      failed_when: selenium_image_final_check.stdout | trim == ""
       changed_when: false
 
-    - name: 检查 selenium/chrome 容器是否存在
+    - name: 5 检查 selenium/chrome 容器是否存在
       shell: "docker ps -a -q -f name=selenium-chrome_david"
       register: selenium_container_exists
       changed_when: false
 
-    - name: 检查 selenium/chrome 容器是否正在运行
+    - name: 6 检查 selenium/chrome 容器是否正在运行
       shell: "docker ps -q -f name=selenium-chrome_david"
       register: selenium_container_running
       changed_when: false
 
-    - name: 确保容器网络 selenium-network 存在
-      shell: docker network create selenium-network || echo " selenium-network 网络创建失败"
-      register: selenium_network_status
-      failed_when:  selenium_network_status.rc != 0 or '网络创建失败' in selenium_network_status.stdout  #确保命令执行成功
+    - name: 7 检查容器网络 selenium-network 是否存在
+      shell: |
+        docker network ls --filter name=^selenium-network$ --format "{{ '{{' }}.Name{{ '}}' }}"
+      register: selenium_network_check
+      failed_when: "false"
       changed_when: false
 
-    - name: 验证网络是否成功创建
+    - name: 8 创建容器网络 selenium-network 不存在创建 存在跳过
+      shell: docker network create selenium-network
+      when: selenium_network_check.stdout == ""
+      register: selenium_network_create
+      failed_when: selenium_network_create.rc != 0
+
+    - name: 9 验证网络是否成功创建
       shell: |
         docker network ls --filter name=^selenium-network$ --format "{{ '{{' }}.Name{{ '}}' }}"
       register: selenium_network_validation
       failed_when: "'selenium-network' not in selenium_network_validation.stdout"  # 确保网络验证通过
       changed_when: false
 
-    - name: 显示网络信息
+    - name: 01 显示网络信息
       shell: |
         docker network inspect selenium-network || echo "网络信息获取失败，网络未创建"
       register: selenium_network_info
       changed_when: false
 
-    - name: 启动 selenium/chrome 容器（存在但未运行）
+    - name: 02 启动 selenium/chrome 容器（存在但未运行）
       shell: docker start selenium-chrome_david
       when: selenium_container_exists.stdout != "" and selenium_container_running.stdout == ""
 
-    - name: 创建并启动 selenium/chrome 容器（如果未运行）
+    - name: 03 创建并启动 selenium/chrome 容器（如果未运行）
       shell: |
-        docker run -d --net=selenium-network -p 5555:5555 -p 5900:5900 -p 4444:4444 --name selenium-chrome_david selenium/standalone-chrome:4.27.0-20241204
+        docker run -d --net=selenium-network  -p 5900:5900 -p 4444:4444 --name selenium-chrome_david selenium/standalone-chrome:4.27.0-20241204
       when:
         - selenium_container_running.stdout == ""
         - selenium_image_check
-    - name: 检查 selenium/chrome 容器是否成功运行
+
+    - name: 04 检查 selenium/chrome 容器是否成功运行
       shell: "docker ps -q -f name=selenium-chrome_david"
       register: selenium_container_final_check
       changed_when: false
 
-    - name: 获取 selenium/chrome 容器端口信息
+    - name: 05 获取 selenium/chrome 容器端口信息
       shell: |
         docker inspect --format='{{ "{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{if $conf}}{{(index $conf 0).HostPort}}{{else}}未映射{{end}} {{end}} "}}' selenium-chrome_david
       register: selenium_container_ports
       when: selenium_container_final_check.stdout != ""
       changed_when: false
-    - name: 显示 selenium/chrome_david 容器详细信息
+
+    - name: 06 显示 selenium/chrome_david 容器详细信息
       debug:
         msg: >
           selenium/chrome 容器启动结果:

@@ -72,7 +72,7 @@
     # 创建并启动容器（如果容器不存在）
     - name: 创建并启动 OCR 容器（如果容器不存在）
       shell: |
-        docker run -d -p 8000:8000 --name ddddocr-api ddddocr-api
+        docker run -d --net=selenium-network -p 8000:8000 --name ddddocr-api ddddocr-api
       when: container_exists.stdout == "" and image_check.stdout != ""
     # 启动容器（如果存在但未运行）
     - name: 启动 OCR 容器（存在且未运行）
