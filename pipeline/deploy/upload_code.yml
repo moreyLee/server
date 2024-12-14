@@ -16,6 +16,12 @@
     - name: 确认路径存在
       ansible.builtin.debug:
           msg: "目标路径 {{ dest_path }} 已准备好，开始上传代码压缩包。"
+
+    - name: 检查本地文件是否存在
+      ansible.builtin.stat:
+          path: "{{ src_path }}"
+      register: local_file_check
+
     - name: 上传代码压缩包文件
       ansible.builtin.copy:
         src: "{{ src_path }}"  # 本地路径
@@ -36,6 +42,9 @@
         src: "{{ dest_path }}/{{ src_path | basename }}"
         dest: "{{ dest_path }}"
         remote_src: yes  # 指定解压文件在远程服务器上
+      register: unarchive_result
+      failed_when: not unarchive_result.changed
+
     - name: 验证远程文件解压成功 DockerFile
       ansible.builtin.stat:
         path: "{{ dest_path }}/Dockerfile"

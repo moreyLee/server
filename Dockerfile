@@ -26,7 +26,12 @@ FROM alpine:latest
 LABEL MAINTAINER="David588@gmail.com"
 
 WORKDIR /app
-
+# 安装 tzdata 以支持时区配置
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Dubai /etc/localtime \
+    && echo "Asia/Dubai" > /etc/timezone
+# 测试环境 Jenkins视图配置文件
+COPY ./task/tasks.json /app/task/tasks.json
 COPY --from=0 /app/devops-api ./
 #动态文件，确保镜像变化
 COPY --from=0 /app/.build_info ./

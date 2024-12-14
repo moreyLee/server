@@ -57,7 +57,7 @@ pipeline {
        stage('验证打包') {
              steps {
                script{
-                       def fileExists = sh(script: "test -f ${build_file}", returnStatus: true) == 0
+                       def fileExists = sh(script: "test -f ${WORKSPACE}/${build_file}", returnStatus: true) == 0
                          if (!fileExists) {
                            error "打包失败：未找到文件 ${build_file}"
                        } else {
@@ -70,11 +70,13 @@ pipeline {
             steps {
                   script{
                         echo "清理远程测试环境并上传新代码"
-                          sh """
-                              ansible-playbook -i /etc/ansible/hosts ./upload_code.yml \
-                              --extra-vars 'src_path=./${build_file} dest_path=${remote_path} target_host=${ansible_host}'
+                        def workspace = pwd()
+                        echo "Jenkins 工作目录: ${workspace}"
+                        sh """
+                              ansible-playbook -i /etc/ansible/hosts ./pipeline/deploy/upload_code.yml \
+                              --extra-vars 'src_path=${workspace}/${build_file} dest_path=${remote_path} target_host=${ansible_host}'
                           """
-                          echo "新代码文件上传完成"
+                        echo "新代码文件上传完成"
                   }
             }
        }
@@ -84,7 +86,7 @@ pipeline {
               script {
                       echo "检查远程测试环境 OCR 镜像和容器状态"
                       sh """
-                        ansible-playbook -i /etc/ansible/hosts ./build_ocr.yml \
+                        ansible-playbook -i /etc/ansible/hosts ./pipeline/build/build_ocr.yml \
                         --extra-vars 'target_host=${ansible_host}'
                       """
                       echo "远程测试环境 OCR 服务检查完成"
@@ -96,7 +98,7 @@ pipeline {
              script {
                      echo "检查远程测试环境 selenium-chrome 镜像和容器状态"
                      sh """
-                       ansible-playbook -i /etc/ansible/hosts ./build_selenium_chrome.yml \
+                       ansible-playbook -i /etc/ansible/hosts ./pipeline/build/build_selenium_chrome.yml \
                        --extra-vars 'target_host=${ansible_host}'
                      """
                      echo "远程测试环境 selenium-chrome 服务检查完成"
@@ -108,7 +110,7 @@ pipeline {
             script {
                     echo "检查远程测试环境 ngrok 镜像和容器状态"
                     sh """
-                      ansible-playbook -i /etc/ansible/hosts ./build_ngrok.yml \
+                      ansible-playbook -i /etc/ansible/hosts ./pipeline/build/build_ngrok.yml \
                       --extra-vars 'target_host=${ansible_host} ngrok_token=${NGROK_AUTHTOKEN} ngrok_url=${NGROK_URL}'
                     """
                     echo "远程测试环境 ngrok 服务检查完成"
@@ -119,12 +121,24 @@ pipeline {
           steps {
               script {
                       sh """
-                          ansible-playbook -i /etc/ansible/hosts ./build_docker.yml \
+                          ansible-playbook -i /etc/ansible/hosts ./pipeline/build/build_docker.yml \
                           --extra-vars 'target_host=${ansible_host} dest_path=${remote_path} version=${BUILD_NUMBER} timestamp=${timestamp}'
                       """
                       echo "远程镜像构建完成"
               }
           }
       }
+      stage('清理测试环境代码') {
+                steps {
+                    script {
+                            echo "清理远程测试环境中的代码文件"
+                            sh """
+                                ansible-playbook -i /etc/ansible/hosts ./pipeline/deploy/cleanup_remote_code.yml \
+                                --extra-vars 'target_host=${ansible_host} remote_path=${remote_path}'
+                            """
+                            echo "远程测试环境代码清理完成"
+                    }
+                }
+            }
     }
 }

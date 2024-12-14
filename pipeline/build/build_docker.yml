@@ -30,11 +30,33 @@
             xargs --no-run-if-empty docker rm
       become: yes
       changed_when: true
-    - name: 清理旧镜像（保留最近 1 个镜像）
+    - name: 清理旧镜像（保留最新构建的镜像）
       ansible.builtin.shell:
-          cmd: >
-            docker images --filter=reference='devops-api:*' --format '{{ "{{.Repository}}:{{.Tag}}" }} {{ "{{.ID}}" }}'
-            | sort -r
-            | awk 'NR>1 { print $2 }'
-            | xargs --no-run-if-empty docker rmi || true
+          cmd: |
+            docker images --filter=reference='devops-api:*' --format '{{ "{{.Repository}}:{{.Tag}}" }} {{ "{{.ID}}" }}' |
+                      grep -v 'v{{ version }}-{{ timestamp }}' |
+                      awk '{ print $2 }' |
+                      xargs --no-run-if-empty docker rmi || true
+      register: cleanup_result
+      changed_when: true
+      failed_when: cleanup_result.rc not in [0, 123]  # 容忍没有镜像可清理的情况
+
+    - name: 启动最新 devops-api 容器
+      ansible.builtin.shell:
+        cmd: |
+          docker run -d --name devops-api --net=selenium-network \
+          -p 5888:5888 devops-api:v{{ version }}-{{ timestamp }}
+      changed_when: true
+
+    - name: 验证新容器是否成功运行
+      ansible.builtin.shell:
+        cmd: docker ps --filter "name=devops-api" --format '{{ "{{.ID}}" }}'
+      register: running_container
+      failed_when: running_container.stdout == ""
       changed_when: false
+
+    - name: 显示运行中的容器信息
+      ansible.builtin.debug:
+        msg: >
+          新运行的 devops-api 容器信息:
+          - 容器 ID: {{ running_container.stdout }}

@@ -29,7 +29,9 @@ const (
 	fullPageScreenshotFile = "./full_page_screenshot.png"
 	ApiOCRUrl              = "http://localhost:8000/ocr"
 	chromedriver           = "/Users/david/tools/chromedriver/chromedriver"
-	port                   = 5555
+	//ApiOCRUrl              = "http://ddddocr-api:8000/ocr"
+	//seleniumURL            = "http://selenium-chrome_david:4444"
+	port = 5555
 )
 
 // ReplyWithMessage 全局引用 用于小飞机发送消息
