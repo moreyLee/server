@@ -517,10 +517,21 @@ func GetJobBuildStatus(bot *tgbotapi.BotAPI, webhook modelSystem.WebhookRequest,
 	if len(changes) > 0 {
 		changeLog = strings.Join(changes, "\n")
 	}
-	formattedTime := time.Unix(build.Timestamp/1000, (build.Timestamp%1000)*1000000).UTC().In(func() *time.Location { loc, _ := time.LoadLocation("Asia/Dubai"); return loc }()).Format("2006-01-02 15:04:05")
+	// 格式化时间
+	formattedTime := FormatTimestamp(build.Timestamp, "Asia/Dubai")
 	ReplyWithMessage(bot, webhook, fmt.Sprintf(
 		"构建信息: %s\n最新构建编号: %d\n构建时间: %s\n更新描述: \n%s",
 		build.Result, build.Number, formattedTime, changeLog))
 
 	return build, nil
+}
+
+// FormatTimestamp 格式化时间戳为指定时区的时间字符串
+func FormatTimestamp(timestamp int64, timezone string) string {
+	location, err := time.LoadLocation(timezone)
+	if err != nil {
+		global.GVA_LOG.Warn("加载时区失败，使用 UTC 代替:", zap.Error(err))
+		location = time.UTC
+	}
+	return time.Unix(timestamp/1000, (timestamp%1000)*1000000).In(location).Format("2006-01-02 15:04:05")
 }

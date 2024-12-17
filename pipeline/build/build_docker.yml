@@ -1,0 +1,62 @@
+- name: 在远程测试环境构建 devops-api 镜像
+  hosts: "{{ target_host }}"
+  vars:
+    version: "{{ version }}"
+    timestamp: "{{ timestamp }}"
+  tasks:
+    - name: 开始构建 devops-api 镜像.....
+      ansible.builtin.shell:
+        cmd: "cd {{ dest_path }} && 
+        docker build --no-cache \
+        --build-arg BUILD_TIMESTAMP={{ timestamp }} \
+        --build-arg BUILD_VERSION={{ version }} \
+        -t devops-api:v{{ version }}-{{ timestamp }} . "
+      register: build_result
+      failed_when: build_result.rc != 0  # 如果构建失败则中止
+
+    - name: 显示构建结果
+      ansible.builtin.debug:
+        msg: >
+          Docker 镜像构建成功:
+          - 状态码: {{ build_result.rc }}
+          - 项目路径: {{ dest_path }}
+          - 镜像标签: devops-api:v{{ version }}-{{ timestamp }}
+    - name: 停止并移除旧容器
+      ansible.builtin.shell:
+        cmd: >
+            docker ps --filter "name=devops-api" --format '{{ "{{.ID}}" }}' |
+            xargs --no-run-if-empty docker stop &&
+            docker ps -a --filter "name=devops-api" --format '{{ "{{.ID}}" }}' |
+            xargs --no-run-if-empty docker rm
+      become: yes
+      changed_when: true
+    - name: 清理旧镜像（保留最新构建的镜像）
+      ansible.builtin.shell:
+          cmd: |
+            docker images --filter=reference='devops-api:*' --format '{{ "{{.Repository}}:{{.Tag}}" }} {{ "{{.ID}}" }}' |
+                      grep -v 'v{{ version }}-{{ timestamp }}' |
+                      awk '{ print $2 }' |
+                      xargs --no-run-if-empty docker rmi || true
+      register: cleanup_result
+      changed_when: true
+      failed_when: cleanup_result.rc not in [0, 123]  # 容忍没有镜像可清理的情况
+
+    - name: 启动最新 devops-api 容器
+      ansible.builtin.shell:
+        cmd: |
+          docker run -d --name devops-api --net=selenium-network \
+          -p 5888:5888 devops-api:v{{ version }}-{{ timestamp }}
+      changed_when: true
+
+    - name: 验证新容器是否成功运行
+      ansible.builtin.shell:
+        cmd: docker ps --filter "name=devops-api" --format '{{ "{{.ID}}" }}'
+      register: running_container
+      failed_when: running_container.stdout == ""
+      changed_when: false
+
+    - name: 显示运行中的容器信息
+      ansible.builtin.debug:
+        msg: >
+          新运行的 devops-api 容器信息:
+          - 容器 ID: {{ running_container.stdout }}

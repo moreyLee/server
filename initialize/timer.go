@@ -24,17 +24,5 @@ func Timer() {
 		if err != nil {
 			fmt.Println("add timer error:", err)
 		}
-
-		// 其他定时任务定在这里 参考上方使用方法
-		// 定时响应 @telegram 机器人的消息 调用三方接口
-		//_, err = global.GVA_Timer.AddTaskByFunc("定时任务标识", "@every 1h", func() {
-		//	task.SendMessage()
-		//	//if err != nil {
-		//	//	fmt.Println("定时任务机器人错误", err)
-		//	//}
-		//}, "@机器人响应并执行三方接口", option...)
-		//if err != nil {
-		//	fmt.Println("添加定时任务错误:", err)
-		//}
 	}()
 }

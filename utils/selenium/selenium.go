@@ -23,14 +23,15 @@ import (
 
 const (
 	adminURL               = "https://web.3333c.vip/"
-	cookiesUrl             = "https://api.3333c.vip/admin/site/config/site/login?siteId=2209" //https://web.3333c.vip/#/site/index" //"https://web.3333c.vip/#/dashboard"
 	username               = "yunwei"
 	password               = "IRbj2pY27Vm&eMAM"
 	captchaFile            = "./code.png"
 	fullPageScreenshotFile = "./full_page_screenshot.png"
 	ApiOCRUrl              = "http://localhost:8000/ocr"
 	chromedriver           = "/Users/david/tools/chromedriver/chromedriver"
-	port                   = 5555
+	//ApiOCRUrl              = "http://ddddocr-api:8000/ocr"
+	//seleniumURL            = "http://selenium-chrome_david:4444"
+	port = 5555
 )
 
 // ReplyWithMessage 全局引用 用于小飞机发送消息

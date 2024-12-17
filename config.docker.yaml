@@ -74,12 +74,12 @@ captcha:
 # mysql connect configuration
 # 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://gin-vue-admin.com/docs/first_master）
 mysql:
-  path: "localhost"
+  path: "172.24.95.250"
   port: "3306"
   config: "charset=utf8mb4&parseTime=True&loc=Local"
   db-name: "cg_devops"
   username: "root"
-  password: "Devops%588"
+  password: "rOYkHEc#jOesowLL"
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: ""
@@ -159,27 +159,28 @@ cors:
       expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
       allow-credentials: true # 布尔值
 jenkins:
-  testUrl: https://jenkins.qiyinyun.com/    #测试环境
-  testUser: root
-  testToken: 117a9f29e2793cb262426c8fbbb39b27cd
-  url: http://jenkins1.3333d.vip/
-  user: admin
-  api-token: 11d2d3cd4784aa28379905bf13988ad50e
+  url: k7kesncx4XfeFZY4UUfR+CZwEyXXW3LezEQ= #http://jenkins1.3333d.vip/  #加密
+  user: mqkHqyM= #admin   # 加密
+  api-token: yvxf8H0srC3aTM81XlCE4jJrh+X8zzrpSVvk4+tvKJk8nA== # 115202b0a72dadd4f89878e7d352aa8552
+  testUrl: k7kesj4k4TLRHpM6VlqT+JRZNNgp4+4ksYlJTNQ=     #测试环境  加密 https://jenkins.qiyinyun.com/
+  testUser: iaIFtg==   # 加密 root
+  testToken: yvxd8n17qyyMGZhiCQbRsny4xjGTbnbkWflX48pqz3q/SA==    # 加密 11700ee17be3621da8bb4443e073763a69
 telegram:
   url: https://api.telegram.org/bot
-  bot-name: '@CG33333_bot'   #不支持特殊字符
-  bot-token: 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4 #@CG33333_bot 机器人
-  #chat-id: -4275796428 #测试群组 -4275796428   #CG游戏更新发布群 -1001534909056 #未使用
-  webhook-url: https://a904-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook
+  #bot-name: u44t8X4t/S7kGZIl    # 加密后的 机器人用户名 '@CG33333_bot'
+  bot-name: u44t+nUm9ijkGZIl     #加密后的 机器人用户名 @CG88885_bot
+  #bot-token: zPle+3Qt/SSPTccQfnOzpjlhztU7WohodQ8hDikpQlvmPjyH1ExkIDIC28D7gQ== # 加密后的 CG33333_Bot token 7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4
+  bot-token: zPlZ+n8q/CSCTccQfnKXkXhBV6fRnm6K8wQ2DDvZhoM6SBXDL2g8WVwu6II2cg==  # 加密后的@CG88885 bot-token    7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4
+  aes-key: 61afa6ddca1285f640b03c8c64d02c31
+  #chat-id:  #测试群组 -4275796428
+  #webhook-url: k7kesj4k4TLaQs1lEgbR4deTc9rgR/A+U2QZjEKki6pGtgjzzJqbtAdg+0mfyrvpUwqIEc3lPQteAMB/xNqjNEhx  # 加密后的 ngrok url
+  webhook-url: k7kesj4k4TLUCZ4wElWXt2rv4TJ9YcEUZiPkaPbi7JHP7FZ078hiILh8dSoufwJS6KbWFmwgnxKt9C3oTjqOcZg= # 线上加密后 ngrok URL
   authorized_users:
     - David5886
-    - MAX8852
-    - Mac_Archie
-    - liamintl
     - grass9966
-    - ahsheng
+    - nikon_aaa
     - tank9873
-    - wolf_18802
+    - pitter88
 cloudflare:
   cf-api-login: djpt36@163.com
   global-key: 0237bd44ec3b541e622d6aa1b187aac9193f0

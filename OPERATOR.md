@@ -11,25 +11,29 @@ https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/delet
 https://api.telegram.org/bot7449933946:AAGSpUHIsi9cTgc65O9CFheOia3czrLS8l4/setwebhook?url=https://a904-217-165-23-20.ngrok-free.app/jenkins/telegram-webhook
 需要先激活一下测试的webhook  执行一下 telegramwebhook.go
 ### 测试机器人 @CG88885_bot
-https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/setWebhook?url=https://e498-217-165-23-20.ngrok-free.app/telegram-webhook
+https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/setWebhook?url=https://orca-awaited-ibex.ngrok-free.app/jenkins/telegram-webhook
 https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/getWebhookInfo
 https://api.telegram.org/bot7438242996:AAFwGnP8mQBmvcjiDggltiiOTMo14XeOoT4/deleteWebhook
-### 程序打包
-go build  生成 server 二进制
-go clean -modcache
 
-### 打包成指定的包名称
+### 打包 
 go build -o devops-api
 GOOS=linux GOARCH=amd64 go build -o devops-api main.go   # linux 平台
+go clean -modcache
+
 ## dockerfile 镜像部署
 docker  build -t devops-api:v1 . 
 # dockerfile 清理构建缓存
+# 验证docker 镜像服务可用性
+docker  exec selenium-chrome_david curl http://selenium-chrome_david:4444
 
-
+# 启动devops-api 容器 
+docker run --net=selenium-network -p 5888:5888 --name devops-api   devops-api:v117-20241212193246
 # 建立远程分支仓库
 git remote add origin http://43.199.1.126:9099/david/devops-api.git
 # 查看分支 
 git branch 
+# 创建并切换分支 
+git checkout -b dev 
 # 查看远程分支 
 git remote -v 
 # 记得先切换分支   git push 到公司gitlab

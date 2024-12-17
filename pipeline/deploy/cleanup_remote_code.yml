@@ -1,0 +1,8 @@
+- name: 清理远程测试环境代码文件
+  hosts: "{{ target_host }}"
+  tasks:
+    - name: 删除指定目录下的所有代码文件
+      ansible.builtin.shell:
+        cmd: "rm -r -f {{ remote_path }}/*"
+      become: yes
+      changed_when: true
